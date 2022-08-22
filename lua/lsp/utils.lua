@@ -13,7 +13,7 @@ function M.common_on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Helper function
-  local opts = {noremap = true, silent = true}
+  local opts = { noremap = true, silent = true }
   local function bufnnoremap(lhs, rhs)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, rhs, opts)
   end
@@ -28,7 +28,7 @@ function M.common_on_attach(client, bufnr)
 
   -- List symbol uses
   -- bufnnoremap("<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>")  -- Uses quickfix
-  bufnnoremap("<leader>gr", "<cmd>Telescope lsp_references<CR>")  -- Uses Telescope
+  bufnnoremap("<leader>gr", "<cmd>Telescope lsp_references<CR>") -- Uses Telescope
 
   -- Inspect function
   bufnnoremap("K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
@@ -46,7 +46,7 @@ function M.common_on_attach(client, bufnr)
   -- Markdown preview TODO: make this conditional, but I also don't use it all that much
   -- bufnnnoremap("<leader>P", "<Cmd>Glow<CR>")
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end

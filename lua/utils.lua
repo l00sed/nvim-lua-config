@@ -2,23 +2,30 @@
 
 local M = {}
 
+--[[
+map
+  inputs:
+  m (mode)  -> "n" (normal), "i" (insert), "v" (visual), "r" (replace)
+  k (keys)  -> i.e., "<C-c>"
+  v (value) -> i.e., '"+y'
+]] --
 function M.map(mode, lhs, rhs)
-        vim.api.nvim_set_keymap(mode, lhs, rhs, {silent =  true})
+  vim.api.nvim_set_keymap(mode, lhs, rhs, { silent = true })
 end
 
 function M.noremap(mode, lhs, rhs)
-        vim.api.nvim_set_keymap(mode, lhs, rhs, {noremap = true, silent = true})
+  vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true, silent = true })
 end
 
 function M.exprnoremap(mode, lhs, rhs)
-        vim.api.nvim_set_keymap(mode, lhs, rhs, {noremap = true, silent = true, expr = true})
+  vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true, silent = true, expr = true })
 end
 
 -- Useful mode-specific shortcuts
 -- nomenclature: "<expr?><mode><nore?>map(lhs, rhs)" where:
---      "expr?" optional expr option
---      "nore?" optional no-remap option
---      modes -> 'n' = NORMAL, 'i' = INSERT, 'x' = 'VISUAL', 'v' = VISUAL + SELECT, 't' = TERMINAL
+--   "expr?" optional expr option
+--   "nore?" optional no-remap option
+--   modes -> 'n' = NORMAL, 'i' = INSERT, 'x' = 'VISUAL', 'v' = VISUAL + SELECT, 't' = TERMINAL
 
 function M.nmap(lhs, rhs) M.map('n', lhs, rhs) end
 
@@ -37,5 +44,17 @@ function M.tnoremap(lhs, rhs) M.noremap('t', lhs, rhs) end
 function M.exprnnoremap(lhs, rhs) M.exprnoremap('n', lhs, rhs) end
 
 function M.exprinoremap(lhs, rhs) M.exprnoremap('i', lhs, rhs) end
+
+-- Toggle Wrap
+function M.toggle_wrap()
+  if vim.o.wrap then
+    vim.o.wrap = false
+    vim.o.virtualedit = 'all'
+  else
+    vim.o.wrap = true
+    vim.o.virtualedit = ''
+    vim.o.display = 'lastline'
+  end
+end
 
 return M

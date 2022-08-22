@@ -4,16 +4,16 @@ local fn = vim.fn
 local cmd = vim.cmd
 
 -- Boostrap Packer
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone','https://github.com/wbthomason/packer.nvim', install_path})
+  packer_bootstrap = fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
 
 -- Load Packer
 cmd([[packadd packer.nvim]])
 
--- Rerun PackerCompile everytime pluggins.lua is updated
+-- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
   augroup packer_user_config
     autocmd!
@@ -24,14 +24,14 @@ cmd([[
 -- Initialize pluggins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
-  use({'wbthomason/packer.nvim', opt = true})
+  use({ 'wbthomason/packer.nvim', opt = true })
 
   -- LSP server
   use({
     'neovim/nvim-lspconfig',
     config = function() require('plugins.lspconfig') end
   })
-  use 'williamboman/nvim-lsp-installer'  -- Helper for installing most language servers
+  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
 
   -- Autocomplete
   use({
@@ -56,7 +56,7 @@ return require('packer').startup(function(use)
   })
 
   -- Snippets
-  use {"L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end}
+  use { "L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end }
   use "rafamadriz/friendly-snippets"
 
   -- Signature help
@@ -65,11 +65,11 @@ return require('packer').startup(function(use)
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/plenary.nvim'}},
+    requires = { { 'nvim-lua/plenary.nvim' } },
     config = function() require('plugins.telescope') end,
   })
 
-  use({'nvim-telescope/telescope-fzf-native.nvim', run ='make'})
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
   -- bufferline
   use({
@@ -89,15 +89,15 @@ return require('packer').startup(function(use)
   use({
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require('plugins.nvimtree') end,  -- Must add this manually
+    config = function() require('plugins.nvimtree') end, -- Must add this manually
   })
 
   -- Startify
   use({
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
-      vim.cmd('source '..path)
+      local path = vim.fn.stdpath('config') .. '/lua/plugins/startify.vim'
+      vim.cmd('source ' .. path)
     end
   })
 
@@ -105,9 +105,9 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
 
   -- Gitsigns
-  use ({
+  use({
     'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function() require('plugins.gitsigns') end
   })
 

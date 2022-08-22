@@ -4,10 +4,10 @@ local non_language_ft = {'fugitive', 'startify'}
 
 require('lualine').setup({
   options = {
-    theme = "tokyonight",
+    theme = "auto",
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = {left = '', right = ''},
-    section_separators = {left = '', right = ''},
+    section_separators = {left = ' ', right = ''},
     globalstatus = true,
   },
   sections = {
