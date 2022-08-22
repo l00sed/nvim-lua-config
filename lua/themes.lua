@@ -9,6 +9,18 @@ local Utils = require('./utils')
 o.pumblend = 10
 o.winblend = 10
 
+-- LSP
+cmd([[
+sign define DiagnosticSignError text= texthl=TextError linehl= numhl=
+sign define DiagnosticSignWarn  text= texthl=TextWarn  linehl= numhl=
+sign define DiagnosticSignInfo  text= texthl=TextInfo  linehl= numhl=
+sign define DiagnosticSignHint  text= texthl=TextHint  linehl= numhl=
+autocmd ColorScheme * highlight DiagnosticSignError guifg=Red guibg=NONE
+autocmd ColorScheme * highlight DiagnosticSignWarn guifg=DarkOrange3 guibg=NONE
+autocmd ColorScheme * highlight DiagnosticSignInfo guifg=Red1 guibg=NONE
+autocmd ColorScheme * highlight DiagnosticSignHint guifg=LightCyan1 guibg=NONE
+]])
+
 -- transparency
 cmd([[
 autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
@@ -30,7 +42,7 @@ autocmd ColorScheme * highlight BufferLineDuplicateSelected guibg=NONE
 autocmd ColorScheme * highlight BufferLineSeparatorSelected guifg=NONE guibg=NONE
 autocmd ColorScheme * highlight SignColumn guibg=NONE
 autocmd ColorScheme * highlight GitSignsAdd guifg=SpringGreen2 guibg=NONE
-autocmd ColorScheme * highlight GitSignsChange guifg=RoyalBlue1 guibg=NONE
+autocmd ColorScheme * highlight GitSignsChange guifg=MediumPurple2 guibg=NONE
 autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
 ]])
 
