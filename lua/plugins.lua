@@ -12,7 +12,6 @@ end
 
 -- Load Packer
 cmd([[packadd packer.nvim]])
-
 -- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
   augroup packer_user_config
@@ -21,17 +20,18 @@ cmd([[
   augroup end
 ]])
 
--- Initialize pluggins
+-- Initialize plugins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
   use({ 'wbthomason/packer.nvim', opt = true })
 
-  -- LSP server
+  -- LSP Installer and Config (using mason)
   use({
+    'williamboman/mason.nvim', -- Helper for installing most language servers
+    'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
-    config = function() require('plugins.lspconfig') end
+    run = require('plugins.mason.mason')
   })
-  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
 
   -- Autocomplete
   use({
@@ -46,6 +46,13 @@ return require('packer').startup(function(use)
       "saadparwaiz1/cmp_luasnip",
     },
     config = function() require('plugins.cmp') end,
+  })
+
+  -- Colorizer
+  use({
+    'norcalli/nvim-colorizer.lua',
+    -- config = function() require('plugins.colorizer') end,
+    run = require'colorizer'.setup(),
   })
 
   -- Treesitter
@@ -82,7 +89,7 @@ return require('packer').startup(function(use)
   -- statusline
   use({
     'hoob3rt/lualine.nvim',
-    config = function() require('plugins.lualine') end,
+    config = function() require('plugins.lualine.lualine') end,
   })
 
   -- NvimTree

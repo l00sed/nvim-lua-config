@@ -1,10 +1,55 @@
 -- Lualine configuration
-
 local non_language_ft = {'fugitive', 'startify'}
+
+local gruvbox = function()
+  local colors = { -- Gruvbox
+    darkgray = "#282828",
+    gray = "#928374",
+    innerbg = nil,
+    outerbg = "1d2021",
+    normal = "#458588",
+    insert = "#689d6a",
+    visual = "#cc251d",
+    replace = "#d79921",
+    command = "#98971a",
+  }
+  return {
+    inactive = {
+      a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+    visual = {
+      a = { fg = colors.darkgray, bg = colors.visual, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+    replace = {
+      a = { fg = colors.darkgray, bg = colors.replace, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+    normal = {
+      a = { fg = colors.darkgray, bg = colors.normal, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+    insert = {
+      a = { fg = colors.darkgray, bg = colors.insert, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+    command = {
+      a = { fg = colors.darkgray, bg = colors.command, gui = "bold" },
+      b = { fg = colors.gray, bg = colors.outerbg },
+      c = { fg = colors.gray, bg = colors.innerbg },
+    },
+  }
+end
 
 require('lualine').setup({
   options = {
-    theme = "auto",
+    theme = gruvbox(),
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = {left = '', right = ''},
     section_separators = {left = ' ', right = ''},

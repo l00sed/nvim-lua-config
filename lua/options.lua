@@ -14,6 +14,9 @@ o.showmode        = false
 o.showtabline     = 2 -- Always show tabline
 o.title           = true
 o.termguicolors   = true -- Use true colors, required for some plugins
+-- Fix bug in vim.
+cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
+cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]
 o.wrap            = true
 o.virtualedit     = "onemore"
 o.formatoptions   = "l"
@@ -25,6 +28,9 @@ wo.signcolumn     = 'yes'
 wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
+-- Set transparency of pop-up
+o.pumblend = 10
+o.winblend = 10
 g.transparent_enabled = false
 cmd [[hi cursorline cterm=none term=none]]
 cmd [[autocmd WinEnter * setlocal cursorline]]

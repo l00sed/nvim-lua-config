@@ -63,7 +63,7 @@ map("n", "<leader>n", "<Cmd>NvimTreeToggle<CR>") -- NvimTree
 -- nmap("ga", "<cmd>EasyAlign")
 
 -- Toggle Wrap
-map("n", "<leader>tw", '<Cmd>lua require "utils".toggle_wrap()<CR>', { noremap = true, silent = true })
+nomap("n", "<leader>tw", '<Cmd>lua require "utils".toggle_wrap()<CR>')
 
 -- Horizontal scroll while holding control
 nomap("n", "<C-ScrollWheelDown>", "10zl")
@@ -75,3 +75,5 @@ nomap("n", "<C-2-ScrollWheelUp>", "10zh")
 nomap("n", "<C-3-ScrollWheelUp>", "10zh")
 nomap("n", "<C-4-ScrollWheelUp>", "10zh")
 
+-- Toggle in-line LSP debugging
+map("n", "<Leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');

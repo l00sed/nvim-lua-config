@@ -10,8 +10,8 @@ require('bufferline').setup({
     always_show_bufferline = true,
     numbers = 'tabname_format',
     show_buffer_icons = true,
-    show_buffer_close_icons = false,
-    show_close_icon = false,
+    show_buffer_close_icons = true,
+    show_close_icon = true,
     separator_style = 'thick',
     -- Don't show bufferline over vertical, unmodifiable buffers
     offsets = {{

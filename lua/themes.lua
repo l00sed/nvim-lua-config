@@ -1,13 +1,5 @@
 -- Themes
-
-local g = vim.g
-local o = vim.o
 local cmd = vim.cmd
-local Utils = require('./utils')
-
--- Set transparency of pop-up
-o.pumblend = 10
-o.winblend = 10
 
 -- LSP
 cmd([[
@@ -19,6 +11,10 @@ autocmd ColorScheme * highlight DiagnosticSignError guifg=Red guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignWarn guifg=DarkOrange3 guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignInfo guifg=Red1 guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignHint guifg=LightCyan1 guibg=NONE
+autocmd ColorScheme * highlight Normal guibg=NONE
+autocmd ColorScheme * highlight NonText guifg=gray guibg=NONE
+autocmd ColorScheme * highlight NormalFloat guibg=#333
+autocmd ColorScheme * highlight FloatBorder guibg=#333
 ]])
 
 -- transparency
