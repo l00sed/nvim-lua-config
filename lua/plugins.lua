@@ -110,6 +110,8 @@ return require('packer').startup(function(use)
 
   -- git commands
   use 'tpope/vim-fugitive'
+  -- tmux
+  use 'edkolev/tmuxline.vim'
 
   -- Gitsigns
   use({
@@ -118,24 +120,44 @@ return require('packer').startup(function(use)
     config = function() require('plugins.gitsigns') end
   })
 
+  -- :w !sudo tee %
+  use 'lambdalisue/suda.vim'
+
   -- Formatting
+  -- -- Nice indent formatting utilities
+  use 'godlygeek/tabular'
+  use 'Yggdroot/indentLine'
+  -- -- tpope
   use 'tpope/vim-commentary'
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
+  -- -- easy-align
   use 'junegunn/vim-easy-align'
-
-  -- Python formatting
+  -- Syntax
+  use 'sheerun/vim-polyglot'
+  -- -- React / JS
+  use 'maksimr/vim-jsbeautify'
+  use 'othree/javascript-libraries-syntax.vim'
+  use 'pangloss/vim-javascript'
+  use 'leafgarland/typescript-vim'
+  use 'mxw/vim-jsx'
+  use 'peitalin/vim-jsx-typescript'
+  use 'othree/yajs.vim'
+  -- -- Django
+  use 'tweekmonster/django-plus.vim'
+  -- -- Python formatting
   use "EgZvor/vim-black"
   use 'jeetsukumaran/vim-python-indent-black'
-
+  -- -- PHP
+  use '2072/PHP-Indenting-for-VIm'
+  -- -- CSS
+  use 'hail2u/vim-css3-syntax'
+  -- -- Markdown
+  use 'tpope/vim-markdown'
   -- Python
   -- use  'heavenshell/vim-pydocstring'   -- Overwrites a keymap, need to fix.
   -- use 'bfredl/nvim-ipy'
-
-  -- Markdown
-  use 'godlygeek/tabular'
-  use 'ellisonleao/glow.nvim'
 
   -- TOML Files
   use 'cespare/vim-toml'

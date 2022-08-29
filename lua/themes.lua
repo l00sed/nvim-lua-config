@@ -14,7 +14,7 @@ autocmd ColorScheme * highlight DiagnosticSignHint guifg=LightCyan1 guibg=NONE
 autocmd ColorScheme * highlight Normal guibg=NONE
 autocmd ColorScheme * highlight NonText guifg=gray guibg=NONE
 autocmd ColorScheme * highlight NormalFloat guibg=#333
-autocmd ColorScheme * highlight FloatBorder guibg=#333
+autocmd ColorScheme * highlight FloatBorder guibg=black
 ]])
 
 -- transparency

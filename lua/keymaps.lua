@@ -75,5 +75,23 @@ nomap("n", "<C-2-ScrollWheelUp>", "10zh")
 nomap("n", "<C-3-ScrollWheelUp>", "10zh")
 nomap("n", "<C-4-ScrollWheelUp>", "10zh")
 
+-- Tab navigation in vim
+-- -- Move to previous tab
+nomap("n", "gt", ":bp<cr>")
+-- -- Move to next tab
+nomap("n", "gT", ":bn<cr>")
+-- -- Close current tab
+nomap("n", "<leader>c", ":bw<cr>")
+-- -- Use "Alt" + TAB_NUMBER to switch between tabs
+nomap("n", "<M-1>", "1<C-6>")
+nomap("n", "<M-2>", "2<C-6>")
+nomap("n", "<M-3>", "3<C-6>")
+nomap("n", "<M-4>", "4<C-6>")
+nomap("n", "<M-5>", "5<C-6>")
+nomap("n", "<M-6>", "6<C-6>")
+nomap("n", "<M-7>", "7<C-6>")
+nomap("n", "<M-8>", "8<C-6>")
+nomap("n", "<M-9>", "9<C-6>")
+
 -- Toggle in-line LSP debugging
 map("n", "<Leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');

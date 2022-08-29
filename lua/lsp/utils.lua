@@ -19,7 +19,7 @@ function M.common_on_attach(client, bufnr)
   end
 
   -- Keymaps: we need to define keymaps for each of the LSP functionalities manually
-  -- Go to definition and declaration (use leader to presever standard use of 'gd')
+  -- Go to definition and declaration (use leader to preserve standard use of 'gd')
   bufnnoremap("<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
   bufnnoremap("<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
 

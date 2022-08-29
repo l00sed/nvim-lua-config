@@ -7,7 +7,7 @@ local A = vim.api
 local cmd = vim.cmd
 
 -- Visual
-o.conceallevel    = 0 -- Don't hide quotes in markdown
+o.conceallevel    = 2 -- pretty markdown
 o.cmdheight       = 1
 o.pumheight       = 10
 o.showmode        = false
@@ -32,6 +32,19 @@ w.colorcolumn     = [[NONE]]
 o.pumblend = 10
 o.winblend = 10
 g.transparent_enabled = false
+-- Fix conceallevel when using Yggdroot/indentLine plugin
+cmd [[
+let g:indentLine_concealcursor=""
+let g:indentLine_conceallevel=2
+]]
+-- Indentline Settings
+cmd [[
+autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
+"set listchars=tab:\│\ ,trail:\
+let g:indentLine_setColors=1
+let g:indentLine_enabled=1
+let g:indentLine_char_list=['│', '-']
+]]
 cmd [[hi cursorline cterm=none term=none]]
 cmd [[autocmd WinEnter * setlocal cursorline]]
 cmd [[autocmd WinLeave * setlocal nocursorline]]
@@ -42,6 +55,7 @@ cmd [[highlight htmlArg cterm=italic]]
 cmd [[highlight htmlBold cterm=bold gui=bold]]
 cmd [[highlight htmlItalic cterm=italic gui=italic]]
 cmd [[highlight htmlBoldItalic cterm=bold,italic gui=bold,italic]]
+
 
 -- Behaviour
 o.clipboard     = [[unnamed,unnamedplus]] -- Makes neovim and host OS clipboard play nice
@@ -62,19 +76,14 @@ o.tabstop       = 2
 o.softtabstop   = 2
 o.shiftwidth    = 2
 -- Python set 4
-cmd [[autocmd FileType python set sw=4]]
-cmd [[autocmd FileType python set ts=4]]
-cmd [[autocmd FileType python set sts=4]]
+cmd [[au FileType python set sw=4 ts=4 sts=4]]
 -- Javascript tab instead of spaces
-cmd [[autocmd FileType javascript setlocal smartindent noexpandtab shiftwidth=2 tabstop=2]]
+cmd [[au FileType javascript setl smartindent noexpandtab sw=2 sts=2 ts=2]]
 -- Markdown
 cmd [[au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown]]
-cmd [[au FileType markdown setl breakindent]]
-cmd [[au FileType markdown setl textwidth=0]]
-cmd [[au FileType markdown setl wrap]]
-cmd [[au FileType markdown setl linebreak]] -- wrap lines at word breaks
+cmd [[au FileType markdown setl breakindent tw=0 wrap lbr]]
 -- PHP
-cmd [[au FileType php setl breakindent]]
+cmd [[au FileType php setl sw=4 ts=4 sts=4 breakindent]]
 -- HTML
 cmd [[au FileType html setl breakindent]]
 -- JSON

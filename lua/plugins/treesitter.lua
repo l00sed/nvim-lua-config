@@ -1,10 +1,10 @@
 -- Treesitter configuration
-
 require('nvim-treesitter.configs').setup({
 	highlight = {
-    enable = true,
+    enabled = true,
     additional_vim_regex_highlighting = {
-      "php"
+      "jsx",
+      "php",
     },
   },
   sync_installed = true,
@@ -12,13 +12,18 @@ require('nvim-treesitter.configs').setup({
 	ensure_installed = {
     "bash",
     "c",
+    "css",
     "cpp",
     "cuda",
+    "javascript",
 		"json",
     "julia",
 		"lua",
     "php",
     "python",
+    "rust",
+    "tsx",
+    "typescript",
     "yaml",
 	},
 })
