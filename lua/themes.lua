@@ -1,5 +1,6 @@
 -- Themes
 local cmd = vim.cmd
+local g = vim.g
 
 -- LSP
 cmd([[
@@ -44,8 +45,7 @@ autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
 
 -- TokioNight
 -- g.tokyonight_style = 'night'
--- g.tokyonight_italic_comments = false
--- cmd [[colorscheme tokyonight]]
+-- cmd [[colo tokyonight]]
 
 -- Material
 -- g.material_style = 'oceanic'
@@ -53,3 +53,4 @@ autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
 
 -- Gruvbox
 cmd [[colo gruvbox]]
+
