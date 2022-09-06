@@ -162,6 +162,9 @@ return require('packer').startup(function(use)
   -- TOML Files
   use 'cespare/vim-toml'
 
+  -- Markdown ToC
+  use 'mzlogin/vim-markdown-toc'
+
   -- Poetry
   -- use({'petobens/poet-v',
   --   config = function()
