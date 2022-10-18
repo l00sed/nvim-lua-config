@@ -6,7 +6,6 @@ local servers = {
   "cssls",
   "html",
   "bashls",
-  "clangd",
   "pyright",
   "jsonls",
   "dockerls"
