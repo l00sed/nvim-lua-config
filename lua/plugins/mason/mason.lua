@@ -13,6 +13,7 @@ local servers = {
 }
 
 require('mason').setup({
+  log_level = vim.log.levels.DEBUG,
   ui = {
     -- Whether to automatically check for outdated servers when opening the UI window.
     check_outdated_servers_on_open = true,
@@ -25,6 +26,7 @@ require('mason').setup({
     }
   }
 })
+
 require('mason-lspconfig').setup({
   -- automatically detect which servers to install (based on which servers are set up via lspconfig)
   automatic_installation = true,
@@ -39,7 +41,7 @@ local configs = {}
 
 -- add capabilities from nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
   if (lsp == "intelephense") then

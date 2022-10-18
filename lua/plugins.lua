@@ -36,19 +36,19 @@ return require('packer').startup(function(use)
     config = function() require('plugins.cmp') end,
   })
 
+  -- Colorizer
+  use({
+    'norcalli/nvim-colorizer.lua',
+    config = function() require('colorizer') end,
+    run = require'colorizer'.setup(),
+  })
+
   -- LSP Installer and Config (using mason)
   use({
     'williamboman/mason.nvim', -- Helper for installing most language servers
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     run = require('plugins.mason.mason')
-  })
-
-  -- Colorizer
-  use({
-    'norcalli/nvim-colorizer.lua',
-    config = function() require('plugins.colorizer') end,
-    run = require'colorizer'.setup(),
   })
 
   -- Treesitter
