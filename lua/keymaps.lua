@@ -1,4 +1,4 @@
--- General keymaps that are not a<CR>lugin dependant
+-- General keymaps that are not plugin dependant
 -- the file "lua/lsp/utils.lua" contains lsp-specific commands.
 
 local Utils = require('utils')
@@ -42,6 +42,14 @@ map("n", "<leader>G", ":G<CR>")
 
 -- Show line diagnostics
 map("n", "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
+
+-- Toggle diagnostics
+vim.keymap.set(
+  "",
+  "<Leader>l",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+)
 
 -- Open local diagnostics in local list
 map("n", "<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")

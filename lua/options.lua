@@ -14,6 +14,14 @@ o.showmode        = false
 o.showtabline     = 2 -- Always show tabline
 o.title           = true
 o.termguicolors   = true -- Use true colors, required for some plugins
+
+-- Change cursor shape based on mode
+cmd[[
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+]]
 -- Fix bug in vim.
 cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
 cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]
@@ -56,6 +64,11 @@ cmd [[highlight htmlArg cterm=italic]]
 cmd [[highlight htmlBold cterm=bold gui=bold]]
 cmd [[highlight htmlItalic cterm=italic gui=italic]]
 cmd [[highlight htmlBoldItalic cterm=bold,italic gui=bold,italic]]
+-- Invisiblish pane separators
+cmd [[
+set fillchars=vert:\│
+hi! VertSplit guifg=black guibg=NONE ctermfg=black ctermbg=NONE
+]]
 
 
 -- Behaviour
@@ -116,6 +129,7 @@ cmd [[autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear]]
 cmd [[autocmd FileType json syntax match Comment +\/\/.\+$+]]
 -- -- Django
 cmd [[au BufNewFile,BufRead *.html set filetype=htmldjango]]
+
 -- -- Indent wrapped lines
 cmd [[
 set breakindentopt=shift:0,min:40,sbr

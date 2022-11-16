@@ -130,8 +130,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
   -- -- easy-align
   use 'junegunn/vim-easy-align'
-  -- Syntax
-  use 'sheerun/vim-polyglot'
   -- -- React / JS
   use 'maksimr/vim-jsbeautify'
   use 'othree/javascript-libraries-syntax.vim'
@@ -174,6 +172,14 @@ return require('packer').startup(function(use)
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
       require("lsp_lines").setup()
+    end,
+  })
+
+  -- Smooth Scrolling
+  use({
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup()
     end,
   })
 

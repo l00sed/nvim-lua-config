@@ -49,11 +49,16 @@ end
 
 require('lualine').setup({
   options = {
+    icons_enabled = true,
     theme = gruvbox(),
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = {left = '', right = ''},
     section_separators = {left = ' ', right = ''},
     globalstatus = true,
+    disabled_filetypes = {
+      'packer',
+      'NVimTree',
+    }
   },
   sections = {
     lualine_a = {'mode'},

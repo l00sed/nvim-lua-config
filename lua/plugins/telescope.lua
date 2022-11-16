@@ -16,11 +16,18 @@ require('telescope').setup({
       },
     },
     layout_config = {
-      horizontal ={
-        height = 47,
+      horizontal = {
         prompt_position = "top",
-      }
-    }
+      },
+      center = {
+        width = 1,
+        height = function(_, _, max_lines)
+          return math.min(max_lines * 0.5, 15)
+        end,
+      },
+      preview_width = 0.55,
+    },
+    prompt_prefix = "  ",
   },
   extensions ={
     fzf = {
