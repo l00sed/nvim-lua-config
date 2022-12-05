@@ -29,7 +29,7 @@ o.wrap            = true
 o.virtualedit     = "onemore"
 o.formatoptions   = "l"
 o.lbr             = true
--- o.foldmethod      = "indent"
+o.foldmethod      = "syntax"
 wo.number         = true
 wo.relativenumber = false
 wo.signcolumn     = 'yes'
@@ -37,9 +37,9 @@ wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
 -- Set transparency of pop-up
-o.pumblend = 10
-o.winblend = 10
-g.transparent_enabled = false
+o.pumblend = 66
+o.winblend = 66
+g.transparent_enabled = true
 g.airline_powerline_fonts = 1
 -- Fix conceallevel when using Yggdroot/indentLine plugin
 cmd [[
@@ -92,7 +92,7 @@ o.shiftwidth    = 2
 -- Python set 4
 cmd [[au FileType python set sw=4 ts=4 sts=4]]
 -- Javascript tab instead of spaces
-cmd [[au FileType javascript setl smartindent noexpandtab sw=2 sts=2 ts=2]]
+cmd [[au FileType javascript set sw=2 ts=2 sts=2]]
 -- Markdown
 cmd [[au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown]]
 cmd [[au FileType markdown setl breakindent tw=0 wrap lbr]]
