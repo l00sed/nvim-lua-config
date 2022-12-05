@@ -99,10 +99,13 @@ return require('packer').startup(function(use)
     config = function() require('plugins.lualine.lualine') end,
   })
 
+  -- Tmux NvimTree
+  use 'kiyoon/tmuxsend.vim'
+
   -- NvimTree
   use({
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-tree.lua',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins.nvimtree') end, -- Must add this manually
   })
 
