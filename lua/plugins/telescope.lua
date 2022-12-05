@@ -28,8 +28,12 @@ require('telescope').setup({
       preview_width = 0.55,
     },
     prompt_prefix = "  ",
+    horizontal = {
+      height = 47,
+      prompt_position = "top",
+    }
   },
-  extensions ={
+  extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter

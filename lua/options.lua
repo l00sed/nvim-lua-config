@@ -14,7 +14,6 @@ o.showmode        = false
 o.showtabline     = 2 -- Always show tabline
 o.title           = true
 o.termguicolors   = true -- Use true colors, required for some plugins
-
 -- Change cursor shape based on mode
 cmd[[
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -29,7 +28,7 @@ o.wrap            = true
 o.virtualedit     = "onemore"
 o.formatoptions   = "l"
 o.lbr             = true
-o.foldmethod      = "syntax"
+o.foldmethod      = "indent"
 wo.number         = true
 wo.relativenumber = false
 wo.signcolumn     = 'yes'
@@ -37,8 +36,8 @@ wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
 -- Set transparency of pop-up
-o.pumblend = 66
-o.winblend = 66
+o.pumblend = 40
+o.winblend = 40
 g.transparent_enabled = true
 g.airline_powerline_fonts = 1
 -- Fix conceallevel when using Yggdroot/indentLine plugin
@@ -48,8 +47,7 @@ let g:indentLine_conceallevel=2
 ]]
 -- Indentline Settings
 cmd [[
-"autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
-"set listchars=tab:\│\ ,trail:\
+autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
 let g:indentLine_setColors=1
 let g:indentLine_enabled=1
 let g:indentLine_char_list=['│', '-']
@@ -129,7 +127,6 @@ cmd [[autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear]]
 cmd [[autocmd FileType json syntax match Comment +\/\/.\+$+]]
 -- -- Django
 cmd [[au BufNewFile,BufRead *.html set filetype=htmldjango]]
-
 -- -- Indent wrapped lines
 cmd [[
 set breakindentopt=shift:0,min:40,sbr

@@ -17,9 +17,35 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- Load Packer
+cmd([[packadd packer.nvim]])
+-- Rerun PackerCompile everytime plugins.lua is updated
+cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+-- Initialize plugins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
   use({ 'wbthomason/packer.nvim', opt = true })
+
+  -- LSP Installer and Config (using mason)
+  use({
+    'williamboman/mason.nvim', -- Helper for installing most language servers
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
+    run = require('plugins.mason.mason')
+  })
+
+  use({
+    's1n7ax/nvim-search-and-replace',
+    config = function() require'nvim-search-and-replace'.setup({
+      ignore = {'**/node_modules/**', '**/.git/**', '**/.gitignore', '**/.gitmodules', '**/__pycache__/**'},
+    }) end,
+  })
 
   -- Autocomplete
   use({
@@ -54,14 +80,6 @@ return require('packer').startup(function(use)
       -- Available modes: foreground, background
       mode     = 'background' -- Set the display mode.
     }),
-  })
-
-  -- LSP Installer and Config (using mason)
-  use({
-    'williamboman/mason.nvim', -- Helper for installing most language servers
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
-    run = require('plugins.mason.mason')
   })
 
   -- Treesitter
@@ -101,10 +119,13 @@ return require('packer').startup(function(use)
     config = function() require('plugins.lualine.lualine') end,
   })
 
+  -- Tmux NvimTree
+  use 'kiyoon/tmuxsend.vim'
+
   -- NvimTree
   use({
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-tree.lua',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins.nvimtree') end, -- Must add this manually
   })
 
@@ -112,8 +133,8 @@ return require('packer').startup(function(use)
   use({
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config') .. '/lua/plugins/startify.vim'
-      vim.cmd('source ' .. path)
+      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
+      vim.cmd('source '..path)
     end
   })
 
@@ -172,6 +193,9 @@ return require('packer').startup(function(use)
   -- Markdown ToC
   use 'mzlogin/vim-markdown-toc'
 
+  -- Seamless Vim + Tmux navigation
+  use 'christoomey/vim-tmux-navigator'
+
   -- Poetry
   -- use({'petobens/poet-v',
   --   config = function()
@@ -208,6 +232,32 @@ return require('packer').startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
+  -- Themes
+  use 'folke/tokyonight.nvim'
+  use 'marko-cerovac/material.nvim'
+  use({
+    'ellisonleao/gruvbox.nvim',
+    config = function()
+      require('gruvbox').setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = true,
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = false, -- invert background for search, diffs, statuslines and errors
+        contrast = "hard", -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = true,
+        transparent_mode = true,
+      })
+    end,
+  })
+
   if packer_bootstrap then
     require('packer').sync()
   end

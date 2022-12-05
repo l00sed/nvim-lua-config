@@ -890,6 +890,7 @@ call s:HL('multiple_cursors_cursor', s:none, s:none, s:inverse)
 call s:HL('multiple_cursors_visual', s:none, s:bg2)
 
 " }}}
+
 " coc.nvim: {{{
 
 hi! link CocErrorSign GruvboxRedSign

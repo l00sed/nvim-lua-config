@@ -40,7 +40,7 @@ cmp.setup({
   -- Mappings
   mapping = {
     -- open/close autocomplete
-    ['<C-Space>'] = function(fallback)
+    ['<C-Space>'] = function()
       if cmp.visible() then
         cmp.close()
       else

@@ -9,6 +9,7 @@ local servers = {
   "pyright",
   "jsonls",
   "dockerls",
+  "sumneko_lua",
   "tailwindcss",
   "volar",
 }
@@ -45,6 +46,15 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
+  if (lsp == 'sumneko_lua') then
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' }
+        }
+      }
+    }
+  end
   if (lsp == "intelephense") then
     if not configs.intelephense then
       configs.intelephense = {
@@ -128,7 +138,7 @@ for _, lsp in ipairs(servers) do
         environment = {
           -- this line forces the composer path for the stubs in case intelephense doesn't find it
           includePaths = {
-            '/home/dan/.config/composer/vendor/php-stubs/'
+            os.getenv("HOME").."/.config/composer/vendor/php-stubs/"
           }
         },
         files = {

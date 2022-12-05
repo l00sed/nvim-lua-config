@@ -6,6 +6,7 @@ local Utils = require('utils')
 -- Library alias variables
 local g = vim.g
 local o = vim.o
+local cmd = vim.cmd
 local inspect = vim.inspect
 -- local exprnnomap = Utils.exprnnoremap
 local map = Utils.map
@@ -32,10 +33,12 @@ map("i", "<C-SPACE>", "<C-x><C-o>")
 map("v", "<C-c>", '"+y')
 
 -- Move around windows (shifted to the right)
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+cmd('let g:tmux_navigator_no_mappings = 1')
+map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<cr>")
+map("n", "<M-j>", "<Cmd>TmuxNavigateDown<cr>")
+map("n", "<M-k>", "<Cmd>TmuxNavigateUp<cr>")
+map("n", "<M-l>", "<Cmd>TmuxNavigateRight<cr>")
+map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<cr>")
 
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")
