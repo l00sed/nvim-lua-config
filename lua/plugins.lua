@@ -81,7 +81,7 @@ return require('packer').startup(function(use)
   -- bufferline
   use({
     'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins.bufferline') end,
     event = 'BufWinEnter',
   })
@@ -94,8 +94,8 @@ return require('packer').startup(function(use)
 
   -- NvimTree
   use({
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-tree.lua',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins.nvimtree') end, -- Must add this manually
   })
 
