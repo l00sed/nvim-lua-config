@@ -102,6 +102,7 @@ for _, lsp in ipairs(servers) do
           "superglobals",
           "sysvsem",
           "sysvshm",
+          "tailwindcss",
           "tokenizer",
           "xml",
           "xdebug",
@@ -129,6 +130,20 @@ for _, lsp in ipairs(servers) do
         },
         files = {
           maxSize = 5000000
+        }
+      }
+    }
+  end
+  if (lsp == "cssls") then
+    settings = {
+      css = {
+        lint = {
+          unknownAtRules = "ignore"
+        }
+      },
+      scss = {
+        lint = {
+          unknownAtRules = "ignore"
         }
       }
     }
