@@ -1,6 +1,9 @@
 -- Themes
 local cmd = vim.cmd
 local g = vim.g
+local o = vim.o
+
+o.background = "dark"
 
 -- LSP
 cmd([[
@@ -49,8 +52,7 @@ autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
 
 -- Material
 -- g.material_style = 'oceanic'
--- cmd [[colorscheme material]]
+-- cmd [[colo material]]
 
 -- Gruvbox
-cmd [[colo gruvbox]]
-
+cmd[[colo gruvbox]]

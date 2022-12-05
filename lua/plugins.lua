@@ -3,7 +3,7 @@
 local fn = vim.fn
 local cmd = vim.cmd
 
--- Boostrap Packer
+-- Bootstrap Packer
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -31,6 +31,13 @@ return require('packer').startup(function(use)
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     run = require('plugins.mason.mason')
+  })
+
+  use({
+    's1n7ax/nvim-search-and-replace',
+    config = function() require'nvim-search-and-replace'.setup({
+      ignore = {'**/node_modules/**', '**/.git/**', '**/.gitignore', '**/.gitmodules', '**/__pycache__/**'},
+    }) end,
   })
 
   -- Autocomplete
@@ -103,8 +110,8 @@ return require('packer').startup(function(use)
   use({
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config') .. '/lua/plugins/startify.vim'
-      vim.cmd('source ' .. path)
+      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
+      vim.cmd('source '..path)
     end
   })
 
@@ -165,6 +172,8 @@ return require('packer').startup(function(use)
   -- Markdown ToC
   use 'mzlogin/vim-markdown-toc'
 
+  use 'christoomey/vim-tmux-navigator'
+
   -- Poetry
   -- use({'petobens/poet-v',
   --   config = function()
@@ -184,6 +193,28 @@ return require('packer').startup(function(use)
   -- Themes
   use 'folke/tokyonight.nvim'
   use 'marko-cerovac/material.nvim'
+  use({
+    'ellisonleao/gruvbox.nvim',
+    config = function()
+      require('gruvbox').setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = true,
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = false, -- invert background for search, diffs, statuslines and errors
+        contrast = "hard", -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = true,
+        transparent_mode = true,
+      })
+    end,
+  })
 
   if packer_bootstrap then
     require('packer').sync()

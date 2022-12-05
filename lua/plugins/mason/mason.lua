@@ -8,6 +8,7 @@ local servers = {
   "bashls",
   "clangd",
   "pyright",
+  "sumneko_lua",
   "jsonls",
   "dockerls"
 }
@@ -39,9 +40,18 @@ local configs = {}
 
 -- add capabilities from nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
+  if (lsp == 'sumneko_lua') then
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' }
+        }
+      }
+    }
+  end
   if (lsp == "intelephense") then
     if not configs.intelephense then
       configs.intelephense = {
