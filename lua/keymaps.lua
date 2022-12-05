@@ -35,11 +35,11 @@ map("v", "<C-c>", '"+y')
 -- Using together with vim-tmux-navigator plugin
 -- https://github.com/christoomey/vim-tmux-navigator
 cmd('let g:tmux_navigator_no_mappings = 1')
-map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<cr>")
-map("n", "<M-j>", "<Cmd>TmuxNavigateDown<cr>")
-map("n", "<M-k>", "<Cmd>TmuxNavigateUp<cr>")
-map("n", "<M-l>", "<Cmd>TmuxNavigateRight<cr>")
-map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<cr>")
+map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<CR>")
+map("n", "<M-j>", "<Cmd>TmuxNavigateDown<CR>")
+map("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
+map("n", "<M-l>", "<Cmd>TmuxNavigateRight<CR>")
+map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")

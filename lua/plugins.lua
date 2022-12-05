@@ -92,6 +92,10 @@ return require('packer').startup(function(use)
     config = function() require('plugins.lualine.lualine') end,
   })
 
+  -- For Tmux NvimTree usage
+  use 'kiyoon/tmuxsend.vim'
+  use 'christoomey/vim-tmux-navigator'
+
   -- NvimTree
   use({
     'nvim-tree/nvim-tree.lua',
