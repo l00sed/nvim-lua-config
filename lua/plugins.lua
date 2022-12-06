@@ -3,12 +3,19 @@
 local fn = vim.fn
 local cmd = vim.cmd
 
--- Boostrap Packer
-local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
-local packer_bootstrap
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
+-- Bootstrap Packer
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 -- Load Packer
 cmd([[packadd packer.nvim]])
@@ -33,6 +40,13 @@ return require('packer').startup(function(use)
     run = require('plugins.mason.mason')
   })
 
+  use({
+    's1n7ax/nvim-search-and-replace',
+    config = function() require'nvim-search-and-replace'.setup({
+      ignore = {'**/node_modules/**', '**/.git/**', '**/.gitignore', '**/.gitmodules', '**/__pycache__/**'},
+    }) end,
+  })
+
   -- Autocomplete
   use({
     "hrsh7th/nvim-cmp",
@@ -51,8 +65,21 @@ return require('packer').startup(function(use)
   -- Colorizer
   use({
     'norcalli/nvim-colorizer.lua',
-    -- config = function() require('plugins.colorizer') end,
-    run = require'colorizer'.setup(),
+    config = function() require('colorizer') end,
+    run = require'colorizer'.setup({
+      '*';
+    }, {
+      RGB      = true,   -- #RGB hex codes
+      RRGGBB   = true,   -- #RRGGBB hex codes
+      names    = true,   -- "Name" codes like Blue
+      RRGGBBAA = true,  -- #RRGGBBAA hex codes
+      rgb_fn   = true,  -- CSS rgb() and rgba() functions
+      hsl_fn   = true,  -- CSS hsl() and hsla() functions
+      css      = true,  -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+      css_fn   = true,  -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      -- Available modes: foreground, background
+      mode     = 'background' -- Set the display mode.
+    }),
   })
 
   -- Treesitter
@@ -107,8 +134,8 @@ return require('packer').startup(function(use)
   use({
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config') .. '/lua/plugins/startify.vim'
-      vim.cmd('source ' .. path)
+      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
+      vim.cmd('source '..path)
     end
   })
 
@@ -138,8 +165,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
   -- -- easy-align
   use 'junegunn/vim-easy-align'
-  -- Syntax
-  use 'sheerun/vim-polyglot'
   -- -- React / JS
   use 'maksimr/vim-jsbeautify'
   use 'othree/javascript-libraries-syntax.vim'
@@ -169,6 +194,9 @@ return require('packer').startup(function(use)
   -- Markdown ToC
   use 'mzlogin/vim-markdown-toc'
 
+  -- Seamless Vim + Tmux navigation
+  use 'christoomey/vim-tmux-navigator'
+
   -- Poetry
   -- use({'petobens/poet-v',
   --   config = function()
@@ -185,9 +213,51 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- Documentation Generator (jsDoc, etc.)
+  use({
+    'kkoomen/vim-doge',
+    run = ':call doge#install()'
+  })
+
+  -- Smooth Scrolling
+  use({
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup()
+    end,
+  })
+
   -- Themes
   use 'folke/tokyonight.nvim'
   use 'marko-cerovac/material.nvim'
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  -- Themes
+  use 'folke/tokyonight.nvim'
+  use 'marko-cerovac/material.nvim'
+  use({
+    'ellisonleao/gruvbox.nvim',
+    config = function()
+      require('gruvbox').setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = true,
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = false, -- invert background for search, diffs, statuslines and errors
+        contrast = "hard", -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = true,
+        transparent_mode = true,
+      })
+    end,
+  })
 
   if packer_bootstrap then
     require('packer').sync()

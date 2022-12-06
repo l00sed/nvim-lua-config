@@ -1,18 +1,22 @@
 -- Enable language servers with common settings
 local servers = {
   "intelephense",
+  "cssls",
   "eslint",
   "tsserver",
-  "cssls",
   "html",
   "bashls",
   --"clangd",
   "pyright",
   "jsonls",
-  "dockerls"
+  "dockerls",
+  --"sumneko_lua",
+  "tailwindcss",
+  "volar",
 }
 
 require('mason').setup({
+  log_level = vim.log.levels.DEBUG,
   ui = {
     -- Whether to automatically check for outdated servers when opening the UI window.
     check_outdated_servers_on_open = true,
@@ -25,6 +29,7 @@ require('mason').setup({
     }
   }
 })
+
 require('mason-lspconfig').setup({
   -- automatically detect which servers to install (based on which servers are set up via lspconfig)
   automatic_installation = true,
@@ -42,6 +47,23 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
+  if (lsp == 'sumneko_lua') then
+    settings = {
+      Lua = {
+        diagnostics = {
+          -- Get the LS to recognize the vim global
+          globals = { 'vim' }
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.stdpath('config') .. '/lua'] = true,
+          },
+        }
+      }
+    }
+  end
   if (lsp == "intelephense") then
     if not configs.intelephense then
       configs.intelephense = {
@@ -125,7 +147,7 @@ for _, lsp in ipairs(servers) do
         environment = {
           -- this line forces the composer path for the stubs in case intelephense doesn't find it
           includePaths = {
-            '/home/dan/.config/composer/vendor/php-stubs/'
+            os.getenv("HOME").."/.config/composer/vendor/php-stubs/"
           }
         },
         files = {

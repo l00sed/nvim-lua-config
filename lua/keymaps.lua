@@ -1,4 +1,4 @@
--- General keymaps that are not a<CR>lugin dependant
+-- General keymaps that are not plugin dependant
 -- the file "lua/lsp/utils.lua" contains lsp-specific commands.
 
 local Utils = require('utils')
@@ -29,6 +29,7 @@ map("n", "<Space>", "<Nop>")
 map("i", "<C-SPACE>", "<C-x><C-o>")
 
 -- Yank/copy from visual mode
+-- On Mac OS, extra translation step needed in iTerm2
 map("v", "<C-c>", '"+y')
 
 -- Move around windows (shifted to the right)
@@ -44,6 +45,8 @@ nomap("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")
 
+-- Remapped to use <M-k> for navigation
+vim.keymap.set("n", "<leader>k", '<Cmd>lua vim.lsp.buf.signature_help()<CR>', {remap=true});
 -- Toggle in-line LSP debugging
 map("n", "<leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');
 -- Show line diagnostics
