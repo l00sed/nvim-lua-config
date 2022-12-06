@@ -36,17 +36,17 @@ map("v", "<C-c>", '"+y')
 -- Using together with vim-tmux-navigator plugin
 -- https://github.com/christoomey/vim-tmux-navigator
 cmd('let g:tmux_navigator_no_mappings = 1')
-nomap("n", "<M-h>", "<Cmd>TmuxNavigateLeft<CR>")
-nomap("n", "<M-j>", "<Cmd>TmuxNavigateDown<CR>")
-nomap("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
-nomap("n", "<M-l>", "<Cmd>TmuxNavigateRight<CR>")
-nomap("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
+map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<CR>")
+map("n", "<M-j>", "<Cmd>TmuxNavigateDown<CR>")
+map("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
+map("n", "<M-l>", "<Cmd>TmuxNavigateRight<CR>")
+map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")
 
 -- Remapped to use <M-k> for navigation
-vim.keymap.set("n", "<leader>k", '<Cmd>lua vim.lsp.buf.signature_help()<CR>', {remap=true});
+map("n", "<leader>k", '<Cmd>lua vim.lsp.buf.signature_help()<CR>');
 -- Toggle in-line LSP debugging
 map("n", "<leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');
 -- Show line diagnostics

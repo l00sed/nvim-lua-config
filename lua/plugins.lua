@@ -121,6 +121,7 @@ return require('packer').startup(function(use)
 
   -- For Tmux NvimTree usage
   use 'kiyoon/tmuxsend.vim'
+  -- Seamless Vim + Tmux navigation
   use 'christoomey/vim-tmux-navigator'
 
   -- NvimTree
@@ -194,9 +195,6 @@ return require('packer').startup(function(use)
   -- Markdown ToC
   use 'mzlogin/vim-markdown-toc'
 
-  -- Seamless Vim + Tmux navigation
-  use 'christoomey/vim-tmux-navigator'
-
   -- Poetry
   -- use({'petobens/poet-v',
   --   config = function()
@@ -231,11 +229,6 @@ return require('packer').startup(function(use)
   use 'folke/tokyonight.nvim'
   use 'marko-cerovac/material.nvim'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  -- Themes
-  use 'folke/tokyonight.nvim'
-  use 'marko-cerovac/material.nvim'
   use({
     'ellisonleao/gruvbox.nvim',
     config = function()
@@ -259,6 +252,8 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end

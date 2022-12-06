@@ -140,6 +140,10 @@ au FileType json setl breakindent
 au FileType js setl breakindent
 au User Startified setl breakindent
 ]]
+-- Set filetype to bash for .zsh-theme
+cmd [[
+  au BufNewFile,BufRead *.zsh-theme setf bash
+]]
 -- -- CSS
 cmd [[
 augroup VimCSS3Syntax
