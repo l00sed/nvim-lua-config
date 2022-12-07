@@ -35,8 +35,8 @@ wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
 -- Set transparency of pop-up
-o.pumblend = 40
-o.winblend = 40
+o.pumblend = 20
+o.winblend = 20
 g.transparent_enabled = true
 g.airline_powerline_fonts = 1
 -- Fix conceallevel when using Yggdroot/indentLine plugin
@@ -156,7 +156,7 @@ cmd [[au FileType json setl breakindent]]
 -- JS
 cmd [[au FileType js setl breakindent]]
 -- Startify
-cmd [[au User Startified setl breakindent]]
+cmd [[au User Startified setl nowrap breakindent]]
 
 o.splitbelow    = true
 o.splitright    = true
