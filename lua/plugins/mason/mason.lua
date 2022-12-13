@@ -1,18 +1,23 @@
 -- Enable language servers with common settings
 local servers = {
-  "intelephense",
-  "cssls",
-  "eslint",
-  "tsserver",
-  "html",
   "bashls",
   --"clangd",
-  "pyright",
-  "jsonls",
+  "cssls",
+  "cssmodules_ls",
   "dockerls",
+  "eslint",
+  "grammarly",
+  "html",
+  "intelephense",
+  "jsonls",
+  "pyright",
+  "rome",
+  "stylelint_lsp",
   --"sumneko_lua",
   "tailwindcss",
+  "tsserver",
   "volar",
+  "vuels",
 }
 
 require('mason').setup({
@@ -84,6 +89,7 @@ for _, lsp in ipairs(servers) do
           "calendar",
           "Core",
           "curl",
+          "cypress", -- JavaScript e2e testing library
           "date",
           "dba",
           "dom",
