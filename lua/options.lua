@@ -45,12 +45,13 @@ let g:indentLine_concealcursor=""
 let g:indentLine_conceallevel=2
 ]]
 -- Indentline Settings
+--[[
 cmd [[
 autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
 let g:indentLine_setColors=1
 let g:indentLine_enabled=1
 let g:indentLine_char_list=['│', '-']
-]]
+]]--
 cmd [[hi cursorline cterm=none term=none]]
 cmd [[autocmd WinEnter * setlocal cursorline]]
 cmd [[autocmd WinLeave * setlocal nocursorline]]
