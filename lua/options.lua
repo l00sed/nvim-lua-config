@@ -3,7 +3,6 @@ local o = vim.o
 local w = vim.w
 local wo = vim.wo
 local D = vim.diagnostic
-local A = vim.api
 local cmd = vim.cmd
 
 -- Visual
@@ -14,6 +13,13 @@ o.showmode        = false
 o.showtabline     = 2 -- Always show tabline
 o.title           = true
 o.termguicolors   = true -- Use true colors, required for some plugins
+-- Change cursor shape based on mode
+cmd[[
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+]]
 -- Fix bug in vim.
 cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
 cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]
@@ -29,9 +35,10 @@ wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
 -- Set transparency of pop-up
-o.pumblend = 10
-o.winblend = 10
-g.transparent_enabled = false
+o.pumblend = 20
+o.winblend = 20
+g.transparent_enabled = true
+g.airline_powerline_fonts = 1
 -- Fix conceallevel when using Yggdroot/indentLine plugin
 cmd [[
 let g:indentLine_concealcursor=""
@@ -40,7 +47,6 @@ let g:indentLine_conceallevel=2
 -- Indentline Settings
 cmd [[
 autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
-"set listchars=tab:\│\ ,trail:\
 let g:indentLine_setColors=1
 let g:indentLine_enabled=1
 let g:indentLine_char_list=['│', '-']
@@ -55,6 +61,11 @@ cmd [[highlight htmlArg cterm=italic]]
 cmd [[highlight htmlBold cterm=bold gui=bold]]
 cmd [[highlight htmlItalic cterm=italic gui=italic]]
 cmd [[highlight htmlBoldItalic cterm=bold,italic gui=bold,italic]]
+-- Invisiblish pane separators
+cmd [[
+set fillchars=vert:\│
+hi! VertSplit guifg=black guibg=NONE ctermfg=black ctermbg=NONE
+]]
 
 
 -- Behaviour
@@ -78,7 +89,7 @@ o.shiftwidth    = 2
 -- Python set 4
 cmd [[au FileType python set sw=4 ts=4 sts=4]]
 -- Javascript tab instead of spaces
-cmd [[au FileType javascript setl smartindent noexpandtab sw=2 sts=2 ts=2]]
+cmd [[au FileType javascript set sw=2 ts=2 sts=2]]
 -- Markdown
 cmd [[au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown]]
 cmd [[au FileType markdown setl breakindent tw=0 wrap lbr]]
@@ -129,6 +140,10 @@ au FileType json setl breakindent
 au FileType js setl breakindent
 au User Startified setl breakindent
 ]]
+-- Set filetype to bash for .zsh-theme
+cmd [[
+  au BufNewFile,BufRead *.zsh-theme setf bash
+]]
 -- -- CSS
 cmd [[
 augroup VimCSS3Syntax
@@ -141,7 +156,7 @@ cmd [[au FileType json setl breakindent]]
 -- JS
 cmd [[au FileType js setl breakindent]]
 -- Startify
-cmd [[au User Startified setl breakindent]]
+cmd [[au User Startified setl nowrap breakindent]]
 
 o.splitbelow    = true
 o.splitright    = true
@@ -156,7 +171,7 @@ cmd [[autocmd InsertEnter,InsertLeave * set cul!]]
 
 -- Vim specific
 o.hidden           = true -- Do not save when switching buffers
-o.encoding         = "utf8"
+o.encoding         = "utf-8"
 o.fileencoding     = "utf-8"
 o.spell            = true
 o.ls               = 2

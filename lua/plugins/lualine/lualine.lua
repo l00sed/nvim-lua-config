@@ -6,12 +6,12 @@ local gruvbox = function()
     darkgray = "#282828",
     gray = "#928374",
     innerbg = nil,
-    outerbg = "1d2021",
-    normal = "#458588",
-    insert = "#689d6a",
-    visual = "#cc251d",
-    replace = "#d79921",
-    command = "#98971a",
+    outerbg = "#1d2021",
+    normal = "#458487",
+    insert = "#689c69",
+    visual = "#cb231d",
+    replace = "#d69821",
+    command = "#98961a",
   }
   return {
     inactive = {
@@ -49,6 +49,7 @@ end
 
 require('lualine').setup({
   options = {
+    icons_enabled = true,
     theme = gruvbox(),
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = {left = '', right = ''},
@@ -58,6 +59,10 @@ require('lualine').setup({
       'NvimTree',
     },
     globalstatus = true,
+    disabled_filetypes = {
+      'packer',
+      'NVimTree',
+    }
   },
   sections = {
     lualine_a = {'mode'},

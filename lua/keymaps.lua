@@ -1,4 +1,4 @@
--- General keymaps that are not a<CR>lugin dependant
+-- General keymaps that are not plugin dependant
 -- the file "lua/lsp/utils.lua" contains lsp-specific commands.
 
 local Utils = require('utils')
@@ -6,6 +6,7 @@ local Utils = require('utils')
 -- Library alias variables
 local g = vim.g
 local o = vim.o
+local cmd = vim.cmd
 local inspect = vim.inspect
 -- local exprnnomap = Utils.exprnnoremap
 local map = Utils.map
@@ -28,23 +29,30 @@ map("n", "<Space>", "<Nop>")
 map("i", "<C-SPACE>", "<C-x><C-o>")
 
 -- Yank/copy from visual mode
+-- On Mac OS, extra translation step needed in iTerm2
 map("v", "<C-c>", '"+y')
 
 -- Move around windows (shifted to the right)
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+-- Using together with vim-tmux-navigator plugin
+-- https://github.com/christoomey/vim-tmux-navigator
+cmd('let g:tmux_navigator_no_mappings = 1')
+map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<CR>")
+map("n", "<M-j>", "<Cmd>TmuxNavigateDown<CR>")
+map("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
+map("n", "<M-l>", "<Cmd>TmuxNavigateRight<CR>")
+map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")
 
+-- Remapped to use <M-k> for navigation
+map("n", "<leader>k", '<Cmd>lua vim.lsp.buf.signature_help()<CR>');
+-- Toggle in-line LSP debugging
+map("n", "<leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');
 -- Show line diagnostics
 map("n", "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
-
 -- Open local diagnostics in local list
 map("n", "<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
-
 -- Open all project diagnostics in quickfix list
 map("n", "<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 
@@ -92,6 +100,3 @@ nomap("n", "<M-6>", "6<C-6>")
 nomap("n", "<M-7>", "7<C-6>")
 nomap("n", "<M-8>", "8<C-6>")
 nomap("n", "<M-9>", "9<C-6>")
-
--- Toggle in-line LSP debugging
-map("n", "<Leader>l", '<Cmd>lua require "lsp_lines".toggle()<CR>');

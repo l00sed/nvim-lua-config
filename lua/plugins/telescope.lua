@@ -1,4 +1,4 @@
-local actions = require('telescope.actions')
+ local actions = require('telescope.actions')
 -- local utils = require('telescope.utils')
 -- local trouble = require('telescope.providers.telescope')
 
@@ -16,13 +16,24 @@ require('telescope').setup({
       },
     },
     layout_config = {
-      horizontal ={
-        height = 47,
+      horizontal = {
         prompt_position = "top",
-      }
+      },
+      center = {
+        width = 1,
+        height = function(_, _, max_lines)
+          return math.min(max_lines * 0.5, 15)
+        end,
+      },
+      preview_width = 0.55,
+    },
+    prompt_prefix = "  ",
+    horizontal = {
+      height = 47,
+      prompt_position = "top",
     }
   },
-  extensions ={
+  extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter
