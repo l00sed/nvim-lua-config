@@ -15,16 +15,16 @@ autocmd ColorScheme * highlight DiagnosticSignError guifg=Red guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignWarn guifg=DarkOrange3 guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignInfo guifg=Red1 guibg=NONE
 autocmd ColorScheme * highlight DiagnosticSignHint guifg=LightCyan1 guibg=NONE
-autocmd ColorScheme * highlight Normal guibg=NONE
-autocmd ColorScheme * highlight NonText guifg=gray guibg=NONE
-autocmd ColorScheme * highlight NormalFloat guibg=#333
-autocmd ColorScheme * highlight FloatBorder guibg=black
 ]])
 
 -- transparency
 cmd([[
 autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
+autocmd ColorScheme * highlight Pmenu guibg=NONE ctermbg=NONE
+autocmd ColorScheme * highlight PmenuBorder guifg=#333333 ctermfg=gray guibg=NONE ctermbg=NONE
+autocmd ColorScheme * highlight NonText guifg=gray guibg=NONE
+autocmd ColorScheme * highlight NormalFloat guibg=NONE ctermbg=NONE
+autocmd ColorScheme * highlight FloatBorder guifg=#333333 ctermfg=gray guibg=NONE ctermbg=NONE
 autocmd ColorScheme * highlight BufferLineNumbersSelected guibg=NONE guifg=white
 autocmd ColorScheme * highlight BufferLineBufferSelected guifg=white guibg=NONE
 autocmd ColorScheme * highlight BufferLineDiagnosticSelected guibg=NONE

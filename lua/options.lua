@@ -35,8 +35,8 @@ wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
 -- transparency
 -- Set transparency of pop-up
-o.pumblend = 20
-o.winblend = 20
+o.pumblend = 0
+o.winblend = 0
 g.transparent_enabled = true
 g.airline_powerline_fonts = 1
 -- Fix conceallevel when using Yggdroot/indentLine plugin

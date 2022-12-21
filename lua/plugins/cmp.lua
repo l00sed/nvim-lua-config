@@ -23,6 +23,41 @@ local opts = {
 
 require('luasnip.loaders.from_vscode').lazy_load(opts)
 
+-- local border = {
+--   { "┏", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┓", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+--   { "┛", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┗", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+-- }
+
+-- local border = {
+--   { "╔", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╗", "FloatBorder" },
+--   { "║", "FloatBorder" },
+--   { "╝", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╚", "FloatBorder" },
+--   { "║", "FloatBorder" },
+-- }
+
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+
+local hl = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:Search"
+
 cmp.setup({
   -- Don't autocomplete, otherwise there is too much clutter
   -- completion = {autocomplete = { false },},
@@ -35,6 +70,18 @@ cmp.setup({
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+
+  -- Styles
+  window = {
+    completion = {
+      border = border,
+      winhighlight = hl,
+    },
+    documentation = {
+      border = border,
+      winhighlight = hl,
+    }
   },
 
   -- Mappings

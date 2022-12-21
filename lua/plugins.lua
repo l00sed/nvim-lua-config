@@ -149,6 +149,8 @@ local function init()
   use 'kiyoon/tmuxsend.vim'
   -- Seamless Vim + Tmux navigation
   use 'christoomey/vim-tmux-navigator'
+  -- Like Tmux <C-b>z
+  use 'caenrique/nvim-maximize-window-toggle'
 
   -- NvimTree
   use {
@@ -163,8 +165,8 @@ local function init()
   use {
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
-      vim.cmd('source '..path)
+      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.lua'
+      vim.cmd('source ' .. path)
     end
   }
 

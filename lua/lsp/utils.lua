@@ -4,13 +4,26 @@ local cmd = vim.cmd
 
 local M = {}
 
-cmd([[autocmd ColorScheme * highlight NormalFloat guibg=NONE]])
-cmd([[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=NONE]])
-
 -- This function defines the on_attach function for several languages which share the same key-bindings
 function M.common_on_attach(client, bufnr)
   -- Set omnifunc
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- LSP settings (for overriding per client)
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      border = "rounded"
+    }
+  )
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+      border = "rounded"
+    }
+  )
+
+  vim.diagnostic.config {
+    float = { border = "rounded" }
+  }
 
   -- Helper function
   local opts = { noremap = true, silent = true }
