@@ -12,13 +12,13 @@ local servers = {
   "html",
   "intelephense",
   "jsonls",
-  "ltex",
+  --"ltex",
   "pyright",
-  "rome",
+  --"rome",
   "stylelint_lsp",
   --"sumneko_lua",
   "tailwindcss",
-  "texlab",
+  --"texlab",
   "tsserver",
   "volar",
   "vuels",
@@ -45,7 +45,6 @@ require('mason-lspconfig').setup({
   ensure_installed = servers,
 })
 
-local nvim_lsp = require('lspconfig')
 local utils = require('lsp.utils')
 local common_on_attach = utils.common_on_attach
 local settings = {}
@@ -56,7 +55,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
-
   if (lsp == 'sumneko_lua') then
     settings = {
       Lua = {
@@ -184,13 +182,13 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  nvim_lsp[lsp].setup({
+  require('lspconfig')[lsp].setup({
     on_attach = common_on_attach,
     capabilities = capabilities,
     settings = settings,
-    configs = configs,
+    configs = configs
   })
 end
 
 -- signature help hover
-require "lsp_signature".setup({})
+require('lsp_signature').setup({})

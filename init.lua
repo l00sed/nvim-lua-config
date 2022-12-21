@@ -20,8 +20,13 @@ create_cmd('PackerCompile', function()
   vim.cmd [[packadd packer.nvim]]
   require('plugins').compile()
 end, {})
+create_cmd('PackerStatus', function()
+  vim.cmd [[packadd packer.nvim]]
+  require('plugins').status()
+end, {})
 
 -- Load all config files
+require('plugins')
 require('options')
 require('keymaps')
 require('commands')

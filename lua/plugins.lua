@@ -1,63 +1,85 @@
-local packer = nil
-local function init()
-  if packer == nil then
-    packer = require 'packer'
-    packer.init {
-      disable_commands = true,
-      display = {
-        open_fn = function()
-          local result, win, buf = require('packer.util').float {
-            border = {
-              { '╭', 'FloatBorder' },
-              { '─', 'FloatBorder' },
-              { '╮', 'FloatBorder' },
-              { '│', 'FloatBorder' },
-              { '╯', 'FloatBorder' },
-              { '─', 'FloatBorder' },
-              { '╰', 'FloatBorder' },
-              { '│', 'FloatBorder' },
-            },
-          }
-          vim.api.nvim_win_set_option(win, 'winhighlight', 'NormalFloat:Normal')
-          return result, win, buf
-        end,
-      },
-    }
+-- auto install packer if not installed
+local fn = vim.fn
+local cmd = vim.cmd
+local ensure_packer = function()
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    cmd([[packadd packer.nvim]])
+    return true
   end
+  return false
+end
 
-  local use = packer.use
-  packer.reset()
+local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
-  -- Let Packer manage itself
+-- autocommand that reloads neovim and installs/updates/removes plugins
+cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
+
+local status, packer = pcall(require, "packer")
+if not status then
+  return
+end
+
+packer.init({
+  package_root = fn.stdpath("data") .. "/site/pack",
+  compile_path = fn.stdpath("config") .. "plugin/packer_compiled.lua",
+  plugin_package = "packer",
+  disable_commands = true,
+  display = {
+    open_fn = function()
+      local result, win, buf = require('packer.util').float {
+        border = {
+          { '╭', 'FloatBorder' },
+          { '─', 'FloatBorder' },
+          { '╮', 'FloatBorder' },
+          { '│', 'FloatBorder' },
+          { '╯', 'FloatBorder' },
+          { '─', 'FloatBorder' },
+          { '╰', 'FloatBorder' },
+          { '│', 'FloatBorder' }
+        }
+      }
+      vim.api.nvim_win_set_option(win, 'winhighlight', 'NormalFloat:Normal')
+      return result, win, buf
+    end
+  }
+})
+
+-- add list of plugins to install
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- LSP Installer and Config (using mason)
-  use {
+  use({
     'williamboman/mason.nvim', -- Helper for installing most language servers
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
-    config = function()
-      require'plugins.mason.mason'
-    end,
-  }
+    run = require('plugins.mason.mason')
+  })
 
-  use {
+  use({
     's1n7ax/nvim-search-and-replace',
     config = function()
-      require'nvim-search-and-replace'.setup {
+      require('nvim-search-and-replace').setup({
         ignore = {
           '**/node_modules/**',
           '**/.git/**',
           '**/.gitignore',
           '**/.gitmodules',
           '**/__pycache__/**'
-        },
-      }
-    end,
-  }
+        }
+      })
+    end
+  })
 
   -- Autocomplete
-  use {
+  use({
     "hrsh7th/nvim-cmp",
     -- Sources for nvim-cmp
     requires = {
@@ -68,16 +90,14 @@ local function init()
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
     },
-    config = function()
-      require('plugins.cmp')
-    end,
-  }
+    config = function() require('plugins.cmp') end
+  })
 
   -- Colorizer
-  use {
+  use({
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require'colorizer'.setup({
+      require('colorizer').setup({
         '*',
       }, {
         RGB      = true,   -- #RGB hex codes
@@ -91,59 +111,53 @@ local function init()
         -- Available modes: foreground, background
         mode     = 'background' -- Set the display mode.
       })
-    end,
-  }
+    end
+  })
 
   -- Treesitter
-  use {
+  use({
     'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('plugins.treesitter')
-    end,
-  }
+    config = function() require('plugins.treesitter') end
+  })
 
   -- Snippets
-  use {
-    "L3MON4D3/LuaSnip",
-    config = function()
-      require('plugins.snippets')
-    end
-  }
+  use({
+    'L3MON4D3/LuaSnip',
+    config = function() require('plugins.snippets') end
+  })
 
-  use "rafamadriz/friendly-snippets"
+  use 'rafamadriz/friendly-snippets'
 
   -- Signature help
-  use "ray-x/lsp_signature.nvim"
+  use 'ray-x/lsp_signature.nvim'
 
   -- Telescope
-  use {
+  use({
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim'
     },
-    config = function()
-      require('plugins.telescope')
-    end,
-  }
+    config = function() require('plugins.telescope') end
+  })
 
-  use {
+  use({
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
-  }
+  })
 
   -- bufferline
-  use {
+  use({
     'akinsho/bufferline.nvim',
     requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins.bufferline') end,
-    event = 'BufWinEnter',
-  }
+    event = 'BufWinEnter'
+  })
 
   -- statusline
-  use {
+  use({
     'hoob3rt/lualine.nvim',
-    config = function() require('plugins.lualine.lualine') end,
-  }
+    config = function() require('plugins.lualine.lualine') end
+  })
 
   -- For Tmux NvimTree usage
   use 'kiyoon/tmuxsend.vim'
@@ -153,22 +167,20 @@ local function init()
   use 'caenrique/nvim-maximize-window-toggle'
 
   -- NvimTree
-  use {
+  use({
     'nvim-tree/nvim-tree.lua',
     requires = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('plugins.nvimtree')
-    end, -- Must add this manually
-  }
+    config = function() require('plugins.nvimtree') end
+  })
 
   -- Startify
-  use {
+  use({
     'mhinz/vim-startify',
     config = function()
       local path = vim.fn.stdpath('config')..'/lua/plugins/startify.lua'
       vim.cmd('source ' .. path)
     end
-  }
+  })
 
   -- git commands
   use 'tpope/vim-fugitive'
@@ -176,13 +188,11 @@ local function init()
   use 'edkolev/tmuxline.vim'
 
   -- Gitsigns
-  use {
+  use({
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('plugins.gitsigns')
-    end,
-  }
+    config = function() require('plugins.gitsigns') end
+  })
 
   -- :w !sudo tee %
   use 'lambdalisue/suda.vim'
@@ -209,7 +219,7 @@ local function init()
   -- -- Django
   use 'tweekmonster/django-plus.vim'
   -- -- Python formatting
-  use "EgZvor/vim-black"
+  use 'EgZvor/vim-black'
   use 'jeetsukumaran/vim-python-indent-black'
   -- -- PHP
   use '2072/PHP-Indenting-for-VIm'
@@ -220,10 +230,8 @@ local function init()
   -- Python
   -- use 'heavenshell/vim-pydocstring'   -- Overwrites a keymap, need to fix.
   -- use 'bfredl/nvim-ipy'
-
   -- TOML Files
   use 'cespare/vim-toml'
-
   -- Markdown ToC
   use 'mzlogin/vim-markdown-toc'
 
@@ -236,46 +244,42 @@ local function init()
   -- })
 
   -- Shows lines pointing to offending errors inline
-  use {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  }
+  use({
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function() require('lsp_lines').setup() end
+  })
 
   -- Documentation Generator (jsDoc, etc.)
-  use {
+  use({
     'kkoomen/vim-doge',
     run = ':call doge#install()'
-  }
+  })
 
   -- Smooth Scrolling
-  use {
+  use({
     'karb94/neoscroll.nvim',
     config = function()
       require('neoscroll').setup({
         mappings = {},
         hide_cursor = true,
       })
-    end,
-  }
+    end
+  })
 
   -- LaTeX for Vim
-  use {
+  use({
     'lervag/vimtex',
-    config = function()
-      require('plugins.vimtex')
-    end
-  }
+    config = function() require('plugins.vimtex') end
+  })
 
   -- Themes
-  use 'folke/tokyonight.nvim'
-  use 'marko-cerovac/material.nvim'
+  --use 'folke/tokyonight.nvim'
+  --use 'marko-cerovac/material.nvim'
 
-  use {
+  use({
     'ellisonleao/gruvbox.nvim',
     config = function()
-      require'gruvbox'.setup {
+      require('gruvbox').setup({
         undercurl = true,
         underline = true,
         bold = true,
@@ -291,16 +295,11 @@ local function init()
         overrides = {},
         dim_inactive = true,
         transparent_mode = true,
-      }
-    end,
-  }
-end
+      })
+    end
+  })
 
-local plugins = setmetatable({}, {
-  __index  = function(__, key)
-    init()
-    return packer[key]
-  end,
-})
-
-return plugins
+  if packer_bootstrap then
+    packer.sync()
+  end
+end)
