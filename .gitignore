@@ -1,5 +1,4 @@
 .DS_Store
-=======
-/.ctagsignore
-/tags
+.ctagsignore
+tags
 plugin/packer_compiled.lua
