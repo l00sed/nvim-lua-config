@@ -62,9 +62,13 @@ function! ConfirmQuit(writeFile)
     endif
 endfu
 ]]
+-- Split vertically
 map("n", "<leader>%", "<Cmd>vnew<CR>")
+-- Split horizontally
 map("n", "<leader>\"", "<Cmd>new<CR>")
+-- Kill neovim pane like Tmux
 map("n", "<leader>x", ":call ConfirmQuit(0)<CR>")
+-- Used with the ToggleOnly plugin, zoom the neovim pane like Tmux
 map("n", "<leader>z", ":ToggleOnly<CR>")
 
 -- Fugitive
@@ -107,6 +111,10 @@ nomap("n", "<C-ScrollWheelUp>", "10zh")
 nomap("n", "<C-2-ScrollWheelUp>", "10zh")
 nomap("n", "<C-3-ScrollWheelUp>", "10zh")
 nomap("n", "<C-4-ScrollWheelUp>", "10zh")
+-- Neoscroll
+map("n", "<C-u>", "<Cmd>lua require('neoscroll').scroll(-(vim.api.nvim_win_get_height(0)/2), true, 500)<CR>")  -- Up
+map("n", "<C-d>", "<Cmd>lua require('neoscroll').scroll(-(vim.api.nvim_win_get_height(0)/2), true, 500)<CR>")  -- Up
+map("n", "<C-f>", "<Cmd>lua require('neoscroll').scroll((vim.api.nvim_win_get_height(0)/2), true, 500)<CR>")  -- Down
 
 -- Tab navigation in vim
 -- -- Move to previous tab

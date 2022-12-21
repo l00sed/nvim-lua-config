@@ -39,19 +39,30 @@ o.pumblend = 0
 o.winblend = 0
 g.transparent_enabled = true
 g.airline_powerline_fonts = 1
--- Fix conceallevel when using Yggdroot/indentLine plugin
-cmd [[
-let g:indentLine_concealcursor=""
-let g:indentLine_conceallevel=2
-]]
 -- Indentline Settings
---[[
 cmd [[
-autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
-let g:indentLine_setColors=1
-let g:indentLine_enabled=1
-let g:indentLine_char_list=['│', '-']
-]]--
+if exists(":IndentLinesReset")
+  autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
+endif
+]]
+-- Fix conceallevel when using Yggdroot/indentLine plugin
+g.indentLine_concealcursor = ""
+g.indentLine_conceallevel = 2
+g.indentLine_setColors = 1
+g.indentLine_enabled = 1
+g.indentLine_char_list = {
+  '│',
+  '-',
+}
+g.indentLine_bufTypeExclude = {
+  'help',
+  'terminal',
+}
+g.indentLine_bufNameExclude = {
+  'packer',
+  'startify',
+}
+
 cmd [[hi cursorline cterm=none term=none]]
 cmd [[autocmd WinEnter * setlocal cursorline]]
 cmd [[autocmd WinLeave * setlocal nocursorline]]
