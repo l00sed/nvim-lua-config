@@ -54,6 +54,10 @@ require('lualine').setup({
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = {left = '', right = ''},
     section_separators = {left = ' ', right = ''},
+    disabled_filetypes = {
+      'packer',
+      'NvimTree',
+    },
     globalstatus = true,
     disabled_filetypes = {
       'packer',

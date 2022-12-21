@@ -1,5 +1,4 @@
 -- NVIM tree
-
 local g = vim.g
 
 g.loaded_netrw = 1
