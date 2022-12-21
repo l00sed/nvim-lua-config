@@ -255,6 +255,14 @@ local function init()
     end,
   }
 
+  -- LaTeX for Vim
+  use {
+    'lervag/vimtex',
+    config = function()
+      require('plugins.vimtex')
+    end
+  }
+
   -- Themes
   use 'folke/tokyonight.nvim'
   use 'marko-cerovac/material.nvim'

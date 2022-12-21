@@ -2,4 +2,4 @@
 =======
 /.ctagsignore
 /tags
-plugin/
+plugin/packer_compiled.lua

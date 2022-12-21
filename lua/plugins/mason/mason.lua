@@ -1,4 +1,6 @@
 -- Enable language servers with common settings
+-- For available values, look here:
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   "bashls",
   --"clangd",
@@ -10,11 +12,13 @@ local servers = {
   "html",
   "intelephense",
   "jsonls",
+  "ltex",
   "pyright",
   "rome",
   "stylelint_lsp",
   --"sumneko_lua",
   "tailwindcss",
+  "texlab",
   "tsserver",
   "volar",
   "vuels",
@@ -52,6 +56,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
+
   if (lsp == 'sumneko_lua') then
     settings = {
       Lua = {
@@ -69,6 +74,7 @@ for _, lsp in ipairs(servers) do
       }
     }
   end
+
   if (lsp == "intelephense") then
     if not configs.intelephense then
       configs.intelephense = {
@@ -162,6 +168,7 @@ for _, lsp in ipairs(servers) do
       }
     }
   end
+
   if (lsp == "cssls") then
     settings = {
       css = {
@@ -176,6 +183,7 @@ for _, lsp in ipairs(servers) do
       }
     }
   end
+
   nvim_lsp[lsp].setup({
     on_attach = common_on_attach,
     capabilities = capabilities,
