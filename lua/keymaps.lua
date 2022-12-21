@@ -42,6 +42,31 @@ map("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
 map("n", "<M-l>", "<Cmd>TmuxNavigateRight<CR>")
 map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 
+-- More Tmux-like magic
+cmd [[
+function! ConfirmQuit(writeFile)
+    if (a:writeFile)
+        if (expand('%:t')=="")
+            echo "Can't save a file with no name."
+            return
+        endif
+        :write
+    endif
+
+    if (winnr('$')==1 && tabpagenr('$')==1)
+        if (confirm("Do you really want to quit?", "&Yes\n&No", 2)==1)
+            :quit
+        endif
+    else
+        :quit
+    endif
+endfu
+]]
+map("n", "<leader>%", "<Cmd>vnew<CR>")
+map("n", "<leader>\"", "<Cmd>new<CR>")
+map("n", "<leader>x", ":call ConfirmQuit(0)<CR>")
+map("n", "<leader>z", ":ToggleOnly<CR>")
+
 -- Fugitive
 map("n", "<leader>G", ":G<CR>")
 
