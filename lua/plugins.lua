@@ -4,9 +4,7 @@ return {
     'williamboman/mason.nvim', -- Helper for installing most language servers
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
-    config = function()
-      require('plugins.mason.mason')
-    end
+    build = require('plugins.mason.mason')
   },
 
   {
