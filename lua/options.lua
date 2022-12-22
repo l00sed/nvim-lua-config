@@ -33,36 +33,13 @@ wo.relativenumber = false
 wo.signcolumn     = 'yes'
 wo.cursorline     = true
 w.colorcolumn     = [[NONE]]
+-- No fold enabled
+cmd [[au FileType lazy set nofen]]
 -- transparency
 -- Set transparency of pop-up
 o.pumblend = 0
 o.winblend = 0
 g.transparent_enabled = true
-g.airline_powerline_fonts = 1
--- Indentline Settings
-cmd [[
-if exists(":IndentLinesReset")
-  autocmd VimEnter,WinEnter,BufNewFile,BufRead,BufEnter,TabEnter * IndentLinesReset
-endif
-]]
--- Fix conceallevel when using Yggdroot/indentLine plugin
-g.indentLine_concealcursor = ""
-g.indentLine_conceallevel = 2
-g.indentLine_setColors = 1
-g.indentLine_enabled = 1
-g.indentLine_char_list = {
-  '│',
-  '-',
-}
-g.indentLine_bufTypeExclude = {
-  'help',
-  'terminal',
-}
-g.indentLine_bufNameExclude = {
-  'packer',
-  'startify',
-}
-
 cmd [[hi cursorline cterm=none term=none]]
 cmd [[autocmd WinEnter * setlocal cursorline]]
 cmd [[autocmd WinLeave * setlocal nocursorline]]
@@ -78,8 +55,6 @@ cmd [[
 set fillchars=vert:\│
 hi! VertSplit guifg=black guibg=NONE ctermfg=black ctermbg=NONE
 ]]
-
-
 -- Behaviour
 o.clipboard     = [[unnamed,unnamedplus]] -- Makes neovim and host OS clipboard play nice
 o.hlsearch      = false
@@ -117,6 +92,7 @@ function! PhpSyntaxOverride()
   hi phpClassNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
   setl ts=2 sts=2 noet | retab! | setl ts=2 sts=2 et | retab
 endfunction
+
 augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
@@ -128,8 +104,8 @@ cmd [[au FileType html setl breakindent]]
 -- -- JS/JSX/TS
 cmd [[
 augroup FiletypeGroup
-    autocmd!
-    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  autocmd!
+  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 ]]
 cmd [[autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart]]
@@ -150,7 +126,6 @@ au FileType php setl breakindent
 au FileType html setl breakindent
 au FileType json setl breakindent
 au FileType js setl breakindent
-au User Startified setl breakindent
 ]]
 -- Set filetype to bash for .zsh-theme
 cmd [[
@@ -167,8 +142,6 @@ augroup END
 cmd [[au FileType json setl breakindent]]
 -- JS
 cmd [[au FileType js setl breakindent]]
--- Startify
-cmd [[au User Startified setl nowrap breakindent]]
 
 o.splitbelow    = true
 o.splitright    = true
@@ -208,8 +181,9 @@ black_virtualenv  = os.getenv("HOME") .. pynvim_env
 loaded_perl_provider = 0
 loaded_ruby_provider = 0
 
--- Disable inline error messages
+-- Diagnostics
 D.config {
+  -- Disable inline error messages
   virtual_text = false,
   underline = false,
   signs = true, -- Keep gutter signs

@@ -6,6 +6,9 @@ local cmd = vim.cmd
 g.startify_enable_special = 1
 g.startify_session_autoload = 1
 
+-- disable folding, wrapping in Startify
+cmd [[au User Startified setl nofen nowrap breakindent]]
+
 -- WebDevIcons
 function _G.webDevIcons(path)
   local filename = vim.fn.fnamemodify(path, ':t')

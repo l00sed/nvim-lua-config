@@ -2,3 +2,4 @@
 .ctagsignore
 tags
 plugin/packer_compiled.lua
+lazy-lock.json

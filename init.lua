@@ -1,29 +1,32 @@
-local create_cmd = vim.api.nvim_create_user_command
+-- Bootstrap lazy.nvim plugin loader
+------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- If lazyloader not downloaded, clone from github
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    '--single-branch',
+    'https://github.com/folke/lazy.nvim.git',
+    lazypath,
+  })
+end
+-- Make Lazy available
+vim.opt.runtimepath:prepend(lazypath)
+------------------------------------
 
-create_cmd('PackerInstall', function()
-  vim.cmd [[packadd packer.nvim]]
-  require('plugins').install()
-end, {})
-create_cmd('PackerUpdate', function()
-  vim.cmd [[packadd packer.nvim]]
-  require('plugins').update()
-end, {})
-create_cmd('PackerSync', function()
-  vim.cmd [[packadd packer.nvim]]
-  require('plugins').sync()
-end, {})
-create_cmd('PackerClean', function()
-  vim.cmd [[packadd packer.nvim]]
-  require('plugins').clean()
-end, {})
-create_cmd('PackerCompile', function()
-  vim.cmd [[packadd packer.nvim]]
-  require('plugins').compile()
-end, {})
-
--- Load all config files
+-- Load native Neovim options (NO PLUGIN SETTINGS)
 require('options')
+
+-- Install plugins
+require('lazy').setup(require('plugins'))
+
+-- Load keymap customizations
 require('keymaps')
+
+-- Load command customizations
 require('commands')
-require('themes')
+
 -- Theme at the end, to prevent overwrite by other plugins
+require('themes')
