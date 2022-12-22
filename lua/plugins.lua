@@ -7,6 +7,7 @@ return {
     build = require('plugins.mason.mason')
   },
 
+  -- Search and replace across multiple files
   {
     's1n7ax/nvim-search-and-replace',
     config = function()
@@ -22,11 +23,15 @@ return {
     end
   },
 
+  -- devicons in cmp menu
+  'onsails/lspkind.nvim',
+
   -- Autocomplete
   {
     'hrsh7th/nvim-cmp',
     -- Sources for nvim-cmp
     dependencies = {
+      'nvim-tree/nvim-web-devicons',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -34,9 +39,7 @@ return {
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
     },
-    config = function()
-      require('plugins.cmp')
-    end
+    config = function() require('plugins.cmp') end
   },
 
   -- Colorizer
@@ -63,17 +66,13 @@ return {
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('plugins.treesitter')
-    end
+    config = function() require('plugins.treesitter') end
   },
 
   -- Snippets
   {
     'L3MON4D3/LuaSnip',
-    config = function()
-      require('plugins.snippets')
-    end
+    config = function() require('plugins.snippets') end
   },
 
   'rafamadriz/friendly-snippets',
@@ -81,6 +80,7 @@ return {
   -- Signature help
   'ray-x/lsp_signature.nvim',
 
+  -- FZF Native
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make'
@@ -121,9 +121,7 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('plugins.nvimtree')
-    end -- Must add this manually
+    config = function() require('plugins.nvimtree') end -- Must add this manually
   },
 
   -- Startify
@@ -206,9 +204,7 @@ return {
   -- Shows lines pointing to offending errors inline
   {
     url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    config = function()
-      require("lsp_lines").setup()
-    end
+    config = function() require('lsp_lines').setup() end
   },
 
   -- Documentation Generator (jsDoc, etc.)
@@ -220,22 +216,18 @@ return {
   -- Smooth Scrolling
   {
     'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup()
-    end,
+    config = function() require('neoscroll').setup() end
   },
 
   -- LaTeX for Vim
   {
     'lervag/vimtex',
-    config = function()
-      require('plugins.vimtex')
-    end
+    config = function() require('plugins.vimtex') end
   },
 
   -- Themes
-  'folke/tokyonight.nvim',
-  'marko-cerovac/material.nvim',
+  --'folke/tokyonight.nvim',
+  --'marko-cerovac/material.nvim',
 
   {
     'ellisonleao/gruvbox.nvim',

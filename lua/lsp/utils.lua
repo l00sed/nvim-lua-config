@@ -10,17 +10,20 @@ function M.common_on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- LSP settings (for overriding per client)
+  -- rounded borders
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
       border = "rounded"
     }
   )
+  -- rounded borders
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help, {
       border = "rounded"
     }
   )
 
+  -- rounded borders
   vim.diagnostic.config {
     float = { border = "rounded" }
   }

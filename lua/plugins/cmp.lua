@@ -1,4 +1,5 @@
 local fn = vim.fn
+local cmd = vim.cmd
 
 -- local Utils = require('utils')
 local luasnip = require('luasnip')
@@ -58,6 +59,8 @@ local border = {
 
 local hl = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:Search"
 
+local lspkind = require('lspkind')
+
 cmp.setup({
   -- Don't autocomplete, otherwise there is too much clutter
   -- completion = {autocomplete = { false },},
@@ -75,13 +78,79 @@ cmp.setup({
   -- Styles
   window = {
     completion = {
+      side_padding = 1,
+      col_offset = -1,
       border = border,
       winhighlight = hl,
     },
     documentation = {
+      side_padding = 1,
       border = border,
       winhighlight = hl,
     }
+  },
+
+  --[[
+  formatting = {
+    format = function(entry, vim_item)
+      if vim.tbl_contains({ 'path' }, entry.source.name) then
+        local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+        if icon then
+          vim_item.kind = icon
+          vim_item.kind_hl_group = hl_group
+          return vim_item
+        end
+      end
+      return lspkind.cmp_format({ with_text = false })(entry, vim_item)
+    end
+  },
+  ]]--
+
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol',
+      preset = 'default',
+      menu = ({
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+        buffer = "[Buffer]",
+        spell = "[Spell]",
+        --latex_symbols = "[Latex]",
+      }),
+      symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+      },
+      ellipsis_char = '...',
+      before = function(entry, vim_item)
+        return vim_item
+      end
+    })
   },
 
   -- Mappings
@@ -130,12 +199,12 @@ cmp.setup({
 
   -- Complete options from the LSP servers and the snippet engine
   sources = {
-    {name = 'nvim_lsp'},
-    {name = 'luasnip'},
-    {name = 'nvim_lua'},
-    {name = 'path'},
-    {name = 'buffer'},
-    {name = 'spell'},
-    -- {name = 'calc'},
+    { name = 'nvim_lsp' },
+    { name = 'luasnip'  },
+    { name = 'nvim_lua' },
+    { name = 'path'     },
+    { name = 'buffer'   },
+    { name = 'spell'    },
+    --{ name = 'calc'     },
   },
 })

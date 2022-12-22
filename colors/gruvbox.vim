@@ -916,6 +916,42 @@ call s:HL('CocHintHighlight', s:none, s:none, s:undercurl, s:blue)
 
 " }}}
 
+" nvim-cmp: {{{
+
+hi! link CmpItemAbbrDeprecated GruvboxGray
+hi! link CmpItemAbbrMatch GruvboxGreenBold
+hi! link CmpItemAbbrMatchFuzzy GruvboxBlueBold
+hi! link CmpItemKind GruvboxBlue
+hi! link CmpItemKindClass GruvboxYellow
+hi! link CmpItemKindColor GruvboxRed
+hi! link CmpItemKindConstant GruvboxAqua
+hi! link CmpItemKindConstructor GruvboxBlue
+hi! link CmpItemKindCopilot GruvboxGreen
+hi! link CmpItemKindEnum GruvboxFg3
+hi! link CmpItemKindEnumMember GruvboxRed
+hi! link CmpItemKindEvent GruvboxBlue
+hi! link CmpItemKindField GruvboxFg3
+hi! link CmpItemKindFile GruvboxBlue
+hi! link CmpItemKindFolder GruvboxBlue
+hi! link CmpItemKindFunction GruvboxBlue
+hi! link CmpItemKindInterface GruvboxYellow
+hi! link CmpItemKindKeyword GruvboxRed
+hi! link CmpItemKindMethod GruvboxBlue
+hi! link CmpItemKindModule GruvboxBlue
+hi! link CmpItemKindOperator GruvboxBlue
+hi! link CmpItemKindProperty GruvboxFg3
+hi! link CmpItemKindReference GruvboxRed
+hi! link CmpItemKindSnippet GruvboxPurple
+hi! link CmpItemKindStruct GruvboxBlue
+hi! link CmpItemKindText GruvboxGreen
+hi! link CmpItemKindTypeParameter GruvboxBlue
+hi! link CmpItemKindValue GruvboxOrange
+hi! link CmpItemKindVariable GruvboxAqua
+hi! link CmpItemKindUnit GruvboxFg3
+hi! link CmpItemMenu GruvboxFg1
+
+" }}}
+
 " Filetype specific -----------------------------------------------------------
 " Diff: {{{
 
