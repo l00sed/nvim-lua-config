@@ -19,8 +19,17 @@ vim.opt.runtimepath:prepend(lazypath)
 -- Load native Neovim options (NO PLUGIN SETTINGS)
 require('options')
 
+-- Lazy options
+local opts = {
+  install = {
+    colorscheme = { "gruvbox-dark" }
+  },
+  ui = {
+    border = "rounded"
+  }
+}
 -- Install plugins
-require('lazy').setup(require('plugins'))
+require('lazy').setup(require('plugins'), opts)
 
 -- Load keymap customizations
 require('keymaps')

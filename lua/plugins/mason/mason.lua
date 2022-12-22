@@ -56,7 +56,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
-
   if (lsp == 'sumneko_lua') then
     settings = {
       Lua = {
@@ -191,6 +190,3 @@ for _, lsp in ipairs(servers) do
     configs = configs,
   })
 end
-
--- signature help hover
-require "lsp_signature".setup({})

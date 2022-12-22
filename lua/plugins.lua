@@ -78,7 +78,10 @@ return {
   'rafamadriz/friendly-snippets',
 
   -- Signature help
-  'ray-x/lsp_signature.nvim',
+  {
+    'ray-x/lsp_signature.nvim',
+    config = function() require('plugins.lsp_signature') end
+  },
 
   -- FZF Native
   {
