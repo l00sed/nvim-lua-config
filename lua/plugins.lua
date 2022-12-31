@@ -3,8 +3,7 @@ return {
   {
     'williamboman/mason.nvim', -- Helper for installing most language servers
     'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
-    build = require('plugins.mason.mason')
+    'neovim/nvim-lspconfig'
   },
 
   -- Search and replace across multiple files
@@ -107,14 +106,6 @@ return {
     event = 'BufWinEnter'
   },
 
-  -- statusline
-  {
-    'hoob3rt/lualine.nvim',
-    config = function() require('plugins.lualine.lualine') end
-  },
-
-  -- For Tmux NvimTree usage
-  'kiyoon/tmuxsend.vim',
   -- Seamless Vim + Tmux navigation
   'christoomey/vim-tmux-navigator',
   -- Like Tmux <C-b>z
@@ -156,8 +147,8 @@ return {
   'godlygeek/tabular',
 
   {
-    'Yggdroot/indentLine',
-    config = function() require('plugins.indentline') end
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require('plugins.indent-blankline') end
   },
 
   -- -- tpope
@@ -232,8 +223,16 @@ return {
   --'folke/tokyonight.nvim',
   --'marko-cerovac/material.nvim',
 
+  -- statusline
+  {
+    'hoob3rt/lualine.nvim',
+    config = function() require('plugins.lualine') end
+  },
+
   {
     'ellisonleao/gruvbox.nvim',
+    lazy = false,
+    priority = 1000,
     config = function()
       require('gruvbox').setup {
         undercurl = true,
@@ -253,5 +252,5 @@ return {
         transparent_mode = true,
       }
     end
-  }
+  },
 }

@@ -1,8 +1,12 @@
+local cmd = vim.cmd
 -- Lualine configuration
-local non_language_ft = {'fugitive', 'startify'}
+local non_language_ft = {
+  'Startify',
+  'NVimTree',
+}
 
 local gruvbox = function()
-  local colors = { -- Gruvbox
+  local colors = { -- Gruvbox Dark
     darkgray = "#282828",
     gray = "#928374",
     innerbg = nil,
@@ -13,6 +17,7 @@ local gruvbox = function()
     replace = "#d69821",
     command = "#98961a",
   }
+
   return {
     inactive = {
       a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
@@ -52,21 +57,36 @@ require('lualine').setup({
     icons_enabled = true,
     theme = gruvbox(),
     -- Separators might look weird for certain fonts (eg Cascadia)
-    component_separators = {left = '', right = ''},
-    section_separators = {left = ' ', right = ''},
+    component_separators = { left = '', right = '' },
+    --section_separators = {
+    --  left = ' ',
+    --  right = ''
+    --},
+    section_separators = {
+      left = '',
+      right = ''
+    }, -- BubbleButt
     disabled_filetypes = {
-      'packer',
-      'NvimTree',
+      statusline = {
+        'packer',
+        'NvimTree',
+      },
+      winbar = {
+        'packer',
+        'NvimTree',
+      },
     },
     globalstatus = true,
-    disabled_filetypes = {
-      'packer',
-      'NVimTree',
-    }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff'},
+    --lualine_a = {'mode'},
+    lualine_a = { -- BubbleButt
+      { 'mode', separator = {
+        left = '',
+        right = ''
+      }, right_padding = 0 },
+    },
+    lualine_b = { 'branch', 'diff' },
     lualine_c = {
       'filetype',
       {
@@ -97,7 +117,7 @@ require('lualine').setup({
 
           return msg
         end,
-        color = {fg = '#ffffff', gui = 'bold'},
+        color = { fg = '#ffffff', gui = 'bold' },
         separator = "",
       },
       {
@@ -106,11 +126,14 @@ require('lualine').setup({
         sections = {'error', 'warn', 'info'},
       },
     },
-    lualine_x = {'encoding'},
-    lualine_y = {'progress'},
+    lualine_x = { 'encoding' },
+    lualine_y = { 'progress' },
     lualine_z = {
-      {function () return '' end},
-      {'location'},
+      { function () return '' end },
+      --{'location'},
+      { 'location', separator = {
+        right = ''
+      }, left_padding = 0 }, -- BubbleButt
     }
   },
 })

@@ -43,6 +43,8 @@ autocmd ColorScheme * highlight SignColumn guibg=NONE
 autocmd ColorScheme * highlight GitSignsAdd guifg=SpringGreen2 guibg=NONE
 autocmd ColorScheme * highlight GitSignsChange guifg=MediumPurple2 guibg=NONE
 autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
+autocmd ColorScheme * highlight CursorLine guibg=#333333
+autocmd ColorScheme * highlight CursorLineNr guibg=#333333
 ]]
 
 -- TokioNight
@@ -51,8 +53,6 @@ autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
 
 -- Material
 -- g.material_style = 'oceanic'
--- cmd [[colorscheme material]]
-
 -- cmd [[colo material]]
 
 -- Gruvbox

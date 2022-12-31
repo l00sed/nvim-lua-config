@@ -7,7 +7,7 @@ local cmd = vim.cmd
 
 -- Visual
 o.conceallevel    = 2 -- pretty markdown
-o.cmdheight       = 1
+o.cmdheight       = 0 -- hide vim command line
 o.pumheight       = 10
 o.showmode        = false
 o.showtabline     = 2 -- Always show tabline

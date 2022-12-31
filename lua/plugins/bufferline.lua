@@ -12,20 +12,24 @@ require('bufferline').setup({
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,
-    separator_style = 'thick',
+    separator_style = 'thin',
     -- Don't show bufferline over vertical, unmodifiable buffers
     offsets = {{
-        filetype = 'NvimTree',
-        text = 'File Explorer',
-        highlight = 'Directory'
+      filetype = 'NVimTree',
+      text = 'File Explorer',
+      highlight = 'Directory'
     }},
     custom_areas = {
       right = function()
-        local result = {{text="Buffers", fg="#ffffff"}}
+        local result = {{ text="Buffers", fg="#ffffff" }}
         return result
       end,
     },
     -- Don't use italic on current buffer
-    highlights = {buffer_selected = { bold = true },},
+    highlights = {
+      buffer_selected = {
+        bold = true
+      }
+    }
   },
 })
