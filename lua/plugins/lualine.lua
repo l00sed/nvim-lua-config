@@ -9,7 +9,7 @@ local gruvbox = function()
   local colors = { -- Gruvbox Dark
     darkgray = "#282828",
     gray = "#928374",
-    innerbg = nil,
+    innerbg = 'None',
     outerbg = "#1d2021",
     normal = "#458487",
     insert = "#689c69",
@@ -20,32 +20,32 @@ local gruvbox = function()
 
   return {
     inactive = {
-      a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.outerbg, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     visual = {
-      a = { fg = colors.darkgray, bg = colors.visual, gui = "bold" },
+      a = { fg = colors.darkgray, bg = colors.visual, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     replace = {
-      a = { fg = colors.darkgray, bg = colors.replace, gui = "bold" },
+      a = { fg = colors.darkgray, bg = colors.replace, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     normal = {
-      a = { fg = colors.darkgray, bg = colors.normal, gui = "bold" },
+      a = { fg = colors.darkgray, bg = colors.normal, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     insert = {
-      a = { fg = colors.darkgray, bg = colors.insert, gui = "bold" },
+      a = { fg = colors.darkgray, bg = colors.insert, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     command = {
-      a = { fg = colors.darkgray, bg = colors.command, gui = "bold" },
+      a = { fg = colors.darkgray, bg = colors.command, bold = true },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
@@ -58,14 +58,14 @@ require('lualine').setup({
     theme = gruvbox(),
     -- Separators might look weird for certain fonts (eg Cascadia)
     component_separators = { left = '', right = '' },
-    --section_separators = {
-    --  left = ' ',
-    --  right = ''
-    --},
     section_separators = {
-      left = '',
-      right = ''
-    }, -- BubbleButt
+      left = ' ',
+      right = ''
+    },
+    --section_separators = {
+    --  left = '',
+    --  right = ''
+    --}, -- BubbleButt
     disabled_filetypes = {
       statusline = {
         'packer',
@@ -79,13 +79,13 @@ require('lualine').setup({
     globalstatus = true,
   },
   sections = {
-    --lualine_a = {'mode'},
-    lualine_a = { -- BubbleButt
-      { 'mode', separator = {
-        left = '',
-        right = ''
-      }, right_padding = 0 },
-    },
+    lualine_a = { 'mode' },
+    --lualine_a = { -- BubbleButt
+    --  { 'mode', separator = {
+    --    left = '',
+    --    right = ''
+    --  }, right_padding = 0 },
+    --},
     lualine_b = { 'branch', 'diff' },
     lualine_c = {
       'filetype',
@@ -117,7 +117,7 @@ require('lualine').setup({
 
           return msg
         end,
-        color = { fg = '#ffffff', gui = 'bold' },
+        color = { fg = '#ffffff', bold = true },
         separator = "",
       },
       {
@@ -130,10 +130,11 @@ require('lualine').setup({
     lualine_y = { 'progress' },
     lualine_z = {
       { function () return '' end },
-      --{'location'},
-      { 'location', separator = {
-        right = ''
-      }, left_padding = 0 }, -- BubbleButt
+      { 'location' },
+      --{ 'location', separator = {
+      --  right = ''
+      --}, left_padding = 0 }, -- BubbleButt
     }
   },
 })
+

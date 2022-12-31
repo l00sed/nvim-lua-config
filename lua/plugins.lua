@@ -28,6 +28,7 @@ return {
   -- Autocomplete
   {
     'hrsh7th/nvim-cmp',
+    event = "InsertEnter",
     -- Sources for nvim-cmp
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -146,11 +147,6 @@ return {
   -- -- Nice indent formatting utilities
   'godlygeek/tabular',
 
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    config = function() require('plugins.indent-blankline') end
-  },
-
   -- -- tpope
   'tpope/vim-commentary',
   'tpope/vim-unimpaired',
@@ -198,7 +194,7 @@ return {
   -- Shows lines pointing to offending errors inline
   {
     url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    config = function() require('lsp_lines').setup() end
+    config = true
   },
 
   -- Documentation Generator (jsDoc, etc.)
@@ -210,7 +206,7 @@ return {
   -- Smooth Scrolling
   {
     'karb94/neoscroll.nvim',
-    config = function() require('neoscroll').setup() end
+    config = true
   },
 
   -- LaTeX for Vim
@@ -219,10 +215,6 @@ return {
     config = function() require('plugins.vimtex') end
   },
 
-  -- Themes
-  --'folke/tokyonight.nvim',
-  --'marko-cerovac/material.nvim',
-
   -- statusline
   {
     'hoob3rt/lualine.nvim',
@@ -230,27 +222,13 @@ return {
   },
 
   {
-    'ellisonleao/gruvbox.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('gruvbox').setup {
-        undercurl = true,
-        underline = true,
-        bold = true,
-        italic = true,
-        strikethrough = true,
-        invert_selection = false,
-        invert_signs = false,
-        invert_tabline = false,
-        invert_intend_guides = false,
-        inverse = false, -- invert background for search, diffs, statuslines and errors
-        contrast = "hard", -- can be "hard", "soft" or empty string
-        palette_overrides = {},
-        overrides = {},
-        dim_inactive = true,
-        transparent_mode = true,
-      }
-    end
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require('plugins.indent-blankline') end
   },
+
+  {
+    'ellisonleao/gruvbox.nvim',
+    config = function() require('plugins.gruvbox') end
+  },
+
 }

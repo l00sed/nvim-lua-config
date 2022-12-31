@@ -1,59 +1,67 @@
 -- Themes
 local cmd = vim.cmd
-local g = vim.g
-local o = vim.o
+local api = vim.api
 
-o.background = "dark"
+-- Lualine fix
+api.nvim_set_hl(0, 'lualine_transitional_lualine_a_replace_to_StatusLine', { bg = 'None' })
+api.nvim_set_hl(0, 'lualine_transitional_lualine_a_insert_to_StatusLine', { bg = 'None' })
+api.nvim_set_hl(0, 'lualine_transitional_lualine_a_normal_to_StatusLine', { bg = 'None' })
+api.nvim_set_hl(0, 'lualine_transitional_lualine_a_command_to_StatusLine', { bg = 'None' })
+api.nvim_set_hl(0, 'lualine_transitional_lualine_a_visual_to_StatusLine', { bg = 'None' })
 
--- LSP
+-- LSP Diagnostics
 cmd [[
-" Diagnostics
 sign define DiagnosticSignError text= texthl=TextError linehl= numhl=
 sign define DiagnosticSignWarn  text= texthl=TextWarn  linehl= numhl=
 sign define DiagnosticSignInfo  text= texthl=TextInfo  linehl= numhl=
 sign define DiagnosticSignHint  text= texthl=TextHint  linehl= numhl=
-autocmd ColorScheme * highlight DiagnosticSignError guifg=Red guibg=NONE
-autocmd ColorScheme * highlight DiagnosticSignWarn guifg=DarkOrange3 guibg=NONE
-autocmd ColorScheme * highlight DiagnosticSignInfo guifg=Red1 guibg=NONE
-autocmd ColorScheme * highlight DiagnosticSignHint guifg=LightCyan1 guibg=NONE
-" Transparency
-autocmd ColorScheme * highlight Normal guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight Pmenu guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight PmenuBorder guifg=#333333 ctermfg=gray guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight NonText guifg=gray guibg=NONE
-autocmd ColorScheme * highlight NormalFloat guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight FloatBorder guifg=#333333 ctermfg=gray guibg=NONE ctermbg=NONE
-autocmd ColorScheme * highlight BufferLineNumbersSelected guibg=NONE guifg=white
-autocmd ColorScheme * highlight BufferLineBufferSelected guifg=white guibg=NONE
-autocmd ColorScheme * highlight BufferLineDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineHintSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineHintDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineInfoSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineInfoDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineWarningSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineWarningDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineErrorSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineErrorDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineModifiedSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineModifiedDiagnosticSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineDuplicateSelected guibg=NONE
-autocmd ColorScheme * highlight BufferLineSeparatorSelected guifg=NONE guibg=NONE
-" git-signs plugin
-autocmd ColorScheme * highlight SignColumn guibg=NONE
-autocmd ColorScheme * highlight GitSignsAdd guifg=SpringGreen2 guibg=NONE
-autocmd ColorScheme * highlight GitSignsChange guifg=MediumPurple2 guibg=NONE
-autocmd ColorScheme * highlight GitSignsDelete guifg=Red1 guibg=NONE
-autocmd ColorScheme * highlight CursorLine guibg=#333333
-autocmd ColorScheme * highlight CursorLineNr guibg=#333333
 ]]
+api.nvim_set_hl(0, 'DiagnosticSignError', { fg = 'Red', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = 'DarkOrange3', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = 'Red1', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = 'LightCyan1', bg = 'None' })
 
--- TokioNight
--- g.tokyonight_style = 'night'
--- cmd [[colo tokyonight]]
+-- Additional Transparency
+api.nvim_set_hl(0, 'Normal', { bg = 'None', ctermbg = 'None' })
+api.nvim_set_hl(0, 'SignColumn', { bg = 'None' })
+api.nvim_set_hl(0, 'Pmenu', { bg = 'None', ctermbg = 'None' })
+api.nvim_set_hl(0, 'PmenuBorder', { fg = '#333333', ctermfg = 'gray', bg = 'None', ctermbg = 'None' })
+api.nvim_set_hl(0, 'NonText', { fg = 'gray', bg = 'None' })
+api.nvim_set_hl(0, 'NormalFloat', { bg = 'None', ctermbg = 'None' })
+api.nvim_set_hl(0, 'FloatBorder', { fg = '#333333', ctermfg = 'gray', bg = 'None', ctermbg = 'None' })
 
--- Material
--- g.material_style = 'oceanic'
--- cmd [[colo material]]
+-- Bufferline Transparency
+api.nvim_set_hl(0, 'BufferLineNumbersSelected', { bg = 'None', fg = 'white' })
+api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = white, bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineHintSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineHintDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineInfoSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineInfoDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineWarningSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineWarningDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineErrorSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineErrorDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineModifiedSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineModifiedDiagnosticSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineDuplicateSelected', { bg = 'None' })
+api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = 'None', bg = 'None' })
 
--- Gruvbox
-cmd([[colo gruvbox]])
+-- Git signs column plugin
+api.nvim_set_hl(0, 'GitSignsAdd', { fg = 'SpringGreen2', bg = 'None' })
+api.nvim_set_hl(0, 'GitSignsChange', { fg = 'MediumPurple2', bg = 'None' })
+api.nvim_set_hl(0, 'GitSignsDelete', { fg = 'Red1', bg = 'None' })
+
+-- Cursorline
+api.nvim_set_hl(0, 'CursorLine', { bg = '#333333' })
+api.nvim_set_hl(0, 'CursorLineNr', { bg = 'None' })
+
+-- IndentLines
+--IndentBlanklineContextStart, { sp = '#3a3a3a', underline = true }, --underline
+api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = '#a3a3a3', nocombine = true }) -- Active context colo
+api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = '#333333', nocombine = true })
+api.nvim_set_hl(0, 'IndentBlanklineIndent2', { fg = '#555555', nocombine = true })
+api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = '#333333', nocombine = true })
+api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = '#555555', nocombine = true })
+api.nvim_set_hl(0, 'IndentBlanklineIndent5', { fg = '#333333', nocombine = true })
+api.nvim_set_hl(0, 'IndentBlanklineIndent6', { fg = '#555555', nocombine = true })

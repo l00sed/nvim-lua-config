@@ -35,7 +35,7 @@ map("v", "<C-c>", '"+y')
 -- Move around windows (shifted to the right)
 -- Using together with vim-tmux-navigator plugin
 -- https://github.com/christoomey/vim-tmux-navigator
-cmd('let g:tmux_navigator_no_mappings = 1')
+g.tmux_navigator_no_mappings = 1
 map("n", "<M-h>", "<Cmd>TmuxNavigateLeft<CR>")
 map("n", "<M-j>", "<Cmd>TmuxNavigateDown<CR>")
 map("n", "<M-k>", "<Cmd>TmuxNavigateUp<CR>")
@@ -45,21 +45,21 @@ map("n", "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>")
 -- More Tmux-like magic
 cmd [[
 function! ConfirmQuit(writeFile)
-    if (a:writeFile)
-        if (expand('%:t')=="")
-            echo "Can't save a file with no name."
-            return
-        endif
-        :write
+  if (a:writeFile)
+    if (expand('%:t')=="")
+      echo "Can't save a file with no name."
+      return
     endif
+    :write
+  endif
 
-    if (winnr('$')==1 && tabpagenr('$')==1)
-        if (confirm("Do you really want to quit?", "&Yes\n&No", 2)==1)
-            :quit
-        endif
-    else
-        :quit
+  if (winnr('$')==1 && tabpagenr('$')==1)
+    if (confirm("Do you really want to quit?", "&Yes\n&No", 2)==1)
+      :quit
     endif
+  else
+    :quit
+  endif
 endfu
 ]]
 -- Split vertically
