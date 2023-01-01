@@ -28,7 +28,7 @@ return {
   -- Autocomplete
   {
     'hrsh7th/nvim-cmp',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     -- Sources for nvim-cmp
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -136,7 +136,10 @@ return {
   -- Gitsigns
   {
     'lewis6991/gitsigns.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    event = 'BufWinEnter',
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
     config = function() require('plugins.gitsigns') end
   },
 

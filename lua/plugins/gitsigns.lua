@@ -1,10 +1,12 @@
-require('gitsigns').setup{
+require('gitsigns').setup({
+  debug_mode = true,
   signs = {
-    add          = {hl='GitSignsAdd'   , text='┃', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl='GitSignsChange', text='┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl='GitSignsDelete', text='┃', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl='GitSignsDelete', text='━', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl='GitSignsChange', text='╋', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = { hl='GitSignsAdd', text='┃', numhl='GitSignsAddNr', linehl='GitSignsAddLn' },
+    untracked    = { hl='GitSignsAdd', text='┠', numhl='GitSignsAddNr', linehl='GitSignsAddLn' },
+    change       = { hl='GitSignsChange', text='┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
+    changedelete = { hl='GitSignsChange', text='╂', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
+    delete       = { hl='GitSignsDelete', text='┃', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
+    topdelete    = { hl='GitSignsDelete', text='┰', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
   },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -35,4 +37,4 @@ require('gitsigns').setup{
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
-}
+})
