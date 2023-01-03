@@ -75,6 +75,12 @@ return {
     config = function() require('plugins.snippets') end
   },
 
+  -- Keymap helper
+  {
+    'folke/which-key.nvim',
+    config = function() require('plugins.which-key') end
+  },
+
   'rafamadriz/friendly-snippets',
 
   -- Signature help
@@ -108,7 +114,10 @@ return {
   },
 
   -- Seamless Vim + Tmux navigation
-  'christoomey/vim-tmux-navigator',
+  {
+    'christoomey/vim-tmux-navigator',
+    config = function() require('plugins.vim-tmux-navigator') end
+  },
   -- Like Tmux <C-b>z
   'caenrique/nvim-maximize-window-toggle',
 
@@ -218,20 +227,21 @@ return {
     config = function() require('plugins.vimtex') end
   },
 
-  -- statusline
+  -- Excellent lua statusline
   {
     'hoob3rt/lualine.nvim',
     config = function() require('plugins.lualine') end
   },
 
+  -- Pretty/interactive indentlines
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function() require('plugins.indent-blankline') end
   },
 
+  -- Gruvbox theme
   {
     'ellisonleao/gruvbox.nvim',
     config = function() require('plugins.gruvbox') end
   },
-
 }
