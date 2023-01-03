@@ -54,14 +54,27 @@ api.nvim_set_hl(0, 'GitSignsDelete', { fg = 'Red1', bg = 'None' })
 
 -- Cursorline
 api.nvim_set_hl(0, 'CursorLine', { bg = '#333333' })
-api.nvim_set_hl(0, 'CursorLineNr', { bg = 'None' })
+api.nvim_set_hl(0, 'CursorLineNr', { bg = '#333333', fg = 'orange' }) -- Also highlight number column
 
 -- IndentLines
 --IndentBlanklineContextStart, { sp = '#3a3a3a', underline = true }, --underline
 api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = '#a3a3a3', nocombine = true }) -- Active context colo
-api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = '#333333', nocombine = true })
-api.nvim_set_hl(0, 'IndentBlanklineIndent2', { fg = '#555555', nocombine = true })
-api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = '#333333', nocombine = true })
-api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = '#555555', nocombine = true })
-api.nvim_set_hl(0, 'IndentBlanklineIndent5', { fg = '#333333', nocombine = true })
-api.nvim_set_hl(0, 'IndentBlanklineIndent6', { fg = '#555555', nocombine = true })
+indent_highlights = {
+  '#333333',
+  '#3c3c3c',
+  '#444444',
+  '#4c4c4c',
+  '#555555',
+  '#5c5c5c',
+  '#666666',
+  '#6c6c6c',
+  '#777777',
+  '#7c7c7c',
+  '#888888',
+  '#8c8c8c',
+  '#999999',
+  '#9c9c9c',
+}
+for i=1,14,1 do
+  api.nvim_set_hl(0, 'IndentBlanklineIndent' .. tostring(i), { fg = indent_highlights[i], nocombine = true })
+end

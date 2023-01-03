@@ -11,6 +11,12 @@ g.indent_blankline_char_list = {
   '-',
   '│',
   '-',
+  '│',
+  '-',
+  '│',
+  '-',
+  '│',
+  '-',
 }
 
 g.indent_blankline_context_patterns = {
@@ -31,6 +37,7 @@ g.indent_blankline_context_patterns = {
   "table",
   "tuple",
   "do_block",
+  "export",
   "const",
   "<?php",
 }
