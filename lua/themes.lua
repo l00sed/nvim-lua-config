@@ -62,19 +62,26 @@ api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = '#a3a3a3', nocombine = t
 indent_highlights = {
   '#333333',
   '#3c3c3c',
+  '#3f3f3f',
   '#444444',
   '#4c4c4c',
+  '#4f4f4f',
   '#555555',
   '#5c5c5c',
+  '#5f5f5f',
   '#666666',
   '#6c6c6c',
+  '#6f6f6f',
   '#777777',
   '#7c7c7c',
+  '#7f7f7f',
   '#888888',
   '#8c8c8c',
+  '#8f8f8f',
   '#999999',
   '#9c9c9c',
+  '#9f9f9f',
 }
-for i=1,14,1 do
+for i=1,21,1 do
   api.nvim_set_hl(0, 'IndentBlanklineIndent' .. tostring(i), { fg = indent_highlights[i], nocombine = true })
 end
