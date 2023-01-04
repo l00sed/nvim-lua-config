@@ -1,7 +1,7 @@
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup({
 	highlight = {
-    enabled = true,
+    enable = true,
     additional_vim_regex_highlighting = {
       "jsx",
       "php",

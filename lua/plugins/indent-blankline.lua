@@ -24,6 +24,7 @@ g.indent_blankline_context_patterns = {
   "^func",
   "method",
   "^if",
+  "^else",
   "while",
   "for",
   "with",
@@ -42,7 +43,7 @@ g.indent_blankline_context_patterns = {
   "<?php",
 }
 -- ignore the above list and use treesitter instead
-g.indent_blankline_use_treesitter_scope = true
+--g.indent_blankline_use_treesitter_scope = true
 
 g.indent_blankline_buftype_exclude = {
   'help',

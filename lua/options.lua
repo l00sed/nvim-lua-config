@@ -92,8 +92,8 @@ cmd [[hi htmlArg cterm=italic]]
 cmd [[hi htmlBold cterm=bold gui=bold]]
 cmd [[hi htmlItalic cterm=italic gui=italic]]
 cmd [[hi htmlBoldItalic cterm=bold,italic gui=bold,italic]]
--- Python set 4
-cmd [[au FileType python set sw=4 ts=4 sts=4]]
+-- Python set tab instead of spaces
+cmd [[au FileType python set sw=2 ts=2 sts=2]]
 -- Javascript tab instead of spaces
 cmd [[au FileType javascript set sw=2 ts=2 sts=2]]
 -- Markdown

@@ -11,19 +11,31 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup {
-  debug = false,
+  --debug = true,
   sources = {
-    formatting.prettier.with {
-      extra_filetypes = { "toml", "solidity" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
-    diagnostics.djlint,
-    formatting.gofumpt,
+    -- Formatting
     formatting.autopep8,
-    formatting.stylua,
+    formatting.djlint.with {
+      extra_args = { '--check', '--profile', 'django' }
+    },
     formatting.clang_format.with {
       filetypes = { "cpp", "c" },
     },
+    formatting.gofumpt,
+    formatting.prettier.with {
+      extra_filetypes = {
+        "toml",
+        "solidity"
+      },
+      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+    },
+    formatting.stylua,
+
+    -- Diagnostics
+    diagnostics.curlylint,
+    diagnostics.djlint,
+    diagnostics.flake8,
+    diagnostics.puppet_lint,
   },
   border = 'rounded',
 }
