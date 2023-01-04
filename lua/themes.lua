@@ -11,15 +11,15 @@ api.nvim_set_hl(0, 'lualine_transitional_lualine_a_visual_to_StatusLine', { bg =
 
 -- LSP Diagnostics
 cmd [[
-sign define DiagnosticSignError text= texthl=TextError linehl= numhl=
-sign define DiagnosticSignWarn  text= texthl=TextWarn  linehl= numhl=
-sign define DiagnosticSignInfo  text= texthl=TextInfo  linehl= numhl=
-sign define DiagnosticSignHint  text= texthl=TextHint  linehl= numhl=
+sign define DiagnosticSignError text= texthl=DiagnosticError linehl= numhl=
+sign define DiagnosticSignWarn  text= texthl=DiagnosticWarn  linehl= numhl=
+sign define DiagnosticSignInfo  text= texthl=DiagnosticInfo  linehl= numhl=
+sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
 ]]
-api.nvim_set_hl(0, 'TextError', { fg = 'red', bg = 'None' })
-api.nvim_set_hl(0, 'TextWarn', { fg = 'orange', bg = 'None' })
-api.nvim_set_hl(0, 'TextInfo', { fg = 'blue', bg = 'None' })
-api.nvim_set_hl(0, 'TextHint', { fg = 'white', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticError', { fg = 'red', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticWarn', { fg = 'orange', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticInfo', { fg = 'teal', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticHint', { fg = 'white', bg = 'None' })
 
 -- Additional Transparency
 api.nvim_set_hl(0, 'VertSplit', { bg = 'None', fg= '#222222' })

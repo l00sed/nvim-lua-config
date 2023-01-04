@@ -164,6 +164,29 @@ return {
   -- -- Nice indent formatting utilities
   'godlygeek/tabular',
 
+  -- ZenMode
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup({
+        window = {
+          backdrop = 0.15,
+          width = 120,
+          height = 1,
+          options = {
+            signcolumn = "no",
+            number = false,
+          }
+        },
+        plugins = {
+          options = { enabled = true },
+          gitsigns = { enabled = true },
+          tmux = { enabled = false }
+        }
+      })
+    end
+  },
+
   -- -- tpope
   'tpope/vim-commentary',
   'tpope/vim-unimpaired',
