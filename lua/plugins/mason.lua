@@ -97,6 +97,7 @@ for _, lsp in ipairs(servers) do
           "cypress", -- JavaScript e2e testing library
           "date",
           "dba",
+          "django",
           "dom",
           "enchant",
           "fileinfo",

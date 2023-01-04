@@ -6,6 +6,11 @@ return {
     'neovim/nvim-lspconfig'
   },
 
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('plugins.null-ls') end
+  },
+
   -- Search and replace across multiple files
   {
     's1n7ax/nvim-search-and-replace',
