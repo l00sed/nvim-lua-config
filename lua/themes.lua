@@ -16,12 +16,13 @@ sign define DiagnosticSignWarn  text= texthl=TextWarn  linehl= numhl=
 sign define DiagnosticSignInfo  text= texthl=TextInfo  linehl= numhl=
 sign define DiagnosticSignHint  text= texthl=TextHint  linehl= numhl=
 ]]
-api.nvim_set_hl(0, 'DiagnosticSignError', { fg = 'Red', bg = 'None' })
-api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = 'DarkOrange3', bg = 'None' })
-api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = 'Red1', bg = 'None' })
-api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = 'LightCyan1', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignError', { fg = 'red', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = 'orange', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = 'blue', bg = 'None' })
+api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = 'white', bg = 'None' })
 
 -- Additional Transparency
+api.nvim_set_hl(0, 'vertsplit', { bg = 'None', fg= '#222222' })
 api.nvim_set_hl(0, 'Normal', { bg = 'None', ctermbg = 'None' })
 api.nvim_set_hl(0, 'SignColumn', { bg = 'None' })
 api.nvim_set_hl(0, 'Pmenu', { bg = 'None', ctermbg = 'None' })
