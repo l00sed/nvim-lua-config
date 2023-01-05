@@ -1,6 +1,20 @@
 local wk = require('which-key')
 
-wk.setup()
+local opts = {
+  popup_mappings = {
+    scroll_down = '<c-d>',
+    scroll_up = '<c-f>',
+  },
+  window = {
+    border = 'single',
+    padding = { 2, 4, 2, 4 },
+    winblend = 15
+  },
+  ignore_missing = true,
+}
+
+wk.setup(opts)
+
 wk.register({
   -- Swap leader in normal mode
   ["<Space>"]   = { "<Nop>", "Replaces leader key" },
@@ -30,6 +44,8 @@ wk.register({
     x = { ":call ConfirmQuit(0)<CR>", "Kill Neovim pane (Tmux-style)" },
     -- Used with the ToggleOnly plugin, zoom the neovim pane like Tmux
     z = { ":ToggleOnly<CR>", "Zoom Neovim pane (Tmux-style)" },
+    -- ZenMode
+    Z = { ":ZenMode<CR>", "ZenMode" },
 
     -- Fugitive
     G = { ":G<CR>", "Fugitive" },
@@ -73,6 +89,9 @@ wk.register({
 
     -- DoGe (Documentation Generator)
     D = { ':DogeGenerate<CR>', "Generate documentation for the highlighted function" },
+
+    -- Which-Key
+    W = { ':W <leader><CR>', "Which-key window" },
   },
 
   -- Horizontal Scrolling with Mouse (hold control key)
@@ -87,6 +106,6 @@ wk.register({
 
   -- Neoscroll
   ["<C-u>"] = { "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", "Smooth-scroll up" },
-  ["<C-d>"] = { "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", "Smooth-scroll up" },
-  ["<C-f>"] = { "<Cmd>lua require('neoscroll').scroll(10, true, 200)<CR>", "Smooth-scroll down" },
+  ["<C-d>"] = { "<Cmd>lua require('neoscroll').scroll(10, true, 200)<CR>", "Smooth-scroll down" },
+  ["<C-f>"] = { "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", "Smooth-scroll up" },
 })
