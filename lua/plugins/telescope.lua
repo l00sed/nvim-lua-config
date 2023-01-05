@@ -27,7 +27,8 @@ require('telescope').setup({
       },
       preview_width = 0.55,
     },
-    prompt_prefix = "  ",
+    prompt_prefix = " ▶ ",
+    selection_caret = "->",
     horizontal = {
       height = 47,
       prompt_position = "top",

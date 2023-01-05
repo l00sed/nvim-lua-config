@@ -25,6 +25,7 @@ g.indent_blankline_context_patterns = {
   "method",
   "^if",
   "^else",
+  "^elif",
   "while",
   "for",
   "with",
