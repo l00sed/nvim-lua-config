@@ -30,11 +30,9 @@ local opts = {
 }
 -- Install plugins
 require('lazy').setup(require('plugins'), opts)
+
 -- Run Mason afterwards to install language servers separately
 require('plugins.mason')
-
--- Load keymap customizations
-require('keymaps')
 
 -- Load command customizations
 require('commands')

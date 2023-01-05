@@ -20,6 +20,9 @@ cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]
 -- transparency
 g.transparent_enabled         = true
 g.do_file_type_lua            = 1
+-- leader
+g.mapleader                   = " "
+g.maplocalleader              = " "
 -- Visual
 o.conceallevel                = 2 -- pretty markdown
 o.cmdheight                   = 1 -- hide vim command line

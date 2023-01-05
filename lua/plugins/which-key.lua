@@ -41,7 +41,7 @@ wk.register({
     -- Show line diagnostics
     d = { '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', "Open LSP diagnostics in popup" },
     -- Open local diagnostics in local list
-    D = {  '<Cmd>lua vim.diagnostic.setloclist()<CR>', "Open LSP diagnostics in new buffer" },
+    --D = {  '<Cmd>lua vim.diagnostic.setloclist()<CR>', "Open LSP diagnostics in new buffer" },
     -- Null-ls
     lf = { '<Cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>', "Enable linting" },
     -- Open all project diagnostics in quickfix list
@@ -70,7 +70,20 @@ wk.register({
     gT = { ":bn<CR>", "Next tab", noremap = true },
     -- -- Close current tab
     c = { ":bw<CR>", "Close tab", noremap = true },
+
+    -- DoGe (Documentation Generator)
+    D = { ':DogeGenerate<CR>', "Generate documentation for the highlighted function" },
   },
+
+  -- Horizontal Scrolling with Mouse (hold control key)
+  ["<C-ScrollWheelDown>"] = { "10zl", 'Horizontal scroll left, hold ctrl key', silent = true },
+  ["<C-2-ScrollWheelDown>"] = { "10zl", 'Horizontal scroll left, hold ctrl key', silent = true },
+  ["<C-3-ScrollWheelDown>"] = { "10zl", 'Horizontal scroll left, hold ctrl key', silent = true },
+  ["<C-4-ScrollWheelDown>"] = { "10zl", 'Horizontal scroll left, hold ctrl key', silent = true },
+  ["<C-ScrollWheelUp>"] = { "10zh", 'Horizontal scroll right, hold ctrl key', silent = true },
+  ["<C-2-ScrollWheelUp>"] = { "10zh<silent>", 'Horizontal scroll right, hold ctrl key', silent = true },
+  ["<C-3-ScrollWheelUp>"] = { "10zh<silent>", 'Horizontal scroll right, hold ctrl key', silent = true },
+  ["<C-4-ScrollWheelUp>"] = { "10zh<silent>", 'Horizontal scroll right, hold ctrl key', silent = true },
 
   -- Neoscroll
   ["<C-u>"] = { "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", "Smooth-scroll up" },
