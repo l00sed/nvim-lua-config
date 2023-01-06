@@ -9,7 +9,8 @@ require("nvim-tree").setup({
   hijack_netrw = true,
   update_cwd = true,
   view = {
-    adaptive_size = true,
+    adaptive_size = false,
+    width = 30,
     number = false,
     mappings = {
       custom_only = false,

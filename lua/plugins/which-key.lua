@@ -57,11 +57,11 @@ wk.register({
     -- Show line diagnostics
     d = { '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', "Open LSP diagnostics in popup" },
     -- Open local diagnostics in local list
-    --D = {  '<Cmd>lua vim.diagnostic.setloclist()<CR>', "Open LSP diagnostics in new buffer" },
+    D = {  '<Cmd>lua vim.diagnostic.setloclist()<CR>', "Open LSP diagnostics in new buffer" },
     -- Null-ls
     lf = { '<Cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>', "Enable linting" },
     -- Open all project diagnostics in quickfix list
-    ["<A-d>"] = { "<Cmd>lua vim.diagnostic.setqflist()<CR>", "Open LSP quickfix" },
+    qf = { "<Cmd>lua vim.diagnostic.setqflist()<CR>", "Open LSP quickfix" },
 
     -- Telescope
     ff = { "<Cmd>Telescope find_files<CR>", "Telescope, find files" },
@@ -88,7 +88,7 @@ wk.register({
     c = { ":bw<CR>", "Close tab", noremap = true },
 
     -- DoGe (Documentation Generator)
-    D = { ':DogeGenerate<CR>', "Generate documentation for the highlighted function" },
+    Do = { ':DogeGenerate<CR>', "Generate documentation for the highlighted function" },
 
     -- Which-Key
     W = { ':W <leader><CR>', "Which-key window" },
