@@ -267,6 +267,13 @@ return {
     config = function() require('plugins.indent-blankline') end
   },
 
+  -- Pretty fold
+  {
+    'anuvyklack/pretty-fold.nvim',
+    event = 'BufWinEnter',
+    config = function() require('plugins.pretty-fold') end
+  },
+
   -- Gruvbox theme
   {
     'ellisonleao/gruvbox.nvim',
