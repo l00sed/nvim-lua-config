@@ -80,6 +80,13 @@ wo.number                     = true
 wo.relativenumber             = false
 wo.signcolumn                 = 'yes'
 wo.cursorline                 = true
+-- Enable blinking together with different cursor shapes for insert/command mode, and cursor highlighting:
+o.guicursor                   = 'n-v-c:block,'..
+                                'i-ci-ve:ver25,'..
+                                'r-cr:hor20,'..
+                                'o:hor50,'..
+                                'a:blinkwait100-blinkoff200-blinkon150-Cursor/lCursor,'..
+                                'sm:block-blinkwait175-blinkoff150-blinkon175'
 
 -- No fold enabled
 cmd [[au FileType lazy set nofen]]

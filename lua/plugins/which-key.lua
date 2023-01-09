@@ -8,7 +8,7 @@ local opts = {
   window = {
     border = 'single',
     padding = { 2, 4, 2, 4 },
-    winblend = 15
+    winblend = 0
   },
   ignore_missing = true,
 }
