@@ -58,7 +58,7 @@ api.nvim_set_hl(0, 'CursorLine', { bg = '#333333' })
 api.nvim_set_hl(0, 'CursorLineNr', { bg = '#333333', fg = 'orange' }) -- Also highlight number column
 
 -- Folds
-api.nvim_set_hl(0, 'Folded', { bg =  'None', fg = '#444444', bold = false, nocombine = true })
+api.nvim_set_hl(0, 'Folded', { bg =  'None', fg = '#333333', bold = false, nocombine = true })
 
 -- IndentLines
 --IndentBlanklineContextStart, { sp = '#3a3a3a', underline = true }, --underline
