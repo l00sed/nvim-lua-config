@@ -59,6 +59,9 @@ require('mason-lspconfig').setup({
 local nvim_lsp = require('lspconfig')
 local utils = require('lsp.utils')
 
+-- Setup border
+require('lspconfig.ui.windows').default_options.border = 'rounded'
+
 local common_on_attach = utils.common_on_attach
 local settings = {}
 local configs = {}

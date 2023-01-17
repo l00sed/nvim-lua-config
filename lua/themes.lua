@@ -31,6 +31,9 @@ api.nvim_set_hl(0, 'NonText', { fg = 'gray', bg = 'None' })
 api.nvim_set_hl(0, 'NormalFloat', { bg = 'None', ctermbg = 'None' })
 api.nvim_set_hl(0, 'FloatBorder', { fg = '#333333', ctermfg = 'gray', bg = 'None', ctermbg = 'None' })
 
+-- LspInfo
+api.nvim_set_hl(0, 'LspInfoBorder', { fg = '#333333', ctermfg = 'gray', bg = 'None', ctermbg = 'None' })
+
 -- Bufferline Transparency
 api.nvim_set_hl(0, 'BufferLineNumbersSelected', { bg = 'None', fg = 'white' })
 api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = white, bg = 'None' })
