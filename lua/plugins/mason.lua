@@ -24,6 +24,17 @@ local servers = {
   "vuels",
 }
 
+function os.capture(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
 require('mason').setup({
   log_level = vim.log.levels.DEBUG,
   ui = {
@@ -47,9 +58,11 @@ require('mason-lspconfig').setup({
 
 local nvim_lsp = require('lspconfig')
 local utils = require('lsp.utils')
+
 local common_on_attach = utils.common_on_attach
 local settings = {}
 local configs = {}
+local init_options = {}
 
 -- add capabilities from nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -184,7 +197,17 @@ for _, lsp in ipairs(servers) do
     }
   end
 
+  -- Typescript must be installed
+  if (lsp == "volar") then
+    init_options = {
+      typescript = {
+        tsdk = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/typescript/lib'
+      }
+    }
+  end
+
   nvim_lsp[lsp].setup({
+    init_options = init_options,
     on_attach = common_on_attach,
     capabilities = capabilities,
     settings = settings,
