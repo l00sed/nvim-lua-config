@@ -5,14 +5,6 @@ local wo = vim.wo
 local D = vim.diagnostic
 local cmd = vim.cmd
 
--- Change cursor shape based on mode
-cmd[[
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-]]
-
 -- Fix bug in vim.
 cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
 cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]

@@ -209,6 +209,21 @@ for _, lsp in ipairs(servers) do
     }
   end
 
+  -- Pyright
+  if (lsp == "pyright") then
+    settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "basic", -- off, basic, strict
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          autoImportCompletions = true,
+          diagnosticMode = "workspace"
+        }
+      }
+    }
+  end
+
   nvim_lsp[lsp].setup({
     init_options = init_options,
     on_attach = common_on_attach,
