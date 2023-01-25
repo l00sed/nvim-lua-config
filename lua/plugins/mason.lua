@@ -56,7 +56,8 @@ require('mason-lspconfig').setup({
   ensure_installed = servers,
 })
 
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
+local lspconfig_util = require('lspconfig.util')
 local utils = require('lsp.utils')
 
 -- Setup border
@@ -66,6 +67,7 @@ local common_on_attach = utils.common_on_attach
 local settings = {}
 local configs = {}
 local init_options = {}
+local default_config = {}
 
 -- add capabilities from nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -200,19 +202,11 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  -- Typescript must be installed
-  if (lsp == "volar") then
-    init_options = {
-      typescript = {
-        tsdk = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/typescript/lib'
-      }
-    }
-  end
-
   -- Pyright
   if (lsp == "pyright") then
     settings = {
       python = {
+        pythonPath = os.capture('which python3'),
         analysis = {
           typeCheckingMode = "basic", -- off, basic, strict
           autoSearchPaths = true,
@@ -224,8 +218,60 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  nvim_lsp[lsp].setup({
-    init_options = init_options,
+  -- Typescript
+  if (lsp == "tsserver") then
+    default_config = {
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+        "vue"
+      }
+    }
+  end
+
+  -- Typescript must be installed
+  if (lsp == "volar") then
+    local volar_cmd = { 'vue-language-server', '--stdio' }
+    local volar_root_dir = lspconfig_util.root_pattern('package.json')
+
+    default_config = {
+      cmd = volar_cmd,
+      root_dir = volar_root_dir,
+      on_new_config = utils.on_new_config,
+      init_options = {
+        typescript = {
+          -- Requires npm to be installed through NVM
+          tsdk = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/typescript/lib'
+        },
+        languageFeatures = {
+          implementation = true, -- new in @volar/vue-language-server v0.33
+          references = true,
+          definition = true,
+          typeDefinition = true,
+          callHierarchy = true,
+          hover = true,
+          rename = true,
+          renameFileRefactoring = true,
+          signatureHelp = true,
+          codeAction = true,
+          workspaceSymbol = true,
+          completion = {
+            defaultTagNameCase = 'both',
+            defaultAttrNameCase = 'kebabCase',
+            getDocumentNameCasesRequest = false,
+            getDocumentSelectionRequest = false,
+          }
+        }
+      }
+    }
+  end
+
+  lspconfig[lsp].setup({
+    default_config = default_config,
     on_attach = common_on_attach,
     capabilities = capabilities,
     settings = settings,

@@ -1,6 +1,6 @@
 -- LSP helper function
-
 local cmd = vim.cmd
+local lspconfig_util = require('lspconfig.util')
 
 local M = {}
 
@@ -50,6 +50,23 @@ function M.common_on_attach(client, bufnr)
 
   if client.server_capabilities.document_formatting then
     cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
+end
+
+-- Typescript/Volar config helper
+function M.on_new_config(new_config, new_root_dir)
+  local function get_typescript_server_path(root_dir)
+    local project_root = lspconfig_util.find_node_modules_ancestor(root_dir)
+    return project_root and (lspconfig_util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
+      or ''
+  end
+
+  if
+    new_config.init_options
+    and new_config.init_options.typescript
+    and new_config.init_options.typescript.tsdk == ''
+  then
+    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
   end
 end
 
