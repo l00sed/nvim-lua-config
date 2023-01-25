@@ -27,6 +27,15 @@ return {
     end
   },
 
+  -- Magically delicious todo-lists
+  {
+    'folke/todo-comments.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function() require('todo-comments').setup() end
+  },
+
   -- devicons in cmp menu
   'onsails/lspkind.nvim',
 

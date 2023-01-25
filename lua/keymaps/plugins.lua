@@ -37,6 +37,7 @@ map({ "n" }, '<leader>ff', "<Cmd>Telescope find_files<CR>", { silent = true, des
 map({ "n" }, '<leader>fhf', "<Cmd>Telescope find_files hidden=true<CR>", { silent = true, desc = "Telescope, find files (hidden)" })
 map({ "n" }, '<leader>fb', "<Cmd>Telescope buffers<CR>", { silent = true, desc = "Telescope, buffers" })
 map({ "n" }, '<leader>fg', "<Cmd>Telescope live_grep<CR>", { silent = true, desc = "Telescope, live grep" })
+map({ "n" }, '<leader>ft', "<Cmd>TodoTelescope<CR>", { silent = true, desc = "Telescope, find todos" })
 -- File explorer
 map({ "n" }, '<leader>n', "<Cmd>NvimTreeToggle<CR>", { silent = true, desc = "Toggle NvimTree" })
 -- EasyAlign
@@ -50,3 +51,5 @@ map({ "n" }, '<leader>W', '<Cmd>W <leader><CR>', { silent = true, desc = "Which-
 map({ "n" }, "<C-u>", "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", { silent = true, desc = "Smooth-scroll up" })
 map({ "n" }, "<C-d>", "<Cmd>lua require('neoscroll').scroll(10, true, 200)<CR>", { silent = true, desc = "Smooth-scroll down" })
 map({ "n" }, "<C-f>", "<Cmd>lua require('neoscroll').scroll(-10, true, 200)<CR>", { silent = true, desc = "Smooth-scroll up" })
+-- Todo
+map({ "n" }, "<leader>T", "<Cmd>TodoLocList<CR>", { silent = true, desc = "Open todo quickfix list for the local file" })
