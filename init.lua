@@ -18,6 +18,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 -- Load native Neovim options (NO PLUGIN SETTINGS)
 require('options')
+require('keymaps.default')
 
 -- Lazy options
 local opts = {
@@ -39,3 +40,4 @@ require('commands')
 
 -- Theme at the end, to prevent overwrite by other plugins
 require('themes')
+require('keymaps.plugins')

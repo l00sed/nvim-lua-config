@@ -13,4 +13,9 @@ function M.toggle_wrap()
   end
 end
 
+-- Open floating diagnostics
+function M.open_float()
+  vim.diagnostics.open_float(0, { scope = "line" })
+end
+
 return M
