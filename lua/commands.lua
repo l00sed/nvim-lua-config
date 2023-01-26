@@ -13,7 +13,16 @@ endif
 
 -- Remove trailing whitespaces
 -- (if a file requires trailing spaces, exclude its type using the regex)
-cmd [[autocmd BufWritePre * %s/\s\+$//e ]]
+vim.api.nvim_create_autocmd(
+  { "BufWritePre" },
+  { pattern = "*", command = [[%s/\s\+$//e]] }
+)
+
+-- Automatically hide lsp_lines
+vim.api.nvim_create_autocmd(
+  { "BufRead" },
+  { pattern = "*", command = "silent! lua require('lsp_lines').toggle()" }
+)
 
 -- Swap folder
 cmd('command! ListSwap split | enew | r !ls -l ~/.local/share/nvim/swap')

@@ -28,7 +28,7 @@ o.showtabline                 = 2 -- Always show tabline
 o.title                       = true
 o.termguicolors               = true -- Use true colors, required for some plugins
 o.virtualedit                 = "onemore"
-o.wrap                        = true
+o.wrap                        = false
 -- Set transparency of pop-up
 o.pumblend                    = 0
 o.winblend                    = 0

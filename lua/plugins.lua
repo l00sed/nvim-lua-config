@@ -233,7 +233,8 @@ return {
   'mzlogin/vim-markdown-toc',
 
   -- Poetry
-  -- use({'petobens/poet-v',
+  -- {
+  --   'petobens/poet-v',
   --   config = function()
   --     local path = vim.fn.stdpath('config')..'/lua/plugins/poet-v.vim'
   --     vim.cmd('source '..path)
