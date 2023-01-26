@@ -136,6 +136,7 @@ cmd [[autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear]]
 cmd [[autocmd FileType json syntax match Comment +\/\/.\+$+]]
 -- -- Django
 cmd [[au BufNewFile,BufRead *.html set filetype=htmldjango]]
+cmd [[au FileType htmldjango set sw=2 ts=2 sts=2]]
 -- -- Indent wrapped lines
 cmd [[
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown
