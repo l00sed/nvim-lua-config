@@ -1,9 +1,12 @@
 local g = vim.g
 local o = vim.o
+local opt = vim.opt
 local w = vim.w
 local wo = vim.wo
 local D = vim.diagnostic
 local cmd = vim.cmd
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
 -- Fix bug in vim.
 cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
@@ -60,11 +63,11 @@ o.lazyredraw                  = true
 o.hidden                      = true -- Do not save when switching buffers
 o.encoding                    = "utf-8"
 o.fileencoding                = "utf-8"
-o.spell                       = true
 o.ls                          = 2
 o.shortmess                   = "c"
-o.spelllang                   = "en_us"
-o.completeopt                 = "menuone,noinsert,noselect"
+o.spell                       = true
+opt.spelllang                   = "en_us"
+opt.completeopt                 = "menuone,noinsert,noselect"
 o.wildmode                    = "longest,full" -- Display auto-complete in Command Mode
 o.timeoutlen                  = 500
 o.updatetime                  = 200 -- Delay until write to Swap and HoldCommand event
@@ -80,28 +83,41 @@ o.guicursor                   = 'n-v-c:block,'..
                                 'o:hor50,'..
                                 'a:blinkwait100-blinkoff200-blinkon150-Cursor/lCursor,'..
                                 'sm:block-blinkwait175-blinkoff150-blinkon175'
+-- Sexy separators
+--vim.opt.fillchars = {
+--  stl = ' ',
+--  stlnc = ' ',
+--  wbr = ' ',
+--  horiz = '─',
+--  horizup = '┴',
+--  horizdown = '┬',
+--  vert = '│',
+--  vertleft  = '┤',
+--  vertright = '├',
+--  verthoriz = '┼',
+--  fold = '.',
+--  foldopen = '-',
+--  foldclose = '+',
+--  foldsep = '│',
+--  diff = '-',
+--  msgsep = ' ',
+--  eob = '~',
+--  lastline = '@'
+--}
 
 -- No fold enabled
-cmd [[au FileType lazy set nofen]]
--- Invisiblish pane separators
-cmd [[
-set fillchars=vert:\│
-hi! VertSplit guifg=#010101 guibg=NONE ctermfg=black ctermbg=NONE
-]]
--- Italic comments
-cmd [[highlight Comment cterm=italic gui=italic]]
--- Extra HTML syntax highlighting
-cmd [[hi htmlArg cterm=italic]]
-cmd [[hi htmlBold cterm=bold gui=bold]]
-cmd [[hi htmlItalic cterm=italic gui=italic]]
-cmd [[hi htmlBoldItalic cterm=bold,italic gui=bold,italic]]
+autocmd('FileType', { pattern = 'lazy', command = 'set nofen' })
+
 -- Python set tab instead of spaces
-cmd [[au FileType python set sw=4 ts=4 sts=4 expandtab]]
+autocmd('FileType', {
+  pattern = 'python',
+  command = 'set sw=4 ts=4 sts=4 expandtab'
+})
 -- Javascript tab instead of spaces
-cmd [[au FileType javascript set sw=2 ts=2 sts=2]]
--- Markdown
-cmd [[au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown]]
-cmd [[au FileType markdown setl breakindent tw=0 wrap lbr]]
+autocmd('FileType', {
+  pattern = 'javascript',
+  command = 'set sw=2 ts=2 sts=2'
+})
 -- -- PHP
 cmd [[
 function! PhpSyntaxOverride()
@@ -114,51 +130,61 @@ function! PhpSyntaxOverride()
   hi phpClassNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
   setl ts=2 sts=2 noet | retab! | setl ts=2 sts=2 et | retab
 endfunction
-
-augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
-augroup END
 ]]
--- HTML
-cmd [[au FileType html setl breakindent]]
+local php_group = augroup('PHPGroup', { clear = true })
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = php_group,
+  pattern = '*.php',
+  command = 'call PhpSyntaxOverride()'
+})
 -- Syntax highlighting autocmds
 -- -- JS/JSX/TS
-cmd [[
-augroup FiletypeGroup
-  autocmd!
-  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-augroup END
-]]
-cmd [[autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart]]
-cmd [[autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear]]
+local jsx_group = augroup('JSXGroup', { clear = true })
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = jsx_group,
+  pattern = '*.jsx',
+  command = 'set filetype=javascript.jsx'
+})
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync fromstart'
+})
+autocmd('BufLeave', {
+  pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync clear'
+})
+
 -- -- JSON
-cmd [[autocmd FileType json syntax match Comment +\/\/.\+$+]]
+autocmd('FileType', {
+  pattern = 'json', command = ':syntax match Comment +\\/\\/.\\+$+'
+})
+
 -- -- Django
-cmd [[au BufNewFile,BufRead *.html set filetype=htmldjango]]
-cmd [[au FileType htmldjango set sw=2 ts=2 sts=2]]
--- -- Indent wrapped lines
-cmd [[
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown
-au FileType markdown setl breakindent tw=0 wrap lbr
-au FileType php setl breakindent
-au FileType html setl breakindent
-au FileType json setl breakindent
-au FileType js setl breakindent
-]]
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.html', command = 'set filetype=htmldjango'
+})
+autocmd('FileType', {
+  pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'
+})
+
+-- -- Indent wrapped lines for markdown
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.markdown', '*.mdown', '*.mkd', '*.mkdn', '*.mdwn', 'README.md' }, command = 'setf markdown'
+})
+autocmd('FileType', {
+  pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr'
+})
+
 -- Set filetype to bash for .zsh-theme
-cmd [[au BufNewFile,BufRead *.zsh-theme setf bash]]
--- JSON
-cmd [[au FileType json setl breakindent]]
--- JS
-cmd [[au FileType js setl breakindent]]
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.zsh-theme', command = 'setf bash'
+})
 
+-- JS, JSON
+autocmd('FileType', {
+  pattern = { 'js', 'json', 'php', 'html' }, command = 'setl breakindent'
+})
 
--- Highlight current row in NORMAL mode,
--- hide highlight in INSERT mode
-cmd [[autocmd InsertEnter,InsertLeave * set cul!]]
-
-cmd [[filetype plugin indent on]]
+-- Indent on for "plugin" filetype
+autocmd('FileType', { pattern = 'plugin', command = 'indent on' })
 
 -- Python providers
 local pynvim_env  = "/.local/bin/pyenv/versions/pynvim/"
@@ -173,6 +199,8 @@ loaded_ruby_provider = 0
 D.config {
   -- Disable inline error messages
   virtual_text = false,
-  underline = false,
+  -- Set lsp_lines to be hidden for the current buffer by default
+  virtual_lines = false,
+  underline = true,
   signs = true, -- Keep gutter signs
 }
