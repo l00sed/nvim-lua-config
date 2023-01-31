@@ -8,9 +8,10 @@ local cmd = vim.cmd
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Fix bug in vim.
-cmd [[set t_8f=^[[38;2;%lu;%lu;%lum]]
-cmd [[set t_8b=^[[48;2;%lu;%lu;%lum]]
+-- Fix bug in vim to properly interpret RGB values.
+cmd [[let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"]]
+cmd [[let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"]]
+
 
 -- transparency
 g.transparent_enabled         = true
@@ -104,10 +105,8 @@ o.guicursor                   = 'n-v-c:block,'..
 --  eob = '~',
 --  lastline = '@'
 --}
-
 -- No fold enabled
 autocmd('FileType', { pattern = 'lazy', command = 'set nofen' })
-
 -- Python set tab instead of spaces
 autocmd('FileType', {
   pattern = 'python',
@@ -151,12 +150,10 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 autocmd('BufLeave', {
   pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync clear'
 })
-
 -- -- JSON
 autocmd('FileType', {
   pattern = 'json', command = ':syntax match Comment +\\/\\/.\\+$+'
 })
-
 -- -- Django
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.html', command = 'set filetype=htmldjango'
@@ -164,7 +161,6 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 autocmd('FileType', {
   pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'
 })
-
 -- -- Indent wrapped lines for markdown
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.markdown', '*.mdown', '*.mkd', '*.mkdn', '*.mdwn', 'README.md' }, command = 'setf markdown'
@@ -172,17 +168,14 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 autocmd('FileType', {
   pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr'
 })
-
 -- Set filetype to bash for .zsh-theme
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.zsh-theme', command = 'setf bash'
 })
-
 -- JS, JSON
 autocmd('FileType', {
   pattern = { 'js', 'json', 'php', 'html' }, command = 'setl breakindent'
 })
-
 -- Indent on for "plugin" filetype
 autocmd('FileType', { pattern = 'plugin', command = 'indent on' })
 
@@ -201,6 +194,7 @@ D.config {
   virtual_text = false,
   -- Set lsp_lines to be hidden for the current buffer by default
   virtual_lines = false,
-  underline = true,
+  -- Disable underlines on LSP
+  underline = false,
   signs = true, -- Keep gutter signs
 }

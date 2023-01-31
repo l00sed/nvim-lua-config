@@ -23,10 +23,7 @@ autocmd('BufWritePre', { pattern = '*', command = [[%s/\s\+$//e]] })
 -- Swap folder
 command('ListSwap', 'split | enew | r !ls -l ~/.local/share/nvim/swap', { bang = true })
 command('CleanSwap', '!rm -rf ~/.local/share/nvim/swap/', { bang = true })
-
 -- Open help tags
 command('HelpTags', 'Telescope help_tags', { bang = true })
-
 -- Create ctags
 command('MakeCTags', '!ctags -R --exclude=@.ctagsignore .', { bang = true })
-
