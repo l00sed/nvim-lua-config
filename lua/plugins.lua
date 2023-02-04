@@ -109,6 +109,16 @@ return {
     build = 'make'
   },
 
+  -- Context
+  {
+    "utilyre/barbecue.nvim",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    config = function() require('plugins.barbecue') end
+  },
+
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
