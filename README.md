@@ -45,6 +45,18 @@ brew reinstall neovim
 
 Additionally, you may need to configure the `Option` key to behave like `Alt`. In **iTerm2**, this can be done in `Preferences -> Profiles -> Keys`. Change the left option behaviour to `Esc+`. For **kitty**, you need to set `macos_option_as_alt left` (defualt is no) in the terminal's config file. Restarting the terminal (`Command + Q`, then restart) is required for this to take effect.
 
+## Theme
+
+This configuration repo contains a folder with many different available themes. The `lua/themes.lua` file also contains some specific highlight groups and color definitions. It is generally partial to the `gruvbox` theme (dark). If you'd like to switch the theme, some additional configuration might be necessary. Most importantly, you'd want to change the `lua/plugins.lua` file where the `ellisonleao/gruvbox.nvim` gets installed and configured.
+
+## Which-key
+
+The `folke/which-key.nvim` plugin provides a handy interface for discovering the configured keyboard shortcuts. Try pressing the `<leader>` key (configured to the _Space_ bar) and waiting for the help window to appear. You can then proceed with the next keypress to trigger the mapped function.
+
+The keymaps are designed to be mnemonically intuitive. For example, _Telescope_ shortcuts are all `<leader>f` for "Find", followed by `f` for "File" or `g` for "Live Grep" mode. You can run `<leader>W` (that's a capital-case _W_) to immediately toggle the which-key legend.
+
+Keymaps have many sane defaults related to [Tmux](https://github.com/tmux/tmux/wiki) shortcuts. Pressing `<leader>z` will zoom a Neovim buffer like `<C-b>z` will toggle-zoom a Tmux pane. Similarly, `<leader>%` and `<leader>"` will split Neovim panes vertically and horizontally. The `christoomey/vim-tmux-navigator` plugin also makes navigation across Tmux and Neovim panes seamless.
+
 ## Installing the configuration
 
 Clone the repo into Neovim's installation folder (usually `/home/<usr>/.config/nvim`):
