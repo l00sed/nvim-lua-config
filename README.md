@@ -2,8 +2,10 @@
 
 This [Neovim](https://github.com/neovim/neovim) configuration using mostly Lua. It uses an absurd amount of plugins (~65 when written), but the load time is quick enough for my daily use. The configs might change week-to-week as I'm testing out new plugins or trying to optimize the existing configuration settings.
 
+![neovim](https://user-images.githubusercontent.com/23065167/216802047-7b190d63-90ab-405a-8bf3-085fe5a65bf7.png)
+
 **Recommended Version**
->=0.8.3
+`>=0.8.3`
 
 These configs are tested with `v0.9.0-dev`.
 Using with an older version of Neovim may not support some of the settings that reference newer Vim API capabilities. Very old versions of Neovim will also not support Lua configuration.
