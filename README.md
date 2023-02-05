@@ -1,32 +1,36 @@
-# Neovim configuration with Lua
+# Neovim Configs
 
-A [Neovim](https://github.com/neovim/neovim) configuration using Lua, with the minimal number of pluggins I need for programming. Different language servers available through the LSP protocol provide code completion and analysis.
+This [Neovim](https://github.com/neovim/neovim) configuration using mostly Lua. It uses an absurd amount of plugins (~65 when written), but the load time is quick enough for my daily use. The configs might change week-to-week as I'm testing out new plugins or trying to optimize the existing configuration settings.
 
-This readme exist so I don't have to remember how to do all these things when setting up a new machine.
+**Recommended Version**
+>=0.8.3
+
+These configs are tested with `v0.9.0-dev`.
+Using with an older version of Neovim may not support some of the settings that reference newer Vim API capabilities. Very old versions of Neovim will also not support Lua configuration.
+
+**LSP**
+Different language servers available through the LSP protocol provide code completion and analysis. It's currently setup to use `mason.nvim` and `null-ls` with a few languages.
+
+This README exists to help remember how to do all these things when setting up a new machine.
 
 ## Setting up
 
+In order to install some of the language server functionality, the`npm` (Node Package Manager) should be installed. I using `nvm` (Node Version Manager) to install Node version 18 (LTS).
+
+```bash
+nvm install --lts
+nvm use --lts
+npm --version
+```
+
 ### Linux
 
-The first step is to install the correct version of Neovim. Most plugins require version 0.5 or above, but `treesitter` actually requires >= 0.5.1. to work. Version 0.6 has now been relased, which means the previous comment is deprecated. Versions can be installed using `snap`:
+The first step is to install the correct version of Neovim. Many plugins will require version 0.8.3 or above. Follow the installation instructions for the build release on the official GitHub page [https://github.com/neovim/neovim/releases](https://github.com/neovim/neovim/releases). Verify the downloaded archive's checksums match up with those on the release page.
 
-```bash
-# For stable versions
-sudo snap install --beta nvim --classic
-
-# For nightly versions
-sudo snap install --edge nvim --classic
-```
-
-We also need to install the node package manager `npm` since most language servers are installed that way.
-
-```bash
-sudo apt install npm
-```
 
 ### MacOS
 
-Assume `brew` is installed, then installing Neovim is straighforward:
+Assuming `brew` is installed, installing Neovim is straight-forward:
 
 ```bash
 # For stable version
@@ -45,8 +49,7 @@ Additionally, you may need to configure the `Option` key to behave like `Alt`. I
 
 Clone the repo into Neovim's installation folder (usually `/home/<usr>/.config/nvim`):
 ```bash
-git clone https://github.com/miltonllera/neovim-lua-config ~/.config/nvim
-cd ~/.config/nvim
+git clone https://github.com/l00sed/neovim-lua-config ~/.config/nvim
 ```
 
 This will create a folder with the configuration with the following structure is as follows:
@@ -65,44 +68,26 @@ This will create a folder with the configuration with the following structure is
 
 This structure is important since Lua will not load files that are not located inside `lua`. The file `init.lua` loads all the modules located inside this folder to set the configuration. Most of the names are self explanatory. The most important file here is `plugins.lua`, which is the module that loads the relevant plugins. Some of the most important plugins are:
 
-1. [**`packer`**](https://github.com/wbthomason/packer.nvim): Manage the plugins.
-2. [**`lspconfig`**](https://github.com/neovim/nvim-lspconfig): provides a client for the different language servers using the Language Server Protocol (LSP).
-3. [**`cmp`**](https://github.com/hrsh7th/nvim-cmp): Auto-complete functionality. Recommended by the core Neovim team.
-4. [**`treesitter`**](https://github.com/nvim-treesitter/nvim-treesitter): Syntax highlighting and other functionality.
-5. [**`NvimTree`**](https://github.com/kyazdani42/nvim-tree.lua): File explorer written in Lua.
-6. [**`fugitive`**](https://github.com/tpope/vim-fugitive): The best plugin for git.
-7. [**`gitsigns`**](https://github.com/lewis6991/gitsigns.nvim): Git gutter highlighting and hunk management in buffer.
-8. [**`telescope`**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder.
-9. [**`lualine`**](https://github.com/nvim-lualine/lualine.nvim): A status line written in Lua which is similar to `vim-airline`.
+1. [**`lazy.nvim`**](https://github.com/folke/lazy.nvim): Manage plugins.
+2. [**`lspconfig`**](https://github.com/neovim/nvim-lspconfig): Client for different language servers using the Language Server Protocol (LSP).
+3. [`mason.nvim`](https://github.com/williamboman/mason.nvim): Additional LSP installation automation.
+4. [**`cmp`**](https://github.com/hrsh7th/nvim-cmp): Auto-complete functionality. Recommended by the core Neovim team.
+5. [**`treesitter`**](https://github.com/nvim-treesitter/nvim-treesitter): Syntax highlighting and other functionality.
+6. [**`NvimTree`**](https://github.com/kyazdani42/nvim-tree.lua): File explorer written in Lua.
+7. [**`fugitive`**] (https://github.com/tpope/vim-fugitive): Plugin for git.
+8. [**`gitsigns`**](https://github.com/lewis6991/gitsigns.nvim): Git gutter highlighting and hunk management in buffer.
+9. [**`telescope`**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder.
+10. [**`lualine`**](https://github.com/nvim-lualine/lualine.nvim): A status line written in Lua which is similar to `vim-airline`.
 
-There are some more packages that are dependencies of the ones mentioned above, and some for formatting and theming as well. Adding new plugins is simple using the `use` function:
+There are some more packages that are dependencies of the ones mentioned above, and some for formatting and theming as well. Refer to the `lua/plugins.lua` file to see how plugins are added, or checkout `folke/lazy.nvim` on GitHub.
 
-```lua
-use({
-  '<author>/<plugin-repo>',
-  config = function() require('<plugin-name>').setup({}) end,
-})
-```
-
-This will load a plugin with it's standard configuration. For more complex configurations, we create the relevant file in `lua/plugins` (eg. `lua/plugins/foo.lua`) and load it using the require function along with any other option we wish to pass on to the `use` function:
-
-```lua
-use({
-  '<author>/<plugin-repo>',
-  config = function() require('plugin/<plugin-name>') end,
-  -- Optionally require other plugins.
-  requires = '<author>/<required-plugin-repo>'
-  -- Other functionality
-})
-```
-
-Notice that the file type is omitted from this call.
+Plugin configurations that are simple one-liners have gone in `lua/plugins.lua`. More advanced plugin configurations have their own files inside `lua/plugins/<plugin_name>.lua`.
 
 ## Auto-completion
 
 The auto-complete functionality is achieved by using `nvim-cmp` to attach the relevant language servers to the buffers containing code. Most servers only require that the on attach function is specified so that different motions are available. Currently, the common function to attach a server to a buffer is located in `lua/lsp/utils.lua` . It will enable common key mappings for all language servers to display code completion.
 
-The second part is installing the language servers themselves (described below) and enabling them. `:LspInstall` can be used if [`nvim-lsp-installer`](https://github.com/williamboman/nvim-lsp-installer/) is found. Others may require manual installation. There is an extra step which involves installing the binaries for these servers, which we describe below.
+The second part is installing the language servers themselves (described below) and enabling them. `:Mason` can be used to hopefully automatically install the desired language server. Other may require manual installation or may use `null-ls`. There is an extra step which involves installing the binaries for these servers, which we describe below.
 
 ### Installing the language servers
 
@@ -192,7 +177,7 @@ Make sure to use the `-g` on all `npm` installs, otherwise the server won't be f
 
 ### Some further notes
 
-Inline error messages are disabled in the current configuration. They create a lot of clutter. To enable them back, comment the code on line 34 of `lua/options.lua`. This is a `nvim` option related to it's `lsp` interface, not something provided by the servers themselves.
+Inline error messages are disabled in the current configuration. They create a lot of clutter. I'm use `lsp_lines`, and it can be toggled with `<leader>l`. This is a `nvim` option related to it's `lsp` interface, not something provided by the servers themselves.
 
 ## Web-dev Icons
 
@@ -214,22 +199,16 @@ TL;DR for `MacOS`:
 
 ## TODO:
 
-Improvements:
-- Only open diagnostics if there are any to show.
-
 LSPs to add:
 - LaTex: can use [texlab](https://github.com/latex-lsp/texlab).
 
-Some pluggins to try:
+Some plugins to try:
 - Ranger integration: [Rnvimr](https://github.com/kevinhwang91/rnvimr). Use ranger in a floating buffer instead of as a tiled buffer.
-- Different file explorer: [ranger.vim](https://github.com/francoiscabrol/ranger.vim) which can be used to integrate the [Ranger](https://github.com/ranger/ranger) terminal file explorer into Vim.
 - Using GBrowse with fugitive: [rhubarb.vim](https://github.com/tpope/rhubarb.vim).
-- Prettier quickfix/localist: [trouble.nvim](https://github.com/folke/trouble.nvim).
 - Jupyter on Neovim: [jupytext.vim](https://github.com/mwouts/jupytext), [iron.nvim](https://github.com/hkupty/iron.nvim), [vim-textobj-hydrogen](https://github.com/GCBallesteros/vim-textobj-hydrogen). Check this [blog](https://www.maxwellrules.com/misc/nvim_jupyter.html) for more info.
-
 
 ## Attributions
 
-The structre of this config was based on [yashguptaz](https://github.com/yashguptaz/)'s [config](https://github.com/yashguptaz/nvy) and tutorial which helped me understand the basics of using Lua with Neovim.
+This config was based on a fork of [miltonllera](https://github.com/miltonllera)'s config&mdash; which was, in turn, based heavily on [yashguptaz](https://github.com/yashguptaz/)'s [config](https://github.com/yashguptaz/nvy) and tutorial.
 
-I've also stolen code from different sources which means it might be hard to acknowledge all of them explicitly though most of them are from the associated plugin's documentation.
+There's now a lot of my own efforts and unique approach to some of the config code. However, I frequently use others' code as an example to optimize and enhance my own configs. Thanks to all the useful configs on GitHub that deserve an acknowledgment and to the great Neovim plugin creators out there.
