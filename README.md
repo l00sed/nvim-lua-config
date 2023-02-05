@@ -1,6 +1,6 @@
 # Neovim Configs
 
-This [Neovim](https://github.com/neovim/neovim) configuration is written mostly Lua. It uses an absurd amount of plugins (~65 when written), but the load time is quick enough for my daily use. The configs might change week-to-week as I'm testing out new plugins or trying to optimize the existing configuration settings.
+This [Neovim](https://github.com/neovim/neovim) configuration is written mostly in Lua. It uses an absurd amount of plugins (~65 when written), but the load time is quick enough for my daily use. The configs might change week-to-week as I'm testing out new plugins or trying to optimize the existing configuration settings.
 
 ![neovim](https://user-images.githubusercontent.com/23065167/216802047-7b190d63-90ab-405a-8bf3-085fe5a65bf7.png)
 
