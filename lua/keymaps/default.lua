@@ -26,7 +26,7 @@ map({ "n" }, "10zh<silent>", "<C-2-ScrollWheelUp>", { silent = true, desc = 'Hor
 map({ "n" }, "10zh<silent>", "<C-3-ScrollWheelUp>", { silent = true, desc = 'Horizontal scroll right, hold ctrl key' })
 map({ "n" }, "10zh<silent>", "<C-4-ScrollWheelUp>", { silent = true, desc = 'Horizontal scroll right, hold ctrl key' })
 -- Tmux/Vim resizing
---map({ "n" }, "<C-h>", "vertical resize +1", { silent = true, desc = 'Resize Neovim pane horizontally' })
---map({ "n" }, "<C-j>", "resize +1", { silent = true, desc = 'Resize Neovim pane vertically' })
---map({ "n" }, "<C-k>", "resize -1", { silent = true, desc = 'Resize Neovim pane vertically' })
---map({ "n" }, "<C-l>", "vertical resize -1", { silent = true, desc = 'Resize Neovim pane horizontally' })
+map({ "n" }, "<C-h>", "<Cmd>vertical resize +1<CR>", { silent = true, desc = 'Resize Neovim pane horizontally' })
+map({ "n" }, "<C-j>", "<Cmd>resize +1<CR>", { silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-k>", "<Cmd>resize -1<CR>", { silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-l>", "<Cmd>vertical resize -1<CR>", { silent = true, desc = 'Resize Neovim pane horizontally' })
