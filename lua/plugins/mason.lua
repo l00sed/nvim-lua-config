@@ -24,6 +24,20 @@ local servers = {
   "vuels",
 }
 
+local ensure_installed_list = {}
+local utils = require('utils')
+-- Don't use Mason's auto-installer,
+-- but still configure these servers.
+local exclude = {
+  "pyright"
+}
+
+for i, server in pairs(servers) do
+  if not utils.in_table(exclude, server) then
+    table.insert(ensure_installed_list, server)
+  end
+end
+
 function os.capture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
@@ -51,19 +65,20 @@ require('mason').setup({
 })
 
 require('mason-lspconfig').setup({
-  -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-  automatic_installation = true,
-  ensure_installed = servers,
+  -- Automatically detect which servers to install
+  -- (based on which servers are set up via lspconfig)
+  automatic_installation = false,
+  ensure_installed = ensure_installed_list
 })
 
 local lspconfig = require('lspconfig')
 local lspconfig_util = require('lspconfig.util')
-local utils = require('lsp.utils')
+local lsp_utils = require('lsp.utils')
 
 -- Setup border
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-local common_on_attach = utils.common_on_attach
+local common_on_attach = lsp_utils.common_on_attach
 local settings = {}
 local configs = {}
 local init_options = {}
@@ -241,7 +256,7 @@ for _, lsp in ipairs(servers) do
     default_config = {
       cmd = volar_cmd,
       root_dir = volar_root_dir,
-      on_new_config = utils.on_new_config,
+      on_new_config = lsp_utils.on_new_config,
       init_options = {
         typescript = {
           -- Requires npm to be installed through NVM
