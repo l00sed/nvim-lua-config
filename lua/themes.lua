@@ -25,6 +25,9 @@ set_hl(0, 'DiagnosticHint', { fg = 'white', bg = 'None' })
 -- Italic comments
 set_hl(0, 'Comment', { bg = 'None', fg = '#555555', italic = true })
 set_hl(0, 'SpellBad', { undercurl = true, sp = '#555555' })
+set_hl(0, 'SpellRare', { undercurl = true, sp = '#999999' })
+set_hl(0, 'SpellCap', { undercurl = true, sp = '#aaaaaa' })
+set_hl(0, 'SpellLocal', { undercurl = true, sp = '#eeeeee' })
 
 -- Additional Transparency
 set_hl(0, 'VertSplit', { bg = 'None', fg= '#222222' })
