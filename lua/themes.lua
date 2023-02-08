@@ -17,10 +17,10 @@ sign define DiagnosticSignWarn  text= texthl=DiagnosticWarn  linehl= numhl=
 sign define DiagnosticSignInfo  text= texthl=DiagnosticInfo  linehl= numhl=
 sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
 ]]
-set_hl(0, 'DiagnosticError', { fg = 'red', undercurl = true, sp = 'red', bg = 'None' })
-set_hl(0, 'DiagnosticWarn', { fg = 'orange', undercurl = true, sp = 'orange', bg = 'None' })
-set_hl(0, 'DiagnosticInfo', { fg = 'teal', undercurl = true, sp = 'teal', bg = 'None' })
-set_hl(0, 'DiagnosticHint', { fg = 'white', undercurl = true, sp = 'white', bg = 'None' })
+set_hl(0, 'DiagnosticError', { fg = 'red', bg = 'None' })
+set_hl(0, 'DiagnosticWarn', { fg = 'orange', bg = 'None' })
+set_hl(0, 'DiagnosticInfo', { fg = 'teal', bg = 'None' })
+set_hl(0, 'DiagnosticHint', { fg = 'white', bg = 'None' })
 
 -- Italic comments
 set_hl(0, 'Comment', { bg = 'None', fg = '#555555', italic = true })
