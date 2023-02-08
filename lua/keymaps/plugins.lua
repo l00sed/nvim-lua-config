@@ -8,6 +8,11 @@ map({ "n" }, "<M-j>", "<Cmd>TmuxNavigateDown<CR>", { silent = true, desc = "Navi
 map({ "n" }, "<M-k>", "<Cmd>TmuxNavigateUp<CR>", { silent = true, desc = "Navigate up (Vim/Tmux agnostic)" })
 map({ "n" }, "<M-l>", "<Cmd>TmuxNavigateRight<CR>", { silent = true, desc = "Navigate right (Vim/Tmux agnostic)" })
 map({ "n" }, "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>", { silent = true, desc = "Navigate to the previous pane (Vim/Tmux agnostic)" })
+-- Tmux/Vim resizing
+map({ "n" }, "<C-h>", "<Cmd>vertical resize +1<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
+map({ "n" }, "<C-j>", "<Cmd>resize +1<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-k>", "<Cmd>resize -1<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-l>", "<Cmd>vertical resize -1<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
 -- Split vertically
 map({ "n" }, "<leader>%", "<Cmd>vnew<CR>", { silent = true, desc = "Vertical split (Tmux-style)" })
 -- Split horizontally

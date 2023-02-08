@@ -138,10 +138,7 @@ return {
   },
 
   -- Seamless Vim + Tmux navigation
-  {
-    'christoomey/vim-tmux-navigator',
-    config = function() require('plugins.vim-tmux-navigator') end
-  },
+  'christoomey/vim-tmux-navigator',
   -- Like Tmux <C-b>z
   'caenrique/nvim-maximize-window-toggle',
 
