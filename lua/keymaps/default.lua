@@ -25,3 +25,5 @@ map({ "n" }, "10zh", "<C-ScrollWheelUp>", { silent = true, desc = 'Horizontal sc
 map({ "n" }, "10zh<silent>", "<C-2-ScrollWheelUp>", { silent = true, desc = 'Horizontal scroll right, hold ctrl key' })
 map({ "n" }, "10zh<silent>", "<C-3-ScrollWheelUp>", { silent = true, desc = 'Horizontal scroll right, hold ctrl key' })
 map({ "n" }, "10zh<silent>", "<C-4-ScrollWheelUp>", { silent = true, desc = 'Horizontal scroll right, hold ctrl key' })
+-- Syntax group
+map({ "n" }, '<leader>sg', "<Cmd>lua local result = vim.treesitter.get_captures_at_cursor(0); print(vim.inspect(result))<CR>", { desc = "Get highlight group under cursor" })
