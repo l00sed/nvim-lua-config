@@ -6,6 +6,7 @@ local set_hl = vim.api.nvim_set_hl
 
 -- Disable default commands (uses CTRL modifier)
 cmd[[let g:tmux_navigator_no_mappings = 1]]
+cmd[[let g:tmux_resizer_no_mappings = 1]]
 -- Underline / Undercurl
 cmd [[
 if &term =~ 'xterm\|kitty\|alacritty\|tmux'
