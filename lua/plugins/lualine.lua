@@ -20,32 +20,32 @@ local gruvbox = function()
 
   return {
     inactive = {
-      a = { fg = colors.gray, bg = colors.outerbg, bold = true },
+      a = { fg = colors.gray, bg = colors.outerbg, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     visual = {
-      a = { fg = colors.darkgray, bg = colors.visual, bold = true },
+      a = { fg = colors.darkgray, bg = colors.visual, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     replace = {
-      a = { fg = colors.darkgray, bg = colors.replace, bold = true },
+      a = { fg = colors.darkgray, bg = colors.replace, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     normal = {
-      a = { fg = colors.darkgray, bg = colors.normal, bold = true },
+      a = { fg = colors.darkgray, bg = colors.normal, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     insert = {
-      a = { fg = colors.darkgray, bg = colors.insert, bold = true },
+      a = { fg = colors.darkgray, bg = colors.insert, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     command = {
-      a = { fg = colors.darkgray, bg = colors.command, bold = true },
+      a = { fg = colors.darkgray, bg = colors.command, gui='bold' },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
@@ -79,7 +79,12 @@ require('lualine').setup({
     globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = {
+      {
+        'mode',
+        color = { gui='bold' }
+      }
+    },
     --lualine_a = { -- BubbleButt
     --  { 'mode', separator = {
     --    left = '',
@@ -117,7 +122,7 @@ require('lualine').setup({
 
           return msg
         end,
-        color = { fg = '#ffffff', bold = true },
+        color = { fg = '#ffffff', gui='bold' },
         separator = "",
       },
       {
@@ -130,10 +135,17 @@ require('lualine').setup({
     lualine_y = { 'progress' },
     lualine_z = {
       { function () return '' end },
-      { 'location' },
-      --{ 'location', separator = {
-      --  right = ''
-      --}, left_padding = 0 }, -- BubbleButt
+      {
+        'location',
+        color = { gui='bold' }
+      },
+      --{
+      --  'location',
+      --  separator = {
+      --    right = ''
+      --  },
+      --  left_padding = 0
+      --}, -- BubbleButt
     }
   },
 })
