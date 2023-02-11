@@ -38,7 +38,7 @@ o.pumblend                    = 0
 o.winblend                    = 0
 -- Behaviour
 o.clipboard                   = [[unnamed,unnamedplus]] -- Makes neovim and host OS clipboard play nice
-o.hlsearch                    = false
+o.hlsearch                    = true -- Highlight search results
 o.history                     = 10000
 o.redrawtime                  = 10000
 o.swapfile                    = false

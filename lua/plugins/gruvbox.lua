@@ -1,7 +1,11 @@
 local cmd = vim.cmd
 local o = vim.o
 
-o.background = "dark"
+if os.getenv("THEME_VARIANT") == 'light' then
+  o.background = "light"
+else
+  o.background = "dark"
+end
 
 require('gruvbox').setup({
   undercurl = true,
@@ -18,7 +22,7 @@ require('gruvbox').setup({
   palette_overrides = {},
   overrides = {},
   dim_inactive = true,
-  transparent_mode = true,
+  transparent_mode = false,
 })
 
 cmd [[colo gruvbox]]
