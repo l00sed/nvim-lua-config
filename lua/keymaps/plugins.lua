@@ -37,6 +37,23 @@ map({ "n" }, '<leader>D', '<Cmd>lua vim.diagnostic.setloclist()<CR>', { silent =
 map({ "n" }, '<leader>lf', '<Cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>', { silent = true, desc = "Enable linting" })
 -- Open all project diagnostics in quickfix list
 map({ "n" }, '<leader>qf', "<Cmd>lua vim.diagnostic.setqflist()<CR>", { silent = true, desc = "Open LSP quickfix" })
+-- BarBar (tabs)
+-- -- Goto buffer in position...
+map({ "n" }, '<A-1>', '<Cmd>BufferGoto 1<CR>', { silent = true, desc = 'Goto tab 1' })
+map({ "n" }, '<A-2>', '<Cmd>BufferGoto 2<CR>', { silent = true, desc = 'Goto tab 2' })
+map({ "n" }, '<A-3>', '<Cmd>BufferGoto 3<CR>', { silent = true, desc = 'Goto tab 3' })
+map({ "n" }, '<A-4>', '<Cmd>BufferGoto 4<CR>', { silent = true, desc = 'Goto tab 4' })
+map({ "n" }, '<A-5>', '<Cmd>BufferGoto 5<CR>', { silent = true, desc = 'Goto tab 5' })
+map({ "n" }, '<A-6>', '<Cmd>BufferGoto 6<CR>', { silent = true, desc = 'Goto tab 6' })
+map({ "n" }, '<A-7>', '<Cmd>BufferGoto 7<CR>', { silent = true, desc = 'Goto tab 7' })
+map({ "n" }, '<A-8>', '<Cmd>BufferGoto 8<CR>', { silent = true, desc = 'Goto tab 8' })
+map({ "n" }, '<A-9>', '<Cmd>BufferGoto 9<CR>', { silent = true, desc = 'Goto tab 9' })
+map({ "n" }, '<A-0>', '<Cmd>BufferLast<CR>', { silent = true, desc = 'Goto last tab' })
+-- -- Pin a buffer
+map({ "n" }, '<A-p>', '<Cmd>BufferPin<CR>', { silent = true, desc = 'Pin/Unpin the current buffer' })
+map({ "n" }, '<leader>c', '<Cmd>BufferClose<CR>', { silent = true, desc = 'Close current buffer' })
+map({ "n" }, '<leader>gt', '<Cmd>BufferPrev<CR>', { silent = true, desc = 'Focus buffer on prev tab' })
+map({ "n" }, '<leader>gT', '<Cmd>BufferNext<CR>', { silent = true, desc = 'Focus buffer on next tab' })
 -- Telescope
 map({ "n" }, '<leader>ff', "<Cmd>Telescope find_files<CR>", { silent = true, desc = "Telescope, find files" })
 map({ "n" }, '<leader>fhf', "<Cmd>Telescope find_files hidden=true<CR>", { silent = true, desc = "Telescope, find files (hidden)" })

@@ -9,13 +9,14 @@ map({ "i" }, "<C-x><C-o>", "<C-SPACE>", { silent = true, desc = "Omnifunc, used 
 map({ "v" }, "<C-c>", '"+y', { silent = true, desc = "Yank/copy from visual mode" })
 -- Toggle Wrap
 map({ "n" }, '<leader>tw', '<Cmd>lua require("utils").toggle_wrap()<CR>', { silent = true, desc = "Toggle wrapped lines", noremap = true })
+
 -- Tab navigation in vim
--- -- Move to previous tab
-map({ "n" }, '<leader>gt', "<Cmd>bp<CR>", { silent = true, desc = "Previous tab", noremap = true })
--- -- Move to next tab
-map({ "n" }, '<leader>gT', "<Cmd>bn<CR>", { silent = true, desc = "Next tab", noremap = true })
--- -- Close current tab
-map({ "n" }, '<leader>c', "<Cmd>bw<CR>", { silent = true, desc = "Close tab", noremap = true })
+-- NOTE: Commented out in favor of the barbar.nvim "Buffer{Next,Prev,Close}" commands
+
+-- map({ "n" }, '<leader>gt', "<Cmd>bp<CR>", { silent = true, desc = "Previous tab", noremap = true })
+-- map({ "n" }, '<leader>gT', "<Cmd>bn<CR>", { silent = true, desc = "Next tab", noremap = true })
+-- map({ "n" }, '<leader>c', "<Cmd>bw<CR>", { silent = true, desc = "Close tab", noremap = true })
+
 -- Horizontal Scrolling with Mouse (hold control key)
 map({ "n" }, "10zl", "<C-ScrollWheelDown>", { silent = true, desc = 'Horizontal scroll left, hold ctrl key' })
 map({ "n" }, "10zl", "<C-2-ScrollWheelDown>", { silent = true, desc = 'Horizontal scroll left, hold ctrl key' })

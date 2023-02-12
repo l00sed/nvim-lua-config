@@ -129,11 +129,11 @@ return {
     config = function() require('plugins.telescope') end
   },
 
-  -- bufferline
+  -- Barbar.nvim (bufferline tabs)
   {
-    'akinsho/bufferline.nvim',
+    'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function() require('plugins.bufferline') end,
+    config = function() require('plugins.barbar') end,
     event = 'BufWinEnter'
   },
 
