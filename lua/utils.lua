@@ -34,7 +34,6 @@ function M.invert_hex_color(color)
   -- Drop the initial '#'
   color = string.sub(color, 2)
   local inverted_color = '#'
-
   -- Fetch the different components and invert them
   for i = 0, 2 do
     -- Fetch the substring
@@ -46,7 +45,6 @@ function M.invert_hex_color(color)
     -- Append
     inverted_color = inverted_color .. string.format('%.2x', component)
   end
-
   return inverted_color
 end
 
