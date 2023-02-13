@@ -88,6 +88,12 @@ local indent_highlights = {
   '#999999',
   '#9c9c9c',
   '#9f9f9f',
+  '#acacac',
+  '#bcbcbc',
+  '#cccccc',
+  '#dcdcdc',
+  '#ececec',
+  '#fcfcfc',
 }
 
 if os.getenv("THEME_VARIANT") == 'light' then

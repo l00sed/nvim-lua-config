@@ -110,7 +110,7 @@ colors = {
   ["fg_subtle"] = '#555555',
   ["bg_current"] = 'None',
   ["bg_visible"] = 'None',
-  ["bg_inactive"] = '#1a1a1a',
+  ["bg_inactive"] = '#0f0f0f',
 }
 
 -- Current
