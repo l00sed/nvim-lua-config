@@ -82,16 +82,17 @@ This will create a folder with the configuration with the following structure is
 
 This structure is important since Lua will not load files that are not located inside `lua`. The file `init.lua` loads all the modules located inside this folder to set the configuration. Most of the names are self explanatory. The most important file here is `plugins.lua`, which is the module that loads the relevant plugins. Some of the most important plugins are:
 
-1. [**`lazy.nvim`**](https://github.com/folke/lazy.nvim): Manage plugins.
-2. [**`lspconfig`**](https://github.com/neovim/nvim-lspconfig): Client for different language servers using the Language Server Protocol (LSP).
-3. [`mason.nvim`](https://github.com/williamboman/mason.nvim): Additional LSP installation automation.
-4. [**`cmp`**](https://github.com/hrsh7th/nvim-cmp): Auto-complete functionality. Recommended by the core Neovim team.
-5. [**`treesitter`**](https://github.com/nvim-treesitter/nvim-treesitter): Syntax highlighting and other functionality.
-6. [**`NvimTree`**](https://github.com/kyazdani42/nvim-tree.lua): File explorer written in Lua.
-7. [**`fugitive`**] (https://github.com/tpope/vim-fugitive): Plugin for git.
-8. [**`gitsigns`**](https://github.com/lewis6991/gitsigns.nvim): Git gutter highlighting and hunk management in buffer.
-9. [**`telescope`**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder.
-10. [**`lualine`**](https://github.com/nvim-lualine/lualine.nvim): A status line written in Lua which is similar to `vim-airline`.
+1. [**lazy.nvim**](https://github.com/folke/lazy.nvim): Manage plugins.
+2. [**nvim-lspconfig**](https://github.com/neovim/nvim-lspconfig): Client for different language servers using the Language Server Protocol (LSP).
+3. [**mason.nvim**](https://github.com/williamboman/mason.nvim): Additional LSP installation automation.
+4. [**nvim-cmp**](https://github.com/hrsh7th/nvim-cmp): Auto-complete functionality. Recommended by the core Neovim team.
+5. [**treesitter**](https://github.com/nvim-treesitter/nvim-treesitter): Syntax highlighting and other functionality.
+6. [**nvim-tree.lua**](https://github.com/kyazdani42/nvim-tree.lua): File explorer written in Lua.
+7. [**vim-fugitive**] (https://github.com/tpope/vim-fugitive): Plugin for git.
+8. [**gitsigns.nvim**](https://github.com/lewis6991/gitsigns.nvim): Git gutter highlighting and hunk management in buffer.
+9. [**telescope.nvim**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder.
+10. [**lualine.nvim**](https://github.com/nvim-lualine/lualine.nvim): A status line written in Lua which is similar to `vim-airline`.
+11. [**barbar.nvim**](https://github.com/nvim-lualine/lualine.nvim): A status line written in Lua which is similar to `vim-airline`.
 
 There are some more packages that are dependencies of the ones mentioned above, and some for formatting and theming as well. Refer to the `lua/plugins.lua` file to see how plugins are added, or checkout `folke/lazy.nvim` on GitHub.
 
@@ -195,11 +196,11 @@ Inline error messages are disabled in the current configuration. They create a l
 
 ## Web-dev Icons
 
-To visualize fancy icons and separators, a patched font must be installed. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) has many already patched and offers instructions on how to create new ones (I don't recommend). To install a patched font follow these instructions:
-1. Head to the [repo](https://github.com/ryanoasis/nerd-fonts) and download the font. I use Robot Mono.
+To visualize fancy icons and separators, a patched font must be installed. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) has many already patched and offers instructions on how to create new ones. To install a patched font follow these instructions:
+1. Head to the [repo](https://github.com/ryanoasis/nerd-fonts) and download the font. I use JetBrainsMono Nerd Font (sometimes configured as `JetBrainsMono NF`.
 2. Copy the file to the relevant folder:
   - Linux: `~/.local/share/fonts/`.
-  - MacOS: `/Library/Fonts'`.
+  - MacOS: `/Library/Fonts/'`.
 3. Change the font in the terminal emulator's settings to the patched font.
 
 ### Nerd Fonts with Kitty
@@ -220,6 +221,8 @@ Some plugins to try:
 - Ranger integration: [Rnvimr](https://github.com/kevinhwang91/rnvimr). Use ranger in a floating buffer instead of as a tiled buffer.
 - Using GBrowse with fugitive: [rhubarb.vim](https://github.com/tpope/rhubarb.vim).
 - Jupyter on Neovim: [jupytext.vim](https://github.com/mwouts/jupytext), [iron.nvim](https://github.com/hkupty/iron.nvim), [vim-textobj-hydrogen](https://github.com/GCBallesteros/vim-textobj-hydrogen). Check this [blog](https://www.maxwellrules.com/misc/nvim_jupyter.html) for more info.
+- Git diff and refactoring in Neovim: [diffview.nvim](https://github.com/sindrets/diffview.nvim)
+- Structural search and replace: [ssr.nvim](https://github.com/cshuaimin/ssr.nvim). ssr.nvim parses your search pattern to syntax trees to perform structural searching.
 
 ## Attributions
 

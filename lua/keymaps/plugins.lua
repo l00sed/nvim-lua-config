@@ -49,6 +49,17 @@ map({ "n" }, '<A-7>', '<Cmd>BufferGoto 7<CR>', { silent = true, desc = 'Goto tab
 map({ "n" }, '<A-8>', '<Cmd>BufferGoto 8<CR>', { silent = true, desc = 'Goto tab 8' })
 map({ "n" }, '<A-9>', '<Cmd>BufferGoto 9<CR>', { silent = true, desc = 'Goto tab 9' })
 map({ "n" }, '<A-0>', '<Cmd>BufferLast<CR>', { silent = true, desc = 'Goto last tab' })
+-- -- Goto buffer in position...
+map({ "n" }, '<leader>1', '<Cmd>BufferGoto 1<CR>', { silent = true, desc = 'Goto tab 1' })
+map({ "n" }, '<leader>2', '<Cmd>BufferGoto 2<CR>', { silent = true, desc = 'Goto tab 2' })
+map({ "n" }, '<leader>3', '<Cmd>BufferGoto 3<CR>', { silent = true, desc = 'Goto tab 3' })
+map({ "n" }, '<leader>4', '<Cmd>BufferGoto 4<CR>', { silent = true, desc = 'Goto tab 4' })
+map({ "n" }, '<leader>5', '<Cmd>BufferGoto 5<CR>', { silent = true, desc = 'Goto tab 5' })
+map({ "n" }, '<leader>6', '<Cmd>BufferGoto 6<CR>', { silent = true, desc = 'Goto tab 6' })
+map({ "n" }, '<leader>7', '<Cmd>BufferGoto 7<CR>', { silent = true, desc = 'Goto tab 7' })
+map({ "n" }, '<leader>8', '<Cmd>BufferGoto 8<CR>', { silent = true, desc = 'Goto tab 8' })
+map({ "n" }, '<leader>9', '<Cmd>BufferGoto 9<CR>', { silent = true, desc = 'Goto tab 9' })
+map({ "n" }, '<leader>0', '<Cmd>BufferLast<CR>', { silent = true, desc = 'Goto last tab' })
 -- -- Pin a buffer
 map({ "n" }, '<A-p>', '<Cmd>BufferPin<CR>', { silent = true, desc = 'Pin/Unpin the current buffer' })
 map({ "n" }, '<leader>c', '<Cmd>BufferClose<CR>', { silent = true, desc = 'Close current buffer' })
@@ -62,6 +73,9 @@ map({ "n" }, '<leader>fg', "<Cmd>Telescope live_grep<CR>", { silent = true, desc
 map({ "n" }, '<leader>ft', "<Cmd>TodoTelescope<CR>", { silent = true, desc = "Telescope, find todos" })
 -- File explorer
 map({ "n" }, '<leader>n', "<Cmd>NvimTreeToggle<CR>", { silent = true, desc = "Toggle NvimTree" })
+map({ "n" }, '<leader>aa', "<Cmd>lua require('utils').add_marked_to_args()<CR>", { silent = true, desc = "Add NvimTree marked files to argdo arg list" })
+map({ "n" }, '<leader>ad', "<Cmd>%argdelete<CR>", { silent = true, desc = "Clear arg list" })
+map({ "n" }, '<leader>al', "<Cmd>arg<CR>", { silent = true, desc = "List arglist files" })
 -- EasyAlign
 -- xmap("ga", "<cmd>EasyAlign")
 -- nmap("ga", "<cmd>EasyAlign")
