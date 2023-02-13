@@ -18,16 +18,16 @@ require('bufferline').setup({
   -- Enables / disables diagnostic symbols
   diagnostics = {
     -- you can use a list
-    {enabled = true, icon = ''}, -- ERROR
-    {enabled = false}, -- WARN
-    {enabled = false}, -- INFO
-    {enabled = true},  -- HINT
+    {enabled = true, icon = ' '}, -- ERROR
+    {enabled = false, icon = ' '}, -- WARN
+    {enabled = false, icon = ' '}, -- INFO
+    {enabled = false, icon = ' '},  -- HINT
 
     -- OR `vim.diagnostic.severity`
-    [vim.diagnostic.severity.ERROR] = {enabled = true, icon = ''},
-    [vim.diagnostic.severity.WARN] = {enabled = false},
-    [vim.diagnostic.severity.INFO] = {enabled = false},
-    [vim.diagnostic.severity.HINT] = {enabled = true},
+    [vim.diagnostic.severity.ERROR] = {enabled = true, icon = ' '},
+    [vim.diagnostic.severity.WARN] = {enabled = false, icon = ' '},
+    [vim.diagnostic.severity.INFO] = {enabled = false, icon = ' '},
+    [vim.diagnostic.severity.HINT] = {enabled = false, icon = ' '},
   },
   -- Excludes buffers from the tabline
   exclude_ft = {'javascript'},
@@ -133,3 +133,7 @@ set_hl(0, 'BufferCurrentIcon', { link = 'BufferCurrent' })
 set_hl(0, 'BufferVisibleIcon', { link = 'BufferVisible' })
 set_hl(0, 'BufferInactiveIcon', { link = 'BufferInactive' })
 set_hl(0, 'BufferOffset', { link = 'BufferTabpageFill' })
+set_hl(0, 'BufferDefaultInactiveERROR', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultInactiveWARN', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultInactiveINFO', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultInactiveHINT', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
