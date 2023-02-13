@@ -102,11 +102,11 @@ autocmd('BufWinLeave', {
 colors = {
   ["fg_target"] = 'red',
   ["fg_current"] = 'white',
-  ["fg_visible"] = 'white',
+  ["fg_visible"] = 'gray',
   ["fg_inactive"] = 'gray',
   ["fg_modified"] = 'orange',
   ["fg_special"] = 'teal',
-  ["fg_subtle"] = 'gray',
+  ["fg_subtle"] = 'white',
   ["bg_current"] = 'None',
   ["bg_visible"] = 'None',
   ["bg_inactive"] = 'None',
@@ -114,31 +114,31 @@ colors = {
 
 -- Current
 set_hl(0, 'BufferCurrent', { fg = colors['fg_current'], bg = colors['bg_current'] })
-set_hl(0, 'BufferCurrentIcon', { link = 'BufferCurrent' })
-set_hl(0, 'BufferDefaultCurrentIcon', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferCurrentIcon', { fg = colors['fg_current'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentIcon', { bg = colors['bg_current'] })
 set_hl(0, 'BufferCurrentIndex', { fg = colors['fg_special'], bg = colors['bg_current'] })
-set_hl(0, 'BufferDefaultCurrentIndex', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultCurrentIndex', { bg = colors['bg_current'] })
 set_hl(0, 'BufferCurrentMod', { fg = colors['fg_modified'], bg =colors['bg_current'] })
-set_hl(0, 'BufferDefaultCurrentMod', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultCurrentMod', { bg = colors['bg_current'] })
 set_hl(0, 'BufferCurrentSign', { fg = colors['fg_special'], bg = colors['bg_current'] })
-set_hl(0, 'BufferDefaultCurrentSign', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultCurrentSign', { bg = colors['bg_current'] })
 set_hl(0, 'BufferCurrentTarget', { fg = colors['fg_target'], bg = colors['bg_current'], bold = true })
-set_hl(0, 'BufferDefaultCurrentTarget', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultCurrentTarget', { bg = colors['bg_current'] })
 -- Visible
 set_hl(0, 'BufferVisible', { fg = colors['fg_visible'], bg = colors['bg_visible'] })
-set_hl(0, 'BufferVisibleIcon', { link = 'BufferVisible' })
-set_hl(0, 'BufferDefaultVisibleIcon', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferVisibleIcon', { fg = colors['fg_visible'], bg = colors['bg_visible'] })
+set_hl(0, 'BufferDefaultVisibleIcon', { bg = colors['bg_visible'] })
 set_hl(0, 'BufferVisibleIndex', { fg = colors['fg_visible'], bg = colors['bg_visible'] })
-set_hl(0, 'BufferDefaultVisibleIndex', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultVisibleIndex', { bg = colors['bg_visible'] })
 set_hl(0, 'BufferVisibleMod', { fg = colors['fg_modified'], bg =colors['bg_visible'] })
-set_hl(0, 'BufferDefaultVisibleMod', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultVisibleMod', { bg = colors['bg_visible'] })
 set_hl(0, 'BufferVisibleSign', { fg = colors['fg_visible'], bg = colors['bg_visible'] })
-set_hl(0, 'BufferDefaultVisibleSign', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultVisibleSign', { bg = colors['bg_visible'] })
 set_hl(0, 'BufferVisibleTarget', { fg = colors['fg_target'], bg = colors['bg_visible'], bold = true })
-set_hl(0, 'BufferDefaultVisibleTarget', { bg = colors['bg_inactive'] })
+set_hl(0, 'BufferDefaultVisibleTarget', { bg = colors['bg_visible'] })
 -- Inactive
 set_hl(0, 'BufferInactive', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
-set_hl(0, 'BufferInactiveIcon', { link = 'BufferInactive' })
+set_hl(0, 'BufferInactiveIcon', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveIcon', { bg = colors['bg_inactive'] })
 set_hl(0, 'BufferInactiveIndex', { fg = colors['fg_subtle'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveIndex', { bg = colors['bg_inactive'] })
@@ -154,22 +154,30 @@ set_hl(0, 'BufferTabpageFill', { fg = colors['fg_inactive'], bg =colors['bg_inac
 -- Offset
 set_hl(0, 'BufferOffset', { link = 'BufferTabpageFill' })
 -- Error
-set_hl(0, 'BufferVisibleERROR', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultVisibleERROR', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultCurrentERROR', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferVisibleERROR', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferDefaultVisibleERROR', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferCurrentERROR', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentERROR', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferInactiveERROR', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveERROR', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 -- Warn
-set_hl(0, 'BufferVisibleWARN', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultVisibleWARN', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultCurrentWARN', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferVisibleWARN', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferDefaultVisibleWARN', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferCurrentWARN', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentWARN', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferInactiveWARN', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveWARN', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 -- Info
-set_hl(0, 'BufferVisibleINFO', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultVisibleINFO', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultCurrentINFO', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferVisibleINFO', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferDefaultVisibleINFO', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferCurrentINFO', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentINFO', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferInactiveINFO', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveINFO', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 -- Hint
-set_hl(0, 'BufferVisibleHINT', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultVisibleHINT', { bg = colors['bg_inactive'] })
-set_hl(0, 'BufferDefaultCurrentHINT', { fg = colors['fg_target'], bg = colors['bg_inactive'] })
+set_hl(0, 'BufferVisibleHINT', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferDefaultVisibleHINT', { bg = colors['bg_visible'] })
+set_hl(0, 'BufferCurrentHINT', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentHINT', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferInactiveHINT', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveHINT', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
