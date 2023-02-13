@@ -51,8 +51,8 @@ require('bufferline').setup({
   icon_custom_colors = false,
   -- Configure icons on the bufferline.
   icon_separator_active = '┃',
-  icon_separator_inactive = '│',
-  icon_close_tab = '',
+  icon_separator_inactive = '┃',
+  icon_close_tab = ' ',
   icon_close_tab_modified = '●',
   icon_pinned = '車',
   -- If true, new buffers will be inserted at the start/end of the list.
@@ -100,25 +100,26 @@ autocmd('BufWinLeave', {
 })
 
 colors = {
+  ["fg_error"] = 'red',
   ["fg_target"] = 'red',
   ["fg_current"] = 'white',
-  ["fg_visible"] = 'gray',
-  ["fg_inactive"] = 'gray',
-  ["fg_modified"] = 'orange',
-  ["fg_special"] = 'teal',
-  ["fg_subtle"] = 'white',
+  ["fg_visible"] = '#333333',
+  ["fg_inactive"] = '#333333',
+  ["fg_modified"] = '#d69821',
+  ["fg_special"] = 'white',
+  ["fg_subtle"] = '#555555',
   ["bg_current"] = 'None',
   ["bg_visible"] = 'None',
-  ["bg_inactive"] = 'None',
+  ["bg_inactive"] = '#1a1a1a',
 }
 
 -- Current
-set_hl(0, 'BufferCurrent', { fg = colors['fg_current'], bg = colors['bg_current'] })
+set_hl(0, 'BufferCurrent', { fg = colors['fg_current'], bg = colors['bg_current'], bold = true })
 set_hl(0, 'BufferCurrentIcon', { fg = colors['fg_current'], bg = colors['bg_current'] })
 set_hl(0, 'BufferDefaultCurrentIcon', { bg = colors['bg_current'] })
-set_hl(0, 'BufferCurrentIndex', { fg = colors['fg_special'], bg = colors['bg_current'] })
+set_hl(0, 'BufferCurrentIndex', { fg = colors['fg_special'], bg = colors['bg_current'], bold = true })
 set_hl(0, 'BufferDefaultCurrentIndex', { bg = colors['bg_current'] })
-set_hl(0, 'BufferCurrentMod', { fg = colors['fg_modified'], bg =colors['bg_current'] })
+set_hl(0, 'BufferCurrentMod', { fg = colors['fg_modified'], bg =colors['bg_current'], bold = true })
 set_hl(0, 'BufferDefaultCurrentMod', { bg = colors['bg_current'] })
 set_hl(0, 'BufferCurrentSign', { fg = colors['fg_special'], bg = colors['bg_current'] })
 set_hl(0, 'BufferDefaultCurrentSign', { bg = colors['bg_current'] })
@@ -149,15 +150,15 @@ set_hl(0, 'BufferDefaultInactiveSign', { bg = colors['bg_inactive'] })
 set_hl(0, 'BufferInactiveTarget', { fg = colors['fg_target'], bg = colors['bg_inactive'], bold = true })
 set_hl(0, 'BufferDefaultInactiveTarget', { bg = colors['bg_inactive'] })
 -- Tabpages
-set_hl(0, 'BufferTabpages', { fg = colors['fg_special'], bg = colors['bg_inactive'],bold = true })
-set_hl(0, 'BufferTabpageFill', { fg = colors['fg_inactive'], bg =colors['bg_inactive'] })
+set_hl(0, 'BufferTabpages', { fg = colors['fg_special'], bg = colors['bg_inactive'], bold = true })
+set_hl(0, 'BufferTabpageFill', { fg = colors['fg_inactive'], bg = 'None' })
 -- Offset
 set_hl(0, 'BufferOffset', { link = 'BufferTabpageFill' })
 -- Error
 set_hl(0, 'BufferVisibleERROR', { bg = colors['bg_visible'] })
 set_hl(0, 'BufferDefaultVisibleERROR', { bg = colors['bg_visible'] })
-set_hl(0, 'BufferCurrentERROR', { fg = colors['fg_target'], bg = colors['bg_current'] })
-set_hl(0, 'BufferDefaultCurrentERROR', { fg = colors['fg_target'], bg = colors['bg_current'] })
+set_hl(0, 'BufferCurrentERROR', { fg = colors['fg_error'], bg = colors['bg_current'] })
+set_hl(0, 'BufferDefaultCurrentERROR', { fg = colors['fg_error'], bg = colors['bg_current'] })
 set_hl(0, 'BufferInactiveERROR', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 set_hl(0, 'BufferDefaultInactiveERROR', { fg = colors['fg_inactive'], bg = colors['bg_inactive'] })
 -- Warn
