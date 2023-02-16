@@ -139,7 +139,7 @@ return {
 
   -- Seamless Vim + Tmux navigation
   'christoomey/vim-tmux-navigator',
-  'RyanMillerC/better-vim-tmux-resizer',
+  'l00sed/vim-tmux-resizer',
   -- Like Tmux <C-b>z
   'caenrique/nvim-maximize-window-toggle',
 
