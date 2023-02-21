@@ -55,6 +55,7 @@ require("nvim-tree").setup({
   disable_netrw = true,
   hijack_netrw = true,
   update_cwd = true,
+  remove_keymaps = { "<C-k>" },
   view = {
     adaptive_size = false,
     width = 30,
@@ -67,6 +68,7 @@ require("nvim-tree").setup({
         { key = "H", action = "collapse_all" },
         { key = "ga", action = "git_add", action_cb = git_add },
         { key = "gr", action = "git_restore", action_cb = git_restore },
+        { key = "i", action = "toggle_file_info" },
       }
     },
   },
