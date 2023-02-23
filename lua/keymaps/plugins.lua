@@ -49,6 +49,9 @@ map({ "n" }, '<A-7>', '<Cmd>BufferGoto 7<CR>', { silent = true, desc = 'Goto tab
 map({ "n" }, '<A-8>', '<Cmd>BufferGoto 8<CR>', { silent = true, desc = 'Goto tab 8' })
 map({ "n" }, '<A-9>', '<Cmd>BufferGoto 9<CR>', { silent = true, desc = 'Goto tab 9' })
 map({ "n" }, '<A-0>', '<Cmd>BufferLast<CR>', { silent = true, desc = 'Goto last tab' })
+-- -- Rearrange buffer tabs
+map({ "n" }, '<A-<>', '<Cmd>BufferMovePrevious<CR>', { silent = true, desc = 'Move tab left' })
+map({ "n" }, '<A->>', '<Cmd>BufferMoveNext<CR>', { silent = true, desc = 'Move tab right' })
 -- -- Goto buffer in position...
 map({ "n" }, '<leader>1', '<Cmd>BufferGoto 1<CR>', { silent = true, desc = 'Goto tab 1' })
 map({ "n" }, '<leader>2', '<Cmd>BufferGoto 2<CR>', { silent = true, desc = 'Goto tab 2' })
@@ -62,9 +65,13 @@ map({ "n" }, '<leader>9', '<Cmd>BufferGoto 9<CR>', { silent = true, desc = 'Goto
 map({ "n" }, '<leader>0', '<Cmd>BufferLast<CR>', { silent = true, desc = 'Goto last tab' })
 -- -- Pin a buffer
 map({ "n" }, '<A-p>', '<Cmd>BufferPin<CR>', { silent = true, desc = 'Pin/Unpin the current buffer' })
+-- -- Close buffer
 map({ "n" }, '<leader>c', '<Cmd>BufferClose<CR>', { silent = true, desc = 'Close current buffer' })
+-- -- Navigate buffers
 map({ "n" }, '<leader>gt', '<Cmd>BufferPrev<CR>', { silent = true, desc = 'Focus buffer on prev tab' })
 map({ "n" }, '<leader>gT', '<Cmd>BufferNext<CR>', { silent = true, desc = 'Focus buffer on next tab' })
+map({ "n" }, '<A-,>', '<Cmd>BufferPrev<CR>', { silent = true, desc = 'Focus buffer on prev tab' })
+map({ "n" }, '<A-.>', '<Cmd>BufferNext<CR>', { silent = true, desc = 'Focus buffer on next tab' })
 -- Telescope
 map({ "n" }, '<leader>ff', "<Cmd>Telescope find_files<CR>", { silent = true, desc = "Telescope, find files" })
 map({ "n" }, '<leader>fhf', "<Cmd>Telescope find_files hidden=true<CR>", { silent = true, desc = "Telescope, find files (hidden)" })

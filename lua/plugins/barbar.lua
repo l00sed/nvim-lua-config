@@ -80,23 +80,29 @@ require('bufferline').setup({
 })
 
 local nvim_tree_events = require('nvim-tree.events')
+local nvim_tree_view = require('nvim-tree.view')
 local bufferline_api = require('bufferline.api')
 
 local function get_tree_size()
-  return require'nvim-tree.view'.View.width
+  return nvim_tree_view.View.width
 end
 
 nvim_tree_events.subscribe('TreeOpen', function()
   bufferline_api.set_offset(get_tree_size())
 end)
 
-nvim_tree_events.subscribe('Resize', function()
-  bufferline_api.set_offset(get_tree_size())
-end)
-
 nvim_tree_events.subscribe('TreeClose', function()
   bufferline_api.set_offset(0)
 end)
+
+nvim_tree_events.subscribe('Resize', function()
+  if nvim_tree_view.is_visible() then
+    bufferline_api.set_offset(get_tree_size())
+  else
+    bufferline_api.set_offset(0)
+  end
+end)
+
 
 colors = {
   ["fg_error"] = 'red',
