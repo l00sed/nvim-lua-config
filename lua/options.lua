@@ -106,7 +106,10 @@ o.guicursor                   = 'n-v-c:block,'..
 --  lastline = '@'
 --}
 -- No fold enabled
-autocmd('FileType', { pattern = 'lazy', command = 'set nofen' })
+autocmd('FileType', {
+  pattern = { 'lazy', 'TelescopePrompt', 'TelescopeResults' },
+  command = 'set nofen'
+})
 -- Python set tab instead of spaces
 autocmd('FileType', {
   pattern = 'python',
