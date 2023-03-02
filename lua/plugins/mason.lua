@@ -8,7 +8,7 @@ local servers = {
   "cssmodules_ls",
   "dockerls",
   "eslint",
-  "grammarly",
+  --"grammarly",
   "html",
   "intelephense",
   "jsonls",
