@@ -9,6 +9,7 @@ local M = {}
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
+local lspconfig_util = require('lspconfig.util')
 
 function formatDocument(client, bufnr)
 	local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
@@ -47,10 +48,10 @@ null_ls.setup({
 	sources = {
 		-- Formatting
 		formatting.autopep8,
-		--formatting.djlint.with({
-		--	command = "djlint",
-		--	extra_args = { "--check", "--profile", "django" },
-		--}),
+		formatting.djlint.with({
+			command = "djlint",
+			extra_args = { "--check", "--profile", "django" },
+		}),
 		formatting.clang_format.with({
 			filetypes = { "cpp", "c" },
 		}),
