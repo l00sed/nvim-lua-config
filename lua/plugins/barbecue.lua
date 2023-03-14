@@ -11,7 +11,7 @@ require('barbecue').setup({
   },
   kinds = {
     File = "",
-    Module = "",
+    Module = "",
     Namespace = "",
     Package = "",
     Class = "",
@@ -19,7 +19,7 @@ require('barbecue').setup({
     Property = "",
     Field = "",
     Constructor = "▁",
-    Enum = "",
+    Enum = "",
     Interface = "",
     Function = "",
     Variable = "",
