@@ -15,25 +15,14 @@ require('bufferline').setup({
   --  - left-click: go to buffer
   --  - middle-click: delete buffer
   clickable = true,
-  -- Enables / disables diagnostic symbols
-  diagnostics = {
-    -- you can use a list
-    {enabled = true, icon = ' '}, -- ERROR
-    {enabled = false, icon = ' '}, -- WARN
-    {enabled = false, icon = ' '}, -- INFO
-    {enabled = false, icon = ' '},  -- HINT
-
-    -- OR `vim.diagnostic.severity`
-    [vim.diagnostic.severity.ERROR] = {enabled = true, icon = ' '},
-    [vim.diagnostic.severity.WARN] = {enabled = false, icon = ' '},
-    [vim.diagnostic.severity.INFO] = {enabled = false, icon = ' '},
-    [vim.diagnostic.severity.HINT] = {enabled = false, icon = ' '},
-  },
   -- Excludes buffers from the tabline
   exclude_ft = {'javascript'},
   exclude_name = {'package.json'},
   -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-  hide = { extensions = true, inactive = false },
+  hide = {
+    extensions = true,
+    inactive = false
+  },
   -- Disable highlighting alternate buffers
   highlight_alternate = false,
   -- Disable highlighting file icons in inactive buffers
@@ -43,18 +32,45 @@ require('bufferline').setup({
   -- Enable/disable icons
   -- if set to 'numbers', will show buffer index in the tabline
   -- if set to 'both', will show buffer index and icons in the tabline
-  icons = 'both',
+  icons = {
+    buffer_index = true,
+    button = ' ',
+    filetype = {
+      enabled = true
+    },
+    -- Enables / disables diagnostic symbols
+    diagnostics = {
+      -- you can use a list
+      { enabled = true,  icon = ' ' }, -- ERROR
+      { enabled = false, icon = ' ' }, -- WARN
+      { enabled = false, icon = ' ' }, -- INFO
+      { enabled = false, icon = ' ' }, -- HINT
+
+      -- OR `vim.diagnostic.severity`
+      [ vim.diagnostic.severity.ERROR ] = { enabled = true,  icon = ' ' },
+      [ vim.diagnostic.severity.WARN ]  = { enabled = false, icon = ' ' },
+      [ vim.diagnostic.severity.INFO ]  = { enabled = false, icon = ' ' },
+      [ vim.diagnostic.severity.HINT ]  = { enabled = false, icon = ' ' },
+    },
+    -- Configure icons on the bufferline.
+    separator = {
+      left = '┃',
+    },
+    inactive = {
+      left = '┃',
+    },
+    modified = {
+      button = '● ',
+    },
+    pinned = {
+      button = '車',
+    }
+  },
   -- If set, the icon color will follow its corresponding buffer
   -- highlight group. By default, the Buffer*Icon group is linked to the
   -- Buffer* group (see Highlighting below). Otherwise, it will take its
   -- default value as defined by devicons.
   icon_custom_colors = false,
-  -- Configure icons on the bufferline.
-  icon_separator_active = '┃',
-  icon_separator_inactive = '┃',
-  icon_close_tab = ' ',
-  icon_close_tab_modified = '●',
-  icon_pinned = '車',
   -- If true, new buffers will be inserted at the start/end of the list.
   -- Default is to insert after current buffer.
   insert_at_end = true,
