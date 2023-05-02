@@ -1,4 +1,3 @@
-
 -- This function has been generated from your
 --   view.mappings.list
 --   view.mappings.custom_only
@@ -17,14 +16,11 @@
 local api = require('nvim-tree.api')
 
 local on_attach = function(bufnr)
-
-  local opts = function(desc)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  local opts = function()
+    return { desc='nvim-tree', buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
-
   -- Default mappings. Feel free to modify or remove as you wish.
-  --
   -- BEGIN_DEFAULT_ON_ATTACH
   vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node,          opts('CD'))
   vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer,     opts('Open: In Place'))
@@ -80,62 +76,56 @@ local on_attach = function(bufnr)
   vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
   -- END_DEFAULT_ON_ATTACH
 
-
   -- Mappings removed via:
   --   remove_keymaps
   --   OR
   --   view.mappings.list..action = ""
   --
   -- The dummy set before del is done for safety, in case a default mapping does not exist.
-  --
   -- You might tidy things by removing these along with their default mapping.
   vim.keymap.set('n', '<C-k>', '', { buffer = bufnr })
   vim.keymap.del('n', '<C-k>', { buffer = bufnr })
 
-
   -- Mappings migrated from view.mappings.list
-  --
   -- You will need to insert "your code goes here" for any mappings with a custom action_cb
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
   vim.keymap.set('n', 'H', api.tree.collapse_all, opts('Collapse'))
+  -- Git Add
   vim.keymap.set('n', 'ga', function()
-        local node = api.tree.get_node_under_cursor()
-        git_add(node)
-      end, opts('git_add'))
+    local node = api.tree.get_node_under_cursor()
 
+    local function git_add(node)
+      local gs = node.git_status.file
+
+      -- If the file is untracked, unstaged or partially staged, we stage it
+      if gs == "??" or gs == "MM" or gs == "AM" or gs == " M" then
+        vim.cmd("silent !git add " .. node.absolute_path)
+      -- If the file is staged, we unstage it
+      elseif gs == "M " or gs == "A " then
+        vim.cmd("silent !git restore --staged " .. node.absolute_path)
+      end
+
+      api.tree.reload()
+    end
+
+    git_add(node)
+  end, opts())
+  -- Git Restore
   vim.keymap.set('n', 'gr', function()
     local node = api.tree.get_node_under_cursor()
+
+    local function git_restore(node)
+      local gs = node.git_status.file
+      -- If the file is modified, we restore it
+      vim.cmd("silent !git restore " .. node.absolute_path)
+
+      api.tree.reload()
+    end
+
     git_restore(node)
-  end, opts('git_restore'))
-
+  end, opts())
   vim.keymap.set('n', 'i', api.node.show_info_popup, opts('Info'))
-
-end
-
--- NVIM tree
-local g = vim.g
-local lib = require("nvim-tree.lib")
-
-local git_add = function(node)
-  local gs = node.git_status.file
-
-  -- If the file is untracked, unstaged or partially staged, we stage it
-  if gs == "??" or gs == "MM" or gs == "AM" or gs == " M" then
-    vim.cmd("silent !git add " .. node.absolute_path)
-  -- If the file is staged, we unstage it
-  elseif gs == "M " or gs == "A " then
-    vim.cmd("silent !git restore --staged " .. node.absolute_path)
-  end
-
-  lib.refresh_tree()
-end
-
-local git_restore = function(node)
-  local gs = node.git_status.file
-  -- If the file is modified, we restore it
-  vim.cmd("silent !git restore " .. node.absolute_path)
-  lib.refresh_tree()
 end
 
 local function open_nvim_tree(data)
@@ -156,10 +146,13 @@ local function open_nvim_tree(data)
   vim.cmd.cd(data.file)
 
   -- open the tree
-  require("nvim-tree.api").tree.open()
+  api.tree.open()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+-- NVIM tree
+local g = vim.g
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
