@@ -169,7 +169,7 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.markdown', '*.mdown', '*.mkd', '*.mkdn', '*.mdwn', 'README.md' }, command = 'setf markdown'
 })
 autocmd('FileType', {
-  pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr'
+  pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
 })
 -- Set filetype to bash for .zsh-theme
 autocmd({ 'BufNewFile', 'BufRead' }, {
