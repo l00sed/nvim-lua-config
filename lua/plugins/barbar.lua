@@ -57,7 +57,9 @@ require('bufferline').setup({
       left = '┃',
     },
     inactive = {
-      left = '┃',
+      separator = {
+        left = '┃',
+      },
     },
     modified = {
       button = '● ',
