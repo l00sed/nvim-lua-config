@@ -40,6 +40,14 @@ return {
 		end,
 	},
 
+  -- DiffView.nvim
+  {
+    'sindrets/diffview.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    }
+  },
+
 	-- devicons in cmp menu
 	"onsails/lspkind.nvim",
 
