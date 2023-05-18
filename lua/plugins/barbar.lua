@@ -34,7 +34,7 @@ require('bufferline').setup({
   -- if set to 'both', will show buffer index and icons in the tabline
   icons = {
     buffer_index = true,
-    button = ' ',
+    button = '✗ ',
     filetype = {
       enabled = true
     },
