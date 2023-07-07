@@ -23,7 +23,7 @@ require('barbecue').setup({
     Interface = "",
     Function = "",
     Variable = "𝑥",
-    Constant = "",
+    Constant = "𝝅",
     String = "",
     Number = "",
     Boolean = "◩",

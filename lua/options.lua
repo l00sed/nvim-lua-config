@@ -73,6 +73,9 @@ o.wildmode                    = "longest,full" -- Display auto-complete in Comma
 o.timeoutlen                  = 200
 o.updatetime                  = 200 -- Delay until write to Swap and HoldCommand event
 w.colorcolumn                 = [[NONE]]
+-- The '-ic' flag allows you to use bash aliases in the Vim "!" prompt,
+-- commented out because it does nasty things to Neovim's startup time
+--o.shellcmdflag                = '-ic'
 wo.number                     = true
 wo.relativenumber             = false
 wo.signcolumn                 = 'yes'

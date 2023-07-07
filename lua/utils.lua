@@ -13,6 +13,11 @@ function M.toggle_wrap()
   end
 end
 
+-- Function to setup command aliases
+function M.createAlias(alias, command)
+  if vim.fn.exists(string.format(':%s', alias)) <= 0 then vim.cmd(string.format('command %s %s', alias, command)) end
+end
+
 -- Open floating diagnostics
 function M.open_float()
   vim.diagnostics.open_float(0, { scope = "line" })

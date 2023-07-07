@@ -20,6 +20,9 @@ vim.opt.runtimepath:prepend(lazypath)
 require('options')
 require('keymaps.default')
 
+-- Load aliases
+require('aliases.directories')
+
 -- Lazy options
 local opts = {
   install = {
