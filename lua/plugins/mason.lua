@@ -21,7 +21,7 @@ local servers = {
   --"texlab",
   "tsserver",
   "volar",
-  "vuels",
+  --"vuels",
 }
 
 local ensure_installed_list = {}
