@@ -14,7 +14,7 @@ local servers = {
   "jsonls",
   --"ltex",
   "pyright",
-  "rome",
+  --"rome",
   "stylelint_lsp",
   --"sumneko_lua",
   "tailwindcss",
