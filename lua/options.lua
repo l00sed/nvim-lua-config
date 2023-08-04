@@ -184,6 +184,10 @@ autocmd('FileType', {
 })
 -- Indent on for "plugin" filetype
 autocmd('FileType', { pattern = 'plugin', command = 'indent on' })
+-- Fixes issue with broken syntax highlighting when hiding and revealing buffers
+autocmd({ 'BufEnter' }, {
+  command = 'syntax sync fromstart'
+})
 
 -- Python providers
 local pynvim_env  = "/.local/bin/pyenv/versions/pynvim/"
