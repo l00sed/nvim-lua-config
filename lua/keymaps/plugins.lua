@@ -70,8 +70,8 @@ map({ "n" }, '<leader>c', '<Cmd>BufferClose<CR>', { silent = true, desc = 'Close
 -- -- Navigate buffers
 map({ "n" }, '<leader>gt', '<Cmd>BufferPrev<CR>', { silent = true, desc = 'Focus buffer on prev tab' })
 map({ "n" }, '<leader>gT', '<Cmd>BufferNext<CR>', { silent = true, desc = 'Focus buffer on next tab' })
-map({ "n" }, '<A-,>', '<Cmd>BufferPrev<CR><CR>', { silent = true, desc = 'Focus buffer on prev tab' })
-map({ "n" }, '<A-.>', '<Cmd>BufferNext<CR><CR>', { silent = true, desc = 'Focus buffer on next tab' })
+map({ "n" }, '<A-,>', '<Cmd>BufferPrev<CR>', { silent = true, desc = 'Focus buffer on prev tab' })
+map({ "n" }, '<A-.>', '<Cmd>BufferNext<CR>', { silent = true, desc = 'Focus buffer on next tab' })
 -- Telescope
 map({ "n" }, '<leader>ff', "<Cmd>Telescope find_files<CR>", { silent = true, desc = "Telescope, find files" })
 map({ "n" }, '<leader>fhf', "<Cmd>Telescope find_files hidden=true<CR>", { silent = true, desc = "Telescope, find files (hidden)" })

@@ -69,11 +69,11 @@ require('lualine').setup({
     disabled_filetypes = {
       statusline = {
         'packer',
-        'NvimTree',
+        'NVimTree',
       },
       winbar = {
         'packer',
-        'NvimTree',
+        'NVimTree',
       },
     },
     globalstatus = true,
