@@ -335,6 +335,14 @@ return {
 		config = true,
 	},
 
+  -- Show inline usage metrics
+  {
+    "VidocqH/lsp-lens.nvim",
+    config = function()
+      require("plugins.lsplens")
+    end,
+  },
+
 	-- Documentation Generator (jsDoc, etc.)
 	{
 		"kkoomen/vim-doge",
