@@ -337,10 +337,19 @@ return {
 
   -- Show inline usage metrics
   {
-    "VidocqH/lsp-lens.nvim",
+    'wiliamks/nice-reference.nvim',
+    requires = {
+        'kyazdani42/nvim-web-devicons', --optional
+        {
+          'rmagatti/goto-preview',
+          config = function()
+            require('goto-preview').setup({})
+          end
+        } --optional
+    },
     config = function()
-      require("plugins.lsplens")
-    end,
+      require("plugins.nice-ref")
+    end
   },
 
 	-- Documentation Generator (jsDoc, etc.)
@@ -374,23 +383,27 @@ return {
 	-- Pretty/interactive indentlines
 	{
 		"lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
 		config = function()
 			require("plugins.indent-blankline")
 		end,
 	},
 
 	-- Pretty fold
-	{
-		"anuvyklack/pretty-fold.nvim",
-		event = "BufWinEnter",
-		config = function()
-			require("plugins.pretty-fold")
-		end,
-	},
+	-- {
+	-- 	"anuvyklack/pretty-fold.nvim",
+	-- 	--event = "BufWinEnter",
+	-- 	config = function()
+	-- 		require("plugins.pretty-fold")
+	-- 	end,
+	-- },
 
 	-- Gruvbox theme
 	{
 		"ellisonleao/gruvbox.nvim",
+    lazy = false,   -- Load last to ensure nothing overwrites
+    priority = 100, -- Set high priority
 		config = function()
 			require("plugins.gruvbox")
 		end,

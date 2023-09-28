@@ -96,3 +96,5 @@ map({ "n" }, "<C-d>", "<Cmd>lua require('neoscroll').scroll(20, true, 100)<CR>",
 map({ "n" }, "<C-f>", "<Cmd>lua require('neoscroll').scroll(-20, true, 100)<CR>", { silent = true, desc = "Smooth-scroll up" })
 -- Todo
 map({ "n" }, "<leader>T", "<Cmd>TodoLocList<CR>", { silent = true, desc = "Open todo quickfix list for the local file" })
+-- Nice Reference
+map({ "n" }, "<leader>nf", "<cmd>lua require('nice-reference').references()<CR>", { silent = true, desc = "Navigate to method or function references from a floating pop-up." })

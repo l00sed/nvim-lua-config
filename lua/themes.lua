@@ -66,40 +66,7 @@ local theme = {
   ["orange-10"] = '#D65D0E',
 }
 
-local indent_highlights = {
-  '#333333',
-  '#3c3c3c',
-  '#3f3f3f',
-  '#444444',
-  '#4c4c4c',
-  '#4f4f4f',
-  '#555555',
-  '#5c5c5c',
-  '#5f5f5f',
-  '#666666',
-  '#6c6c6c',
-  '#6f6f6f',
-  '#777777',
-  '#7c7c7c',
-  '#7f7f7f',
-  '#888888',
-  '#8c8c8c',
-  '#8f8f8f',
-  '#999999',
-  '#9c9c9c',
-  '#9f9f9f',
-  '#acacac',
-  '#bcbcbc',
-  '#cccccc',
-  '#dcdcdc',
-  '#ececec',
-  '#fcfcfc',
-}
-
 if os.getenv("THEME_VARIANT") == 'light' then
-  for i, color in ipairs(indent_highlights) do
-    indent_highlights[i] = utils.invert_hex_color(color)
-  end
   for i, color in pairs(theme) do
     theme[i] = utils.invert_hex_color(color)
   end
@@ -375,13 +342,6 @@ set_hl(0, 'CursorLineNr', { bg = theme['gray-95'], fg = theme['orange-10'] }) --
 
 -- Folds
 set_hl(0, 'Folded', { bg =  'None', fg = theme['gray-85'], bold = false, nocombine = true })
-
--- IndentLines
-set_hl(0, 'IndentBlanklineContextStart', { sp = theme['gray-80'], underline = true }) --underline
-set_hl(0, 'IndentBlanklineContextChar', { fg = theme['gray-15'], nocombine = true }) -- Active context colo
-for i, hl in ipairs(indent_highlights) do
-  set_hl(0, 'IndentBlanklineIndent' .. i, { fg = hl, nocombine = true })
-end
 
 -- Highlight current row in NORMAL mode,
 -- hide highlight in INSERT mode
