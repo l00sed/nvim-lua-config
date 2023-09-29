@@ -391,13 +391,13 @@ return {
 	},
 
 	-- Pretty fold
-	-- {
-	-- 	"anuvyklack/pretty-fold.nvim",
-	-- 	--event = "BufWinEnter",
-	-- 	config = function()
-	-- 		require("plugins.pretty-fold")
-	-- 	end,
-	-- },
+	{
+		"anuvyklack/pretty-fold.nvim",
+		--event = "BufWinEnter",
+		config = function()
+			require("plugins.pretty-fold")
+		end,
+	},
 
 	-- Gruvbox theme
 	{

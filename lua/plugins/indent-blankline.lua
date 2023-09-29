@@ -75,6 +75,7 @@ require("ibl").setup({
       'gitcommit',
       'TelescopePrompt',
       'TelescopeResults',
+      '',
     },
     buftypes = {
       'terminal',
