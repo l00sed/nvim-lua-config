@@ -5,9 +5,9 @@ This [Neovim](https://github.com/neovim/neovim) configuration is written mostly 
 ![neovim](https://user-images.githubusercontent.com/23065167/216802047-7b190d63-90ab-405a-8bf3-085fe5a65bf7.png)
 
 **Recommended Version**
-`>=0.8.3`
+`>=0.9.4`
 
-These configs are tested with `v0.9.0-dev`.
+These configs are tested with `v0.9.4` and `v0.10.0-dev`.
 Using with an older version of Neovim may not support some of the settings that reference newer Vim API capabilities. Very old versions of Neovim will also not support Lua configuration.
 
 **LSP**
