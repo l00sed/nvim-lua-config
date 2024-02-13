@@ -89,7 +89,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
-  if (lsp == 'sumneko_lua') then
+  if (lsp == "sumneko_lua") then
     settings = {
       Lua = {
         diagnostics = {
@@ -228,6 +228,21 @@ for _, lsp in ipairs(servers) do
           useLibraryCodeForTypes = true,
           autoImportCompletions = true,
           diagnosticMode = "workspace"
+        }
+      }
+    }
+  end
+
+  -- Tailwind
+  if (lsp == "tailwindcss") then
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            "Class \\=([^,]*),", "'([^']*)'",
+            "Class \\=([^,]*),", "\"([^\"]*)\"",
+            "Class \\=([^,]*),", "\\`([^\\`]*)\\`"
+          }
         }
       }
     }
