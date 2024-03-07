@@ -1,6 +1,7 @@
 -- Define commands
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 local command = vim.api.nvim_create_user_command
 local set_hl = vim.api.nvim_set_hl
 
@@ -23,6 +24,86 @@ endif
 autocmd('BufWritePre', { pattern = '*', command = [[%s/\s\+$//e]] })
 -- Set "messages" syntax for these log files
 autocmd({ 'BufNewFile', 'BufReadPost' }, { pattern = '*messages*', command = [[:set filetype=messages]] })
+-- No fold enabled
+autocmd('FileType', {
+  pattern = { 'lazy', 'TelescopePrompt', 'TelescopeResults' },
+  command = 'set nofen'
+})
+-- Python set tab instead of spaces
+autocmd('FileType', {
+  pattern = 'python',
+  command = 'set sw=4 ts=4 sts=4 expandtab'
+})
+-- Javascript tab instead of spaces
+autocmd('FileType', {
+  pattern = 'javascript',
+  command = 'set sw=2 ts=2 sts=2'
+})
+-- -- PHP
+cmd [[
+function! PhpSyntaxOverride()
+  " Put snippet overrides in this function.
+  hi! link phpDocTags phpDefine
+  hi! link phpDocParam phpType
+  syn match phpParentOnly "[()]" contained containedin=phpParent
+  hi phpParentOnly guifg=#f08080 guibg=NONE gui=NONE
+  hi phpUseNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
+  hi phpClassNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
+  setl ts=2 sts=2 noet | retab! | setl ts=2 sts=2 et | retab
+endfunction
+]]
+local php_group = augroup('PHPGroup', { clear = true })
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = php_group,
+  pattern = '*.php',
+  command = 'call PhpSyntaxOverride()'
+})
+-- Syntax highlighting autocmds
+-- -- JS/JSX/TS
+local jsx_group = augroup('JSXGroup', { clear = true })
+autocmd('BufWinEnter', {
+  group = jsx_group,
+  pattern = '*.jsx',
+  command = 'set filetype=javascriptreact'
+})
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync fromstart'
+})
+autocmd('BufLeave', {
+  pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync clear'
+})
+-- -- JSON
+autocmd('FileType', {
+  pattern = 'json', command = ':syntax match Comment +\\/\\/.\\+$+'
+})
+-- -- Django
+autocmd('BufWinEnter', {
+  pattern = '*.html', command = 'set filetype=htmldjango'
+})
+autocmd('FileType', {
+  pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'
+})
+-- -- Indent wrapped lines for markdown
+autocmd('BufWinEnter', {
+  pattern = { '*.markdown', '*.mdown', '*.mkd', '*.mkdn', '*.mdwn', 'README.md' }, command = 'setf markdown'
+})
+autocmd('FileType', {
+  pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
+})
+-- Set filetype to bash for .zsh-theme
+autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.zsh-theme', command = 'setf bash'
+})
+-- JS, JSON
+autocmd('FileType', {
+  pattern = { 'js', 'json', 'php', 'html' }, command = 'setl breakindent'
+})
+-- Indent on for "plugin" filetype
+autocmd('FileType', { pattern = 'plugin', command = 'indent on' })
+-- Fixes issue with broken syntax highlighting when hiding and revealing buffers
+autocmd({ 'BufEnter' }, {
+  command = 'syntax sync fromstart'
+})
 -- Swap folder
 command('ListSwap', 'split | enew | r !ls -l ~/.local/share/nvim/swap', { bang = true })
 command('CleanSwap', '!rm -rf ~/.local/share/nvim/swap/', { bang = true })
