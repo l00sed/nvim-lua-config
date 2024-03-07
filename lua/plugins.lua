@@ -305,7 +305,7 @@ return {
 						-- return false to skip running prettier
 						return true
 					end,
-					timeout = 5000,
+					timeout_ms = 10000,
 				},
 			})
 		end,

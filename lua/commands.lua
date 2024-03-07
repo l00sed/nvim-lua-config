@@ -21,6 +21,8 @@ endif
 -- Remove trailing whitespaces
 -- (if a file requires trailing spaces, exclude its type using the regex)
 autocmd('BufWritePre', { pattern = '*', command = [[%s/\s\+$//e]] })
+-- Set "messages" syntax for these log files
+autocmd({ 'BufNewFile', 'BufReadPost' }, { pattern = '*messages*', command = [[:set filetype=messages]] })
 -- Swap folder
 command('ListSwap', 'split | enew | r !ls -l ~/.local/share/nvim/swap', { bang = true })
 command('CleanSwap', '!rm -rf ~/.local/share/nvim/swap/', { bang = true })

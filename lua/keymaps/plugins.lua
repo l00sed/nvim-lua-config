@@ -34,7 +34,7 @@ map({ "n" }, '<leader>d', '<Cmd>lua require("utils").open_float()<CR>', { silent
 -- Open local diagnostics in local list
 map({ "n" }, '<leader>D', '<Cmd>lua vim.diagnostic.setloclist()<CR>', { silent = true, desc = "Open LSP diagnostics in new buffer" })
 -- Null-ls
-map({ "n" }, '<leader>lf', '<Cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>', { silent = true, desc = "Enable linting" })
+map({ "n" }, '<leader>lf', '<Cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>', { silent = true, desc = "Enable linting" })
 -- Open all project diagnostics in quickfix list
 map({ "n" }, '<leader>qf', "<Cmd>lua vim.diagnostic.setqflist()<CR>", { silent = true, desc = "Open LSP quickfix" })
 -- BarBar (tabs)

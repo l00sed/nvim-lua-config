@@ -86,7 +86,7 @@ null_ls.setup({
 		diagnostics.flake8,
 		diagnostics.puppet_lint,
 	},
-	border = "rounded",
+	border = "rounded"
 })
 
 function M.list_registered_providers_names(filetype)
