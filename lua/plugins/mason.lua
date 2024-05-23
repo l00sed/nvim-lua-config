@@ -3,6 +3,7 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   "bashls",
+  "biome",
   --"clangd",
   "cssls",
   "cssmodules_ls",
@@ -14,7 +15,6 @@ local servers = {
   "jsonls",
   --"ltex",
   "pyright",
-  --"rome",
   "stylelint_lsp",
   --"sumneko_lua",
   "tailwindcss",
