@@ -81,7 +81,7 @@ null_ls.setup({
 		formatting.stylua,
 
 		-- Diagnostics
-		diagnostics.curlylint,
+		--diagnostics.curlylint,
 		diagnostics.djlint,
 		diagnostics.flake8,
 		diagnostics.puppet_lint,
