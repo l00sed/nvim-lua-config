@@ -333,8 +333,23 @@ set_hl(0, 'LspInfoBorder', { fg = theme['gray-95'], ctermfg = 'gray', bg = 'None
 
 -- Git signs column plugin
 set_hl(0, 'GitSignsAdd', { fg = 'SpringGreen2', bg = 'None' })
+set_hl(0, 'GitSignsAddLn', { fg = 'SpringGreen2', bg = 'None' })
+set_hl(0, 'GitSignsAddNr', { fg = 'SpringGreen2', bg = 'None' })
 set_hl(0, 'GitSignsChange', { fg = 'MediumPurple2', bg = 'None' })
+set_hl(0, 'GitSignsChangeLn', { fg = 'MediumPurple2', bg = 'None' })
+set_hl(0, 'GitSignsChangeNr', { fg = 'MediumPurple2', bg = 'None' })
+set_hl(0, 'GitSignsChangeDelete', { fg = 'Orange1', bg = 'None' })
+set_hl(0, 'GitSignsChangeDeleteLn', { fg = 'Orange1', bg = 'None' })
+set_hl(0, 'GitSignsChangeDeleteNr', { fg = 'Orange1', bg = 'None' })
+set_hl(0, 'GitSignsUntracked', { fg = 'SkyBlue1', bg = 'None' })
+set_hl(0, 'GitSignsUntrackedLn', { fg = 'SkyBlue1', bg = 'None' })
+set_hl(0, 'GitSignsUntrackedNr', { fg = 'SkyBlue1', bg = 'None' })
+set_hl(0, 'GitSignsTopDelete', { fg = 'Red1', bg = 'None' })
+set_hl(0, 'GitSignsTopDeleteLn', { fg = 'Red1', bg = 'None' })
+set_hl(0, 'GitSignsTopDeleteNr', { fg = 'Red1', bg = 'None' })
 set_hl(0, 'GitSignsDelete', { fg = 'Red1', bg = 'None' })
+set_hl(0, 'GitSignsDeleteLn', { fg = 'Red1', bg = 'None' })
+set_hl(0, 'GitSignsDeleteNr', { fg = 'Red1', bg = 'None' })
 
 -- Cursorline
 set_hl(0, 'CursorLine', { bg = theme['gray-95'] })
