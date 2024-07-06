@@ -19,6 +19,7 @@ require('nvim-treesitter.configs').setup({
 		"json",
     "julia",
 		"lua",
+    "markdown",
     "php",
     "python",
     "rust",

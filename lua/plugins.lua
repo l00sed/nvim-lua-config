@@ -7,9 +7,12 @@ return {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
 		config = function()
-			require("plugins.null-ls")
+			require("plugins.none-ls")
 		end,
 	},
 
@@ -310,9 +313,6 @@ return {
 			})
 		end,
 	},
-	-- Python
-	-- use 'heavenshell/vim-pydocstring'   -- Overwrites a keymap, need to fix.
-	-- use 'bfredl/nvim-ipy'
 
 	-- TOML Files
 	"cespare/vim-toml",

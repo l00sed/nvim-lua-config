@@ -5,10 +5,6 @@ end
 
 local M = {}
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-local diagnostics = null_ls.builtins.diagnostics
 local lspconfig_util = require('lspconfig.util')
 
 function formatDocument(client, bufnr)
@@ -47,16 +43,15 @@ null_ls.setup({
 	end,
 	sources = {
 		-- Formatting
-		formatting.autopep8,
-		formatting.djlint.with({
+		null_ls.builtins.formatting.djlint.with({
 			command = "djlint",
 			extra_args = { "--check", "--profile", "django" },
 		}),
-		formatting.clang_format.with({
+		null_ls.builtins.formatting.clang_format.with({
 			filetypes = { "cpp", "c" },
 		}),
-		formatting.gofumpt,
-		formatting.prettier.with({
+		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.prettier.with({
 			filetypes = {
 				"css",
 				"djangohtml",
@@ -78,13 +73,12 @@ null_ls.setup({
 				"yaml",
 			},
 		}),
-		formatting.stylua,
+		null_ls.builtins.formatting.stylua,
 
 		-- Diagnostics
-		diagnostics.curlylint,
-		diagnostics.djlint,
-		diagnostics.flake8,
-		diagnostics.puppet_lint,
+		null_ls.builtins.diagnostics.djlint,
+		require("none-ls.diagnostics.flake8"),
+		null_ls.builtins.diagnostics.puppet_lint,
 	},
 	border = "rounded"
 })
