@@ -43,6 +43,11 @@ return {
 		end,
 	},
 
+  -- Navigate big files
+  {
+    "LunarVim/bigfile.nvim"
+  },
+
   -- DiffView.nvim
   {
     'sindrets/diffview.nvim',
