@@ -1,4 +1,4 @@
- local actions = require('telescope.actions')
+local actions = require('telescope.actions')
 -- local utils = require('telescope.utils')
 -- local trouble = require('telescope.providers.telescope')
 
