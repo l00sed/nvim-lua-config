@@ -53,3 +53,5 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('fzf')
+-- Enable number gutter for file previews
+vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
