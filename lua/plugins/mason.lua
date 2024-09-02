@@ -14,7 +14,7 @@ local servers = {
   "intelephense",
   "jsonls",
   --"ltex",
-  "nil_ls",
+  --"nil_ls",
   "pyright",
   "rnix",
   "stylelint_lsp",
