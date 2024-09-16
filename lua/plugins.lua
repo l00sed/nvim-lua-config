@@ -397,7 +397,7 @@ return {
 
 	-- Pretty fold
 	{
-		"anuvyklack/pretty-fold.nvim",
+		"bbjornstad/pretty-fold.nvim",
 		--event = "BufWinEnter",
 		config = function()
 			require("plugins.pretty-fold")

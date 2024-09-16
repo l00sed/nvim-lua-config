@@ -91,9 +91,9 @@ map({ "n" }, '<leader>Do', '<Cmd>DogeGenerate<CR>', { silent = true, desc = "Gen
 -- Which-Key
 map({ "n" }, '<leader>W', '<Cmd>W <leader><CR>', { silent = true, desc = "Which-key window" })
 -- Neoscroll
-map({ "n" }, "<C-u>", "<Cmd>lua require('neoscroll').scroll(-20, true, 100)<CR>", { silent = true, desc = "Smooth-scroll up" })
-map({ "n" }, "<C-d>", "<Cmd>lua require('neoscroll').scroll(20, true, 100)<CR>", { silent = true, desc = "Smooth-scroll down" })
-map({ "n" }, "<C-f>", "<Cmd>lua require('neoscroll').scroll(-20, true, 100)<CR>", { silent = true, desc = "Smooth-scroll up" })
+map({ "n" }, "<C-u>", "<Cmd>lua require('neoscroll').scroll(-20, { move_cursor=true; duration=100 })<CR>", { silent = true, desc = "Smooth-scroll up" })
+map({ "n" }, "<C-d>", "<Cmd>lua require('neoscroll').scroll(20, { move_cursor=true; duration=100 })<CR>", { silent = true, desc = "Smooth-scroll down" })
+map({ "n" }, "<C-f>", "<Cmd>lua require('neoscroll').scroll(-20, { move_cursor=true, duration=100 })<CR>", { silent = true, desc = "Smooth-scroll up" })
 -- Todo
 map({ "n" }, "<leader>T", "<Cmd>TodoLocList<CR>", { silent = true, desc = "Open todo quickfix list for the local file" })
 -- Nice Reference
