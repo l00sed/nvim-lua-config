@@ -40,6 +40,7 @@ o.clipboard                   = [[unnamed,unnamedplus]] -- Makes neovim and host
 o.hlsearch                    = true -- Highlight search results
 o.history                     = 10000
 o.redrawtime                  = 10000
+o.autoread                    = true
 o.swapfile                    = false
  -- Prevents an annoying "Press ENTER or type command to continue" message on any buffer event
 o.dir                         = "~/tmp"
