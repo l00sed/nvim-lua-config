@@ -3,6 +3,7 @@ local o = vim.o
 local opt = vim.opt
 local w = vim.w
 local wo = vim.wo
+local ft = vim.filetype
 local D = vim.diagnostic
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
@@ -11,6 +12,12 @@ local autocmd = vim.api.nvim_create_autocmd
 cmd [[let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"]]
 cmd [[let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"]]
 
+-- add additional filetype support
+ft.add({
+  extension = {
+    mdx = 'mdx'
+  }
+})
 
 -- transparency
 g.transparent_enabled         = true

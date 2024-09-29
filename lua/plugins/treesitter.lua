@@ -20,9 +20,11 @@ require('nvim-treesitter.configs').setup({
     "julia",
 		"lua",
     "markdown",
+    "markdown_inline",
     "nix",
     "php",
     "python",
+    "query",
     "rust",
     "tsx",
     "typescript",
@@ -30,3 +32,6 @@ require('nvim-treesitter.configs').setup({
     "yaml",
 	},
 })
+
+vim.treesitter.language.register('markdown', 'mdx')
+vim.treesitter.language.register('markdown', 'vimwiki')

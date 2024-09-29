@@ -8,9 +8,7 @@ return {
 
 	{
     "nvimtools/none-ls.nvim",
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-    },
+    dependencies = "nvimtools/none-ls-extras.nvim",
 		config = function()
 			require("plugins.none-ls")
 		end,
@@ -35,9 +33,7 @@ return {
 	-- Magically delicious todo-lists
 	{
 		"folke/todo-comments.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
+		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup()
 		end,
@@ -51,9 +47,7 @@ return {
   -- DiffView.nvim
   {
     'sindrets/diffview.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    }
+    dependencies = 'nvim-lua/plenary.nvim',
   },
 
 	-- devicons in cmp menu
@@ -275,6 +269,17 @@ return {
 	"hail2u/vim-css3-syntax",
 	-- -- Markdown
 	"tpope/vim-markdown",
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function()
+      require("plugins.render-markdown")
+    end,
+  },
 	-- -- Prettier formatting
 	-- -- Requires null-ls
 	{

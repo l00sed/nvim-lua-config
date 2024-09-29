@@ -381,7 +381,7 @@ for _, lsp in ipairs(servers) do
   end
 
   -- Typescript
-  if (lsp == "tsserver") then
+  if (lsp == "ts_ls") then
     default_config = {
       filetypes = {
         "javascript",

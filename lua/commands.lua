@@ -11,12 +11,12 @@ cmd[[let g:tmux_resizer_no_mappings = 1]]
 -- Underline / Undercurl
 cmd [[
 if &term =~ 'xterm\|kitty\|alacritty\|tmux'
-    let &t_Ts="\e[9m"   " Strikethrough
-    let &t_Te="\e[29m"
-    let &t_Cs="\e[4:3m" " Undercurl
-    let &t_Ce="\e[4:0m"
-    let &t_ZH="\e[3m"
-    let &t_ZR="\e[23m"
+  let &t_Ts="\e[9m"   " Strikethrough
+  let &t_Te="\e[29m"
+  let &t_Cs="\e[4:3m" " Undercurl
+  let &t_Ce="\e[4:0m"
+  let &t_ZH="\e[3m"
+  let &t_ZR="\e[23m"
 endif
 ]]
 -- Remove trailing whitespaces
@@ -85,10 +85,19 @@ autocmd('FileType', {
 })
 -- -- Indent wrapped lines for markdown
 autocmd('BufWinEnter', {
-  pattern = { '*.markdown', '*.mdown', '*.mkd', '*.mkdn', '*.mdwn', 'README.md' }, command = 'setf markdown'
+  pattern = {
+    '*.markdown',
+    '*.mdown',
+    '*.mkd',
+    '*.mkdn',
+    '*.mdwn',
+    'README.md'
+  },
+  command = 'setf markdown'
 })
 autocmd('FileType', {
-  pattern = 'markdown', command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
+  pattern = 'markdown',
+  command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
 })
 -- Set filetype to bash for .zsh-theme
 autocmd({ 'BufNewFile', 'BufRead' }, {
