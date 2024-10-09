@@ -17,7 +17,7 @@ This README exists to help remember how to do all these things when setting up a
 
 ## Setting up
 
-In order to install some of the language server functionality, the`npm` (Node Package Manager) should be installed. I using `nvm` (Node Version Manager) to install Node version 18 (LTS).
+In order to install some of the language server functionality, the `npm` (Node Package Manager) should be installed. I using `nvm` (Node Version Manager) to install Node version 18 (LTS).
 
 ```bash
 nvm install --lts
@@ -62,11 +62,13 @@ Keymaps have many sane defaults related to [Tmux](https://github.com/tmux/tmux/w
 ## Installing the configuration
 
 Clone the repo into Neovim's installation folder (usually `/home/<usr>/.config/nvim`):
+
 ```bash
 git clone https://github.com/l00sed/neovim-lua-config ~/.config/nvim
 ```
 
 This will create a folder with the configuration with the following structure is as follows:
+
 ```
 |- lua
 |  |- lsp/
@@ -149,19 +151,23 @@ Binaries for each language servers must be installed from their relevant repo. M
   This one is a tricky one as you have to manually clone the repo and then compile it. I did not have any issues, but I did have to install ninja for this, which can be done through `apt install ninja-build`.
 
   1. First clone:
-  ```bash
-  git clone https://github.com/sumneko/lua-language-server
-  cd lua-language-server
-  git submodule update --init --recursive
-  ```
+
+      ```bash
+      git clone https://github.com/sumneko/lua-language-server
+      cd lua-language-server
+      git submodule update --init --recursive
+      ```
+
   2. Next we manually build the server binaries:
-  ```bash
-  cd 3rd/luamake
-  ./compile/install.sh
-  cd ../..
-  ./3rd/luamake/luamake rebuild
-  ```
-  The configuration file in the `lsp` folder for this server should reference these binaries and the root folder of the code. I've set it to `~/.local/share/nvim/site/lsp\_servers/sumneko` there is `sumneko_lua` there which is the Lua module used to hook into this one, be careful no to overwrite.
+
+      ```bash
+      cd 3rd/luamake
+      ./compile/install.sh
+      cd ../..
+      ./3rd/luamake/luamake rebuild
+      ```
+
+    The configuration file in the `lsp` folder for this server should reference these binaries and the root folder of the code. I've set it to `~/.local/share/nvim/site/lsp\_servers/sumneko` there is `sumneko_lua` there which is the Lua module used to hook into this one, be careful no to overwrite.
 
 - **Python**: pyright:
 
@@ -178,16 +184,19 @@ Binaries for each language servers must be installed from their relevant repo. M
   ```
 
   For MacOS use `brew`:
+
   ```
   brew install yaml-language-server
   ```
 
-If a module complains about the verion of node being too old (pyright will do this), then run the following:
-```bash
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n stable
-```
+  If a module complains about the verion of node being too old (pyright will do this), then run the following:
+
+  ```bash
+  sudo npm cache clean -f
+  sudo npm install -g n
+  sudo n stable
+  ```
+
 Make sure to use the `-g` on all `npm` installs, otherwise the server won't be found.
 
 ### Some further notes
@@ -197,6 +206,7 @@ Inline error messages are disabled in the current configuration. They create a l
 ## Web-dev Icons
 
 To visualize fancy icons and separators, a patched font must be installed. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) has many already patched and offers instructions on how to create new ones. To install a patched font follow these instructions:
+
 1. Head to the [repo](https://github.com/ryanoasis/nerd-fonts) and download the font. I use JetBrainsMono Nerd Font (sometimes configured as `JetBrainsMono NF`.
 2. Copy the file to the relevant folder:
   - Linux: `~/.local/share/fonts/`.
@@ -208,6 +218,7 @@ To visualize fancy icons and separators, a patched font must be installed. [Nerd
 If using `kitty` as default terminal, then the procedure above won't work. First, `kitty` does not support non-monospaced fonts due to how it renders text. Second, the fonts cannot be patched. In fact, kitty takes care of patching on it's own which is great. To install the fonts follow the instructions in this [blog](https://erwin.co/kitty-and-nerd-fonts/#symbols), which are straighforward.
 
 TL;DR for `MacOS`:
+
 1. Download and install the fonts and put the file `Symbols-2048-em Nerd Font Complete.tff` (or whatever subset you decide to use) in the `Library/Fonts/` folder for system wide use, or the local variant.
 2. If the glyphs aren't displayed by default, then they can be specified manually by following the instructions.
 3. Refresh the fonts cache.
@@ -215,12 +226,17 @@ TL;DR for `MacOS`:
 ## TODO:
 
 LSPs to add:
+
 - LaTex: can use [texlab](https://github.com/latex-lsp/texlab).
 
 Some plugins to try:
+
 - Ranger integration: [Rnvimr](https://github.com/kevinhwang91/rnvimr). Use ranger in a floating buffer instead of as a tiled buffer.
 - Using GBrowse with fugitive: [rhubarb.vim](https://github.com/tpope/rhubarb.vim).
-- Jupyter on Neovim: [jupytext.vim](https://github.com/mwouts/jupytext), [iron.nvim](https://github.com/hkupty/iron.nvim), [vim-textobj-hydrogen](https://github.com/GCBallesteros/vim-textobj-hydrogen). Check this [blog](https://www.maxwellrules.com/misc/nvim_jupyter.html) for more info.
+- Jupyter on Neovim:
+  - [jupytext.vim](https://github.com/mwouts/jupytext),
+  - [iron.nvim](https://github.com/hkupty/iron.nvim),
+  - [vim-textobj-hydrogen](https://github.com/GCBallesteros/vim-textobj-hydrogen). Check this [blog](https://www.maxwellrules.com/misc/nvim_jupyter.html) for more info.
 - Git diff and refactoring in Neovim: [diffview.nvim](https://github.com/sindrets/diffview.nvim)
 - Structural search and replace: [ssr.nvim](https://github.com/cshuaimin/ssr.nvim). ssr.nvim parses your search pattern to syntax trees to perform structural searching.
 

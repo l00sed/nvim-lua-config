@@ -231,16 +231,18 @@ return {
 		end,
 	},
 
+  -- Fancy Markdown
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    opts = {},
+    "OXY2DEV/markview.nvim",
+    lazy = false,      -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons'
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
     },
     config = function()
-      require("plugins.render-markdown")
-    end,
+      require('plugins.markview')
+    end
   },
 	-- -- Prettier formatting
 	-- -- Requires null-ls
