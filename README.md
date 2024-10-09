@@ -200,7 +200,7 @@ To visualize fancy icons and separators, a patched font must be installed. [Nerd
 1. Head to the [repo](https://github.com/ryanoasis/nerd-fonts) and download the font. I use JetBrainsMono Nerd Font (sometimes configured as `JetBrainsMono NF`.
 2. Copy the file to the relevant folder:
   - Linux: `~/.local/share/fonts/`.
-  - MacOS: `/Library/Fonts/'`.
+  - MacOS: `/Library/Fonts/`.
 3. Change the font in the terminal emulator's settings to the patched font.
 
 ### Nerd Fonts with Kitty
