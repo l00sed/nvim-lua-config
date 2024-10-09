@@ -15,7 +15,7 @@ require('barbecue').setup({
     Module = "",
     Namespace = "",
     Package = "󰏗",
-    Class = "󰇟",
+    Class = "󰒕",
     Method = "󰚺",
     Property = "󰬗",
     Field = "󰧉",

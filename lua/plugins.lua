@@ -39,11 +39,6 @@ return {
 		end,
 	},
 
-  -- Navigate big files
-  {
-    "LunarVim/bigfile.nvim"
-  },
-
   -- DiffView.nvim
   {
     'sindrets/diffview.nvim',
@@ -101,11 +96,6 @@ return {
 		end,
 	},
 
-  -- EJS syntax
-  {
-    "nikvdp/ejs-syntax",
-  },
-
 	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
@@ -121,8 +111,6 @@ return {
 			require("plugins.which-key")
 		end,
 	},
-
-	"rafamadriz/friendly-snippets",
 
 	-- Signature help
 	{
@@ -243,32 +231,6 @@ return {
 		end,
 	},
 
-	-- -- tpope
-	"tpope/vim-commentary",
-	"tpope/vim-unimpaired",
-	"tpope/vim-surround",
-	"tpope/vim-repeat",
-	-- -- easy-align
-	"junegunn/vim-easy-align",
-	-- -- React / JS
-	"maksimr/vim-jsbeautify",
-	"othree/javascript-libraries-syntax.vim",
-	"pangloss/vim-javascript",
-	"leafgarland/typescript-vim",
-	"mxw/vim-jsx",
-	"peitalin/vim-jsx-typescript",
-	"othree/yajs.vim",
-	-- -- Django
-	"tweekmonster/django-plus.vim",
-	-- -- Python formatting
-	"EgZvor/vim-black",
-	"jeetsukumaran/vim-python-indent-black",
-	-- -- PHP
-	"2072/PHP-Indenting-for-VIm",
-	-- -- CSS
-	"hail2u/vim-css3-syntax",
-	-- -- Markdown
-	"tpope/vim-markdown",
   {
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {},
@@ -324,20 +286,8 @@ return {
 		end,
 	},
 
-	-- TOML Files
-	"cespare/vim-toml",
-
 	-- Markdown ToC
 	"mzlogin/vim-markdown-toc",
-
-	-- Poetry
-	-- {
-	--   'petobens/poet-v',
-	--   config = function()
-	--     local path = vim.fn.stdpath('config')..'/lua/plugins/poet-v.vim'
-	--     vim.cmd('source '..path)
-	--   end
-	-- })
 
 	-- Shows lines pointing to offending errors inline
 	{
@@ -361,12 +311,6 @@ return {
       require("plugins.nice-ref")
     end
   },
-
-	-- Documentation Generator (jsDoc, etc.)
-	{
-		"kkoomen/vim-doge",
-		build = ":call doge#install()",
-	},
 
 	-- Smooth Scrolling
 	{
