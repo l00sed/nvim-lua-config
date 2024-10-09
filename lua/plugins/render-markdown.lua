@@ -1,6 +1,10 @@
 require("render-markdown").setup({
   enabled = true,
   render_modes = { 'n', 'c' },
+  indent = {
+    -- Turn on / off org-indent-mode
+    enabled = false,
+  },
   file_types = {
     'markdown',
     'vimwiki',
@@ -8,27 +12,26 @@ require("render-markdown").setup({
   },
   heading = {
     enabled = true,
-    sign = true,
+    sign = false,
     position = 'overlay',
-    icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
-    signs = { '󰫎 ' },
-    width = 'full',
+    icons = { '󰉫 ', '󰉬 ', '󰉭 ', '󰉮 ', '󰉯 ', '󰉰 ' },
+    width = 'block',
     left_margin = 0,
     left_pad = 0,
     right_pad = 0,
     min_width = 0,
-    border = false,
-    border_virtual = false,
-    border_prefix = false,
+    border = true,
+    border_virtual = true,
+    border_prefix = true,
     above = '▄',
     below = '▀',
     backgrounds = {
-      'RenderMarkdownH1Bg',
-      'RenderMarkdownH2Bg',
-      'RenderMarkdownH3Bg',
-      'RenderMarkdownH4Bg',
-      'RenderMarkdownH5Bg',
-      'RenderMarkdownH6Bg',
+      'Normal',
+      'Normal',
+      'Normal',
+      'Normal',
+      'Normal',
+      'Normal',
     },
     foregrounds = {
       'RenderMarkdownH1',
@@ -84,4 +87,19 @@ require("render-markdown").setup({
     quote = { raw = '[!QUOTE]', rendered = '󱆨 Quote', highlight = 'RenderMarkdownQuote' },
     cite = { raw = '[!CITE]', rendered = '󱆨 Cite', highlight = 'RenderMarkdownQuote' },
   },
+  bullet = {
+    -- Turn on / off list bullet rendering
+    enabled = true,
+    -- Replaces '-'|'+'|'*' of 'list_item'
+    -- How deeply nested the list is determines the 'level'
+    -- The 'level' is used to index into the list using a cycle
+    -- If the item is a 'checkbox' a conceal is used to hide the bullet instead
+    icons = { ' ', ' ', '◆', '◇' },
+    -- Padding to add to the left of bullet point
+    left_pad = 2,
+    -- Padding to add to the right of bullet point
+    right_pad = 0,
+    -- Highlight for the bullet icon
+    highlight = 'WarningMsg',
+  }
 })
