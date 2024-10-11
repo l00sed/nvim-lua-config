@@ -62,8 +62,21 @@ local theme = {
 	["gray-80"] =  '#3a3a3a',
 	["gray-85"] =  '#333333',
 	["gray-95"] =  '#222222',
+  ["gray-100"] = '#111111',
+  -- greens
+  ["green-25"] = '#B8BB26',
+  -- yellows
+  ["yellow-25"] = '#FABD2F',
   -- oranges
-  ["orange-10"] = '#D65D0E',
+  ["orange-25"] = '#FE8019',
+  -- reds
+  ["red-25"] = '#FB4934',
+  -- purples
+  ["purple-25"] = '#D3869B',
+  -- blues
+  ["blue-25"] = '#83A598',
+  -- aquas
+  ["aqua-25"] = '#8EC07C',
 }
 
 if os.getenv("THEME_VARIANT") == 'light' then
@@ -71,6 +84,17 @@ if os.getenv("THEME_VARIANT") == 'light' then
     theme[i] = utils.invert_hex_color(color)
   end
 end
+
+-- Git signs column plugin
+set_hl(0, 'MarkviewCode', { bg = theme['gray-100'] })
+set_hl(0, 'MarkviewCodeInfo', { fg = theme['gray-55'], bg = theme['gray-100'] })
+set_hl(0, 'MarkviewInlineCode', { fg = theme['orange-25'], bg = theme['gray-95'] })
+set_hl(0, 'MarkviewHeading1', { fg = '#000000', bg = theme['green-25'] })
+set_hl(0, 'MarkviewHeading2', { fg = '#000000', bg = theme['yellow-25'] })
+set_hl(0, 'MarkviewHeading3', { fg = '#000000', bg = theme['orange-25'] })
+set_hl(0, 'MarkviewHeading4', { fg = '#000000', bg = theme['red-25'] })
+set_hl(0, 'MarkviewHeading5', { fg = '#000000', bg = theme['purple-25'] })
+set_hl(0, 'MarkviewHeading6', { fg = '#000000', bg = theme['blue-25'] })
 
 -- Italic comments
 set_hl(0, 'Comment', { bg = 'None', fg = theme['gray-55'], italic = true })
@@ -353,7 +377,7 @@ set_hl(0, 'GitSignsDeleteNr', { fg = 'Red1', bg = 'None' })
 
 -- Cursorline
 set_hl(0, 'CursorLine', { bg = theme['gray-95'] })
-set_hl(0, 'CursorLineNr', { bg = theme['gray-95'], fg = theme['orange-10'] }) -- Also highlight number column
+set_hl(0, 'CursorLineNr', { bg = theme['gray-95'], fg = theme['orange-25'] }) -- Also highlight number column
 
 -- Folds
 set_hl(0, 'Folded', { bg =  'None', fg = theme['gray-85'], bold = false, nocombine = true })
