@@ -15,7 +15,8 @@ local servers = {
   "jsonls",
   --"ltex",
   --"nil_ls",
-  "pyright",
+  --"pyright",
+  "pylsp",
   "rnix",
   "stylelint_lsp",
   --"sumneko_lua",
@@ -30,13 +31,14 @@ local ensure_installed_list = {}
 local utils = require('utils')
 -- Don't use Mason's auto-installer,
 -- but still configure these servers.
-local exclude = {
-  "pyright"
+local excludes = {
+--  "pyright",
 }
-
-for i, server in pairs(servers) do
-  if not utils.in_table(exclude, server) then
-    table.insert(ensure_installed_list, server)
+for _, server in ipairs(servers) do
+  for _, exclude in ipairs(excludes) do
+    if not string.match(server, exclude) then
+      table.insert(ensure_installed_list, server)
+    end
   end
 end
 
@@ -349,7 +351,7 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  -- Pyright
+  -- Pyright (replaced with pylsp)
   if (lsp == "pyright") then
     settings = {
       python = {
@@ -359,7 +361,20 @@ for _, lsp in ipairs(servers) do
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           autoImportCompletions = true,
-          diagnosticMode = "workspace"
+          -- This will generally speed up Neovim Python projects vs "workspace"
+          diagnosticMode = "openFilesOnly",
+        }
+      }
+    }
+  end
+
+  if (lsp == "pylsp") then
+    settings = {
+      pylsp = {
+        plugins = {
+          flake8 = {
+            enabled = true
+          }
         }
       }
     }
