@@ -79,7 +79,7 @@ local opts = {
   -- to wait before a redraw occurs(after an event is triggered)
   debounce = 50,
   -- Filetypes where the plugin is enabled
-  filetypes = { "markdown", "quarto", "rmd" },
+  filetypes = { "markdown", "quarto", "rmd", "mdx" },
   -- Highlight groups to use
   -- "dynamic" | "light" | "dark"
   highlight_groups = "dynamic",
