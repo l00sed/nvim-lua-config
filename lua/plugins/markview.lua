@@ -3,27 +3,27 @@ local headings = {
   shift_width = 0,
   heading_1 = {
     style = "label",
-    padding_left = "█ 󰉫 ─ ",
+    padding_left = " 󰉫 ─ ",
     padding_left_hl = "MarkviewHeading1",
-    padding_right = "   ",
+    padding_right = "   ",
     padding_right_hl = "MarkviewHeading1",
     icon = "",
     sign = ""
   },
   heading_2 = {
     style = "label",
-    padding_left = "▉ 󰉬 ─ ",
+    padding_left = "▍ 󰉬 ─ ",
     padding_left_hl = "MarkviewHeading2",
-    padding_right = "   ",
+    padding_right = "   ",
     padding_right_hl = "MarkviewHeading2",
     icon = "",
     sign = ""
   },
   heading_3 = {
     style = "label",
-    padding_left = "▊ 󰉭 ─ ",
+    padding_left = "▌ 󰉭 ─ ",
     padding_left_hl = "MarkviewHeading3",
-    padding_right = "   ",
+    padding_right = "   ",
     padding_right_hl = "MarkviewHeading3",
     icon = "",
     sign = ""
@@ -32,25 +32,25 @@ local headings = {
     style = "label",
     padding_left = "▋ 󰉮 ─ ",
     padding_left_hl = "MarkviewHeading4",
-    padding_right = "   ",
+    padding_right = "   ",
     padding_right_hl = "MarkviewHeading4",
     icon = "",
     sign = ""
   },
   heading_5 = {
     style = "label",
-    padding_left = "▌ 󰉯 ─ ",
+    padding_left = "▊ 󰉯 ─ ",
     padding_left_hl = "MarkviewHeading5",
-    padding_right = "   ",
+    padding_right = "   ",
     padding_right_hl = "MarkviewHeading5",
     icon = "",
     sign = ""
   },
   heading_6 = {
     style = "label",
-    padding_left = "▍ 󰉰 ─ ",
+    padding_left = "▉ 󰉰 ─ ",
     padding_left_hl = "MarkviewHeading6",
-    padding_right = "    ",
+    padding_right = "    ",
     padding_right_hl = "MarkviewHeading6",
     icon = "",
     sign = ""
@@ -79,7 +79,7 @@ local opts = {
   -- to wait before a redraw occurs(after an event is triggered)
   debounce = 50,
   -- Filetypes where the plugin is enabled
-  filetypes = { "markdown", "quarto", "rmd" },
+  filetypes = { "markdown", "quarto", "rmd", "mdx" },
   -- Highlight groups to use
   -- "dynamic" | "light" | "dark"
   highlight_groups = "dynamic",
