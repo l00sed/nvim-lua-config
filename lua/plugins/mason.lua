@@ -398,6 +398,21 @@ for _, lsp in ipairs(servers) do
   -- Typescript
   if (lsp == "ts_ls") then
     default_config = {
+      init_options = {
+        npmLocation = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. 'bin/npm',
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/@vue/typescript-plugin',
+            languages = {
+              "javascript",
+              "typescript",
+              "vue"
+            }
+          }
+        }
+      },
+      root_dir = lspconfig_util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
       filetypes = {
         "javascript",
         "javascriptreact",
