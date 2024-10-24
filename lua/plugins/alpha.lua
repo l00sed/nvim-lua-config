@@ -38,10 +38,10 @@ startify.section.top_buttons.val = {
   { type = "padding", val = 1 },
   { type = "text", val = "Shortcuts", opts = { hl = "SpecialComment", shrink_margin = false } },
   { type = "padding", val = 1 },
-	startify.button("f", "Search Filename", ":Tel escope find_files <CR>"),
-	startify.button("b", "Bookmarks", ":Telescope  marks <CR>"),
-	startify.button("t", "Search Text", ":Telesco pe live_grep <CR>"),
-	startify.button("r", "Recent", ":Telescope ol dfiles <CR>"),
+	startify.button("f", "Search Filename", ":Telescope find_files <CR>"),
+	startify.button("b", "Bookmarks", ":Telescope marks <CR>"),
+	startify.button("t", "Search Text", ":Telescope live_grep <CR>"),
+	startify.button("r", "Recent", ":Telescope oldfiles <CR>"),
 }
 
 startify.section.mru_cwd.val = {
