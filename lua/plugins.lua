@@ -176,13 +176,13 @@ return {
 	},
 
 	-- Startify
-	{
-		"mhinz/vim-startify",
-		config = function()
-			local path = vim.fn.stdpath("config") .. "/lua/plugins/startify.lua"
-			vim.cmd("source " .. path)
-		end,
-	},
+  {
+    "goolord/alpha-nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function ()
+      require("plugins.alpha")
+    end
+  };
 
 	-- git commands
 	"tpope/vim-fugitive",
