@@ -15,7 +15,7 @@ local cmd = vim.cmd
 -- Use the "startify" theme
 local startify = require("alpha.themes.startify")
 -- Programmer quotes
-local cow = require("plugins.cowsay")
+local wizard = require("plugins.wizardsay")
 
 local stats = require("lazy").stats()
 local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
@@ -28,7 +28,7 @@ plugins = require("lazy").stats()
 startify.file_icons.provider = "devicons"
 
 -- Set header
-startify.section.header.val = cow.cowsays()
+startify.section.header.val = wizard.wizardsays()
 
 -- disable folding, wrapping in alpha
 cmd [[au FileType alpha setl nofen nowrap breakindent]]
