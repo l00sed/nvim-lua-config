@@ -70,6 +70,8 @@ startify.section.mru.val = {
 }
 
 startify.section.bottom_buttons.val = {
+  { type = "text", val = "Admin", opts = { hl = "SpecialComment", shrink_margin = false } },
+  { type = "padding", val = 1 },
   startify.button("p", "  Plugins", ":e ~/.config/nvim/lua/plugins.lua<CR>"),
 	startify.button("c", "  Config", ":e ~/.config/nvim/lua/options.lua<CR>"),
 	startify.button("q", " 󰈆 Quit", ":q <CR>"),
