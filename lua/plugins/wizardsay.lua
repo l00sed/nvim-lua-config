@@ -235,7 +235,7 @@ local predefined_quotes = {
     "—Anonymous",
   },
   {
-    "DRY —Don't Repeat Yourself.\nEvery piece of knowledge must have a single, unambiguous, authoritative representation within a system.",
+    "DRY (Don't Repeat Yourself).\nEvery piece of knowledge must have a single, unambiguous, authoritative representation within a system.",
     "",
     "—Anonymous",
   },
@@ -265,7 +265,7 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    "Always use source code control.\nSource code control is a time machine for your work —you can go back.",
+    "Always use source code control.\nSource code control is a time machine for your work (you can go back).",
     "",
     "—Anonymous",
   },
@@ -275,7 +275,7 @@ local predefined_quotes = {
     "—Anonymous",
   },
   {
-    "Don't assume it —prove it.\nProve your assumptions in the actual environment —with real data and boundary conditions.",
+    "Don't assume it, prove it.\nProve your assumptions in the actual environment, with real data and boundary conditions.",
     "",
     "—Anonymous",
   },
@@ -335,7 +335,7 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    "Don't gather requirements —dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
+    "Don't gather requirements -dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
     "",
     "—Anonymous"
   },
@@ -345,12 +345,12 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    'Don\'t think outside the box —find the box.\nWhen faced with an impossible problem, identify the real constraints. Ask yourself: "Does it have to be done this way? Does it have to be done at all?"',
+    'Don\'t think outside the box, find the box.\nWhen faced with an impossible problem, identify the real constraints. Ask yourself: "Does it have to be done this way? Does it have to be done at all?"',
     "",
     "—Anonymous"
   },
   {
-    "Some things are better done than described.\nDon't fall into the specification spiral —at some point you need to start coding.",
+    "Some things are better done than described.\nDon't fall into the specification spiral, at some point you need to start coding.",
     "",
     "—Anonymous"
   },
@@ -440,7 +440,7 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    "Fix the problem, not the blame.\nIt doesn't really matter whether the bug is your fault or someone else's —it is still your problem, and it still needs to be fixed.",
+    "Fix the problem, not the blame.\nIt doesn't really matter whether the bug is your fault or someone else's, it is still your problem, and it still needs to be fixed.",
     "",
     "—Anonymous"
   },
@@ -814,6 +814,8 @@ local function draw_rectangle(h_padding, v_padding)
   local max_width = 50 - 2 * h_padding
 
   -- Select a quote - for this example, always the first one
+  -- Produce more random-ness xD
+  math.randomseed(os.time())
   local random_number = math.random(#predefined_quotes)
   local chosen_quote = predefined_quotes[random_number]
 
