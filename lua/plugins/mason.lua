@@ -6,7 +6,9 @@ local servers = {
   "biome",
   --"clangd",
   "cssls",
+  "css_variables",
   "cssmodules_ls",
+  "docker_compose_language_service",
   "dockerls",
   "eslint",
   --"grammarly",
@@ -22,7 +24,7 @@ local servers = {
   --"sumneko_lua",
   "tailwindcss",
   --"texlab",
-  "ts_ls",
+  --"ts_ls",
   "volar",
   --"vuels",
 }
