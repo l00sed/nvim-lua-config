@@ -1,4 +1,4 @@
--- Define commands
+-- Alias some globals
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
@@ -8,6 +8,7 @@ local set_hl = vim.api.nvim_set_hl
 -- Disable default commands (uses CTRL modifier)
 cmd[[let g:tmux_navigator_no_mappings = 1]]
 cmd[[let g:tmux_resizer_no_mappings = 1]]
+
 -- Underline / Undercurl
 cmd [[
 if &term =~ 'xterm\|kitty\|alacritty\|tmux'
@@ -19,26 +20,51 @@ if &term =~ 'xterm\|kitty\|alacritty\|tmux'
   let &t_ZR="\e[23m"
 endif
 ]]
+
+-- Record the buffer number (set global "lastBufName")
+-- when closed, so that it may be reopened with :Last
+local reopen = augroup('Reopen', { clear = true })
+autocmd('BufLeave', {
+  group = reopen,
+  command = 'let g:lastBufName = @%'
+})
+
+-- Reopen the last closed buffer with :Last
+cmd [[
+function! RessurrectLast()
+  exe "tabnew " . g:lastBufName
+endfunction
+command -nargs=0 Last call RessurrectLast()
+]]
+
 -- Remove trailing whitespaces
 -- (if a file requires trailing spaces, exclude its type using the regex)
 autocmd('BufWritePre', { pattern = '*', command = [[%s/\s\+$//e]] })
+
 -- Set "messages" syntax for these log files
-autocmd({ 'BufNewFile', 'BufReadPost' }, { pattern = '*messages*', command = [[:set filetype=messages]] })
+autocmd({ 'BufNewFile', 'BufReadPost' }, {
+  pattern = '*messages*',
+  command = [[:set filetype=messages]]
+})
+
 -- No fold enabled
 autocmd('FileType', {
   pattern = { 'lazy', 'TelescopePrompt', 'TelescopeResults' },
   command = 'set nofen'
 })
+
 -- Python set tab instead of spaces
 autocmd('FileType', {
   pattern = 'python',
   command = 'set sw=4 ts=4 sts=4 expandtab'
 })
+
 -- Javascript tab instead of spaces
 autocmd('FileType', {
   pattern = 'javascript',
   command = 'set sw=2 ts=2 sts=2'
 })
+
 -- -- PHP
 cmd [[
 function! PhpSyntaxOverride()
@@ -52,12 +78,14 @@ function! PhpSyntaxOverride()
   setl ts=2 sts=2 noet | retab! | setl ts=2 sts=2 et | retab
 endfunction
 ]]
+
 local php_group = augroup('PHPGroup', { clear = true })
 autocmd({ 'BufNewFile', 'BufRead' }, {
   group = php_group,
   pattern = '*.php',
   command = 'call PhpSyntaxOverride()'
 })
+
 -- Syntax highlighting autocmds
 -- -- JS/JSX/TS
 local jsx_group = augroup('JSXGroup', { clear = true })
@@ -72,10 +100,12 @@ autocmd({ 'BufNewFile', 'BufRead' }, {
 autocmd('BufLeave', {
   pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync clear'
 })
+
 -- -- JSON
 autocmd('FileType', {
   pattern = 'json', command = ':syntax match Comment +\\/\\/.\\+$+'
 })
+
 -- -- Django
 autocmd('BufWinEnter', {
   pattern = '*.html', command = 'set filetype=htmldjango'
@@ -83,6 +113,7 @@ autocmd('BufWinEnter', {
 autocmd('FileType', {
   pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'
 })
+
 -- -- Indent wrapped lines for markdown
 autocmd('BufWinEnter', {
   pattern = {
@@ -95,31 +126,40 @@ autocmd('BufWinEnter', {
   },
   command = 'setf markdown'
 })
+
 autocmd('FileType', {
   pattern = 'markdown',
   command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
 })
+
 -- Set filetype to bash for .zsh-theme
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.zsh-theme', command = 'setf bash'
 })
+
 -- JS, JSON
 autocmd('FileType', {
   pattern = { 'js', 'json', 'php', 'html' }, command = 'setl breakindent'
 })
+
 -- Indent on for "plugin" filetype
 autocmd('FileType', { pattern = 'plugin', command = 'indent on' })
+
 -- Fixes issue with broken syntax highlighting when hiding and revealing buffers
 autocmd({ 'BufEnter' }, {
   command = 'syntax sync fromstart'
 })
+
 -- Swap folder
 command('ListSwap', 'split | enew | r !ls -l ~/.local/share/nvim/swap', { bang = true })
 command('CleanSwap', '!rm -rf ~/.local/share/nvim/swap/', { bang = true })
+
 -- Open help tags
 command('HelpTags', 'Telescope help_tags', { bang = true })
+
 -- Create ctags
 command('MakeCTags', '!ctags -R --exclude=@.ctagsignore .', { bang = true })
+
 -- More Tmux-like magic
 cmd [[
 function! ConfirmQuit(writeFile)
