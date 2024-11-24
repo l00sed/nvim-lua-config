@@ -24,7 +24,7 @@ local servers = {
   --"sumneko_lua",
   "tailwindcss",
   --"texlab",
-  --"ts_ls",
+  "ts_ls",
   "volar",
   --"vuels",
 }

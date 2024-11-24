@@ -320,6 +320,13 @@ return {
 		config = true,
 	},
 
+  {
+    "sphamba/smear-cursor.nvim",
+    config = function()
+      require('smear_cursor').enabled = true
+    end
+  },
+
 	-- LaTeX for Vim
 	{
 		"lervag/vimtex",
