@@ -1,6 +1,9 @@
 local model = "llama3.2:3b"
 require("codecompanion").setup({
   display = {
+    -- To start Ollama server (and start at startup), run:
+    --  MacOS:
+    --  brew services start ollama
     provider = "delta"
   },
   strategies = {
