@@ -30,6 +30,7 @@ o.conceallevel                = 2 -- pretty markdown
 o.cmdheight                   = 1 -- hide vim command line
 o.foldmethod                  = "indent"
 o.foldopen                    = "block,hor,mark,percent,quickfix,search,tag,undo"
+o.laststatus                  = 3
 o.formatoptions               = "l"
 o.lbr                         = true
 o.pumheight                   = 10

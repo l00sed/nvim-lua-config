@@ -67,6 +67,19 @@ return {
 		end,
 	},
 
+  -- AI coding help
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      { "MeanderingProgrammer/render-markdown.nvim", ft = "codecompanion" },
+    },
+    config = function()
+      require("plugins.codecompanion")
+    end
+  },
+
 	-- Colorizer
 	{
 		"norcalli/nvim-colorizer.lua",
@@ -244,8 +257,21 @@ return {
       require('plugins.markview')
     end
   },
-	-- -- Prettier formatting
-	-- -- Requires null-ls
+
+  --{
+  --  'MeanderingProgrammer/render-markdown.nvim',
+  --  opts = {},
+  --  dependencies = {
+  --    'nvim-treesitter/nvim-treesitter',
+  --    'nvim-tree/nvim-web-devicons'
+  --  },
+  --  config = function()
+  --    require("plugins.render-markdown")
+  --  end,
+  --},
+
+	-- Prettier formatting
+	-- Requires null-ls
 	{
 		"MunifTanjim/prettier.nvim",
 		config = function()

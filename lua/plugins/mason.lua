@@ -457,12 +457,8 @@ for _, lsp in ipairs(servers) do
         plugins = {
           {
             name = "@vue/typescript-plugin",
-            location = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/@vue/typescript-plugin',
-            languages = {
-              "javascript",
-              "typescript",
-              "vue"
-            }
+            location = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/@vue/language-server',
+            languages = { "javascript", "typescript", "vue" }
           }
         }
       },
@@ -475,6 +471,23 @@ for _, lsp in ipairs(servers) do
         "typescriptreact",
         "typescript.tsx",
         "vue"
+      },
+      settings = {
+        typescript = {
+          tsserver = {
+            useSyntaxServer = false,
+          },
+          inlayHints = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true
+          }
+        }
       }
     }
   end
@@ -493,6 +506,9 @@ for _, lsp in ipairs(servers) do
           -- Requires npm to be installed through NVM
           tsdk = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/typescript/lib'
         },
+        vue = {
+          hybridMode = false
+        },
         languageFeatures = {
           implementation = true, -- new in @volar/vue-language-server v0.33
           references = true,
@@ -510,6 +526,28 @@ for _, lsp in ipairs(servers) do
             defaultAttrNameCase = 'kebabCase',
             getDocumentNameCasesRequest = false,
             getDocumentSelectionRequest = false,
+          }
+        }
+      },
+      settings = {
+        typescript = {
+          inlayHints = {
+            enumMemberValues = {
+              enabled = true,
+            },
+            functionLikeReturnTypes = {
+              enabled = true,
+            },
+            propertyDeclarationTypes = {
+              enabled = true,
+            },
+            parameterTypes = {
+              enabled = true,
+              suppressWhenArgumentMatchesName = true,
+            },
+            variableTypes = {
+              enabled = true,
+            }
           }
         }
       }
