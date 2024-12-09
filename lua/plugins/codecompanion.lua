@@ -1,4 +1,4 @@
-local model = "llama3.2:3b"
+local model = "mistral:7b"
 require("codecompanion").setup({
   display = {
     -- To start Ollama server (and start at startup), run:
