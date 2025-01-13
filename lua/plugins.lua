@@ -143,16 +143,28 @@ return {
 	},
 
 	-- Context
-	{
-		"utilyre/barbecue.nvim",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		config = function()
-			require("plugins.barbecue")
-		end,
-	},
+	--{
+	--	"utilyre/barbecue.nvim",
+	--	dependencies = {
+	--		"SmiteshP/nvim-navic",
+	--		"nvim-tree/nvim-web-devicons", -- optional dependency
+	--	},
+	--	config = function()
+	--		require("plugins.barbecue")
+	--	end,
+	--},
+
+  {
+    'Bekaboo/dropbar.nvim',
+    -- optional, but required for fuzzy finder support
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make'
+    },
+    config = function()
+      require("plugins.dropbar")
+    end
+  },
 
 	-- Telescope
 	{
