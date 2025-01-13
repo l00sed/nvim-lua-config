@@ -73,7 +73,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      { "MeanderingProgrammer/render-markdown.nvim", ft = "codecompanion" },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = "codecompanion"
+      },
     },
     config = function()
       require("plugins.codecompanion")
