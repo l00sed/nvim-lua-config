@@ -73,7 +73,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      { "MeanderingProgrammer/render-markdown.nvim", ft = "codecompanion" },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = "codecompanion"
+      },
     },
     config = function()
       require("plugins.codecompanion")
@@ -140,16 +143,28 @@ return {
 	},
 
 	-- Context
-	{
-		"utilyre/barbecue.nvim",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		config = function()
-			require("plugins.barbecue")
-		end,
-	},
+	--{
+	--	"utilyre/barbecue.nvim",
+	--	dependencies = {
+	--		"SmiteshP/nvim-navic",
+	--		"nvim-tree/nvim-web-devicons", -- optional dependency
+	--	},
+	--	config = function()
+	--		require("plugins.barbecue")
+	--	end,
+	--},
+
+  {
+    'Bekaboo/dropbar.nvim',
+    -- optional, but required for fuzzy finder support
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make'
+    },
+    config = function()
+      require("plugins.dropbar")
+    end
+  },
 
 	-- Telescope
 	{
