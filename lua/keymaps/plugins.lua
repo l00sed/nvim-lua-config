@@ -98,3 +98,8 @@ map({ "n" }, "<C-f>", "<Cmd>lua require('neoscroll').scroll(-20, { move_cursor=t
 map({ "n" }, "<leader>T", "<Cmd>TodoLocList<CR>", { silent = true, desc = "Open todo quickfix list for the local file" })
 -- Nice Reference
 map({ "n" }, "<leader>nf", "<cmd>lua require('nice-reference').references()<CR>", { silent = true, desc = "Navigate to method or function references from a floating pop-up." })
+-- Spectre
+map({ "n" }, "<leader>S", "<cmd>lua require('spectre').toggle()<CR>", { silent = true, desc = "Toggle Spectre" })
+map({ "n" }, "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", { silent = true, desc = "Search current word" })
+map({ "v" }, "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<CR>", { silent = true, desc = "Search current word" })
+map({ "n" }, "<leader>sp", "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", { silent = true, desc = "Search on current file" })

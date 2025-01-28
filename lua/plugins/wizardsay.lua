@@ -335,7 +335,7 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    "Don't gather requirements -dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
+    "Don't gather requirements— dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
     "",
     "—Anonymous"
   },

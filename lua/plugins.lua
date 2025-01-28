@@ -48,6 +48,11 @@ return {
 	-- devicons in cmp menu
 	"onsails/lspkind.nvim",
 
+  -- Easy multi-file search and replace
+  {
+    "nvim-pack/nvim-spectre"
+  },
+
 	-- Autocomplete
 	{
 		"hrsh7th/nvim-cmp",

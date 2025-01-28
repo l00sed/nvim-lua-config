@@ -61,7 +61,7 @@ local code_blocks = {
   enable = true,
   icons = "devicons",
   style = "language",
-  hl = "MarkviewCode",
+  border_hl = "MarkviewCode",
   info_hl = "MarkviewCodeInfo",
   min_width = 40,
   pad_amount = 3,
@@ -156,18 +156,18 @@ local latex = {
   enable = true,
   --- Bracket conceal configuration.
   --- Shows () in specific cases
-  brackets = {
+  parenthesis = {
     enable = true,
     --- Highlight group for the ()
     ---@type string
     hl = "@punctuation.brackets"
   },
   --- LaTeX blocks renderer
-  block = {
+  superscripts = {
     enable = true,
     --- Highlight group for the block
     ---@type string
-    hl = "Code",
+    hl = "MarkviewLatexSuperscript",
     --- Virtual text to show on the bottom
     --- right.
     --- First value is the text and second value
@@ -176,11 +176,11 @@ local latex = {
     text = { " LaTeX ", "Special" }
   },
   --- Configuration for inline LaTeX maths
-  inline = {
+  inlines = {
     enable = true
   },
   --- Configuration for operators(e.g. "\frac{1}{2}")
-  operators = {
+  commands = {
     enable = true,
     configs = {
       sin = {
@@ -229,91 +229,54 @@ local latex = {
     enable = true,
     --- Highlight group for the symbols.
     ---@type string?
-    hl = "@operator.latex",
-    --- Allows adding/modifying symbol definitions.
-    overwrite = {
-      --- Symbols can either be strings or functions.
-      --- When the value is a function it receives the buffer
-      --- id as the parameter.
-      ---
-      --- The resulting string is then used.
-      ---@param buffer integer.
-      today = function (buffer)
-        return os.date("%d %B, %Y");
-      end
-    },
-    --- Create groups of symbols to only change their
-    --- appearance.
-    groups = {
-      {
-        --- Matcher for this group.
-        ---
-        --- Can be a list of symbols or a function
-        --- that takes the symbol as the parameter
-        --- and either returns true or false.
-        ---
-        ---@type string[] | fun(symbol: string): boolean
-        match = { "lim", "today" },
-        --- Highlight group for this group.
-        ---@type string
-        hl = "Special"
-      }
-    }
+    hl = "@operator.latex"
   },
-  subscript = {
+  subscripts = {
     enable = true,
     hl = "MarkviewLatexSubscript"
-  },
-  superscript = {
-    enable = true,
-    hl = "MarkviewLatexSuperscript"
   }
 }
 
 local opts = {
-  -- Buffer types to ignore
-  buf_ignore = { "nofile" },
-  -- Delay, in miliseconds
-  -- to wait before a redraw occurs(after an event is triggered)
-  debounce = 50,
-  -- Filetypes where the plugin is enabled
-  filetypes = { "markdown", "quarto", "rmd", "mdx", "latex" },
+  preview = {
+    -- Initial plugin state,
+    -- true = show preview
+    -- false = don't show preview
+    enable = true,
+    -- Buffer types to ignored
+    ignore_buftypes = { "nofile" },
+    -- Delay, in miliseconds
+    -- to wait before a redraw occurs(after an event is triggered)
+    debounce = 50,
+    -- Filetypes where the plugin is enabled
+    filetypes = { "markdown", "quarto", "rmd", "mdx", "latex" },
+    -- Max file size that is rendered entirely
+    max_buf_lines = 1000,
+    -- Modes where preview is shown
+    modes = { "n", "no", "c" },
+    -- Lines from the cursor to draw when the
+    -- file is too big
+    draw_range = 100,
+  },
+  markdown = {
+    headings = headings,
+    horizontal_rules = horizontal_rules
+  },
   -- Highlight groups to use
   -- "dynamic" | "light" | "dark"
   highlight_groups = "dynamic",
   -- Modes where hybrid mode is enabled
   hybrid_modes = nil,
-  -- Tree-sitter query injections
-  injections = {},
-  -- Initial plugin state,
-  -- true = show preview
-  -- falss = don't show preview
-  initial_state = true,
-  -- Max file size that is rendered entirely
-  max_file_length = 1000,
-  -- Modes where preview is shown
-  modes = { "n", "no", "c" },
-  -- Lines from the cursor to draw when the
-  -- file is too big
-  render_distance = 100,
-  -- Window configuration for split view
-  split_conf = {},
-
   -- Rendering related configuration
   block_quotes = {},
-  callbacks = {},
   checkboxes = {},
   code_blocks = code_blocks,
   escaped = {},
   footnotes = {},
-  headings = headings,
-  horizontal_rules = horizontal_rules,
   html = {},
   inline_codes = {},
   latex = latex,
   links = {},
-  list_items = {},
-  tables = {}
 }
 
 require("markview").setup(opts)
