@@ -784,6 +784,42 @@ local predefined_quotes = {
     "",
     "—Frederick P. Brooks",
   },
+  -- Figures in Computer Science
+  {
+    "Mathematics is less related to accounting than it is to philosophy.",
+    "",
+    "—Leonard Adleman"
+  },
+  {
+    "But biology and computer science— life and computation— are related. I am confident that at their interface great discoveries await those who seek them.",
+    "",
+    "—Leonard Adleman"
+  },
+  {
+    "The RSA crypto system is an acronym of it's creators: Ron Rivest, Adi Shamir and Leonard Adleman",
+    "",
+    "—Anonymous"
+  },
+  {
+    "It is astonishing to me how much energy is going into the commercialization of technology that doesn't yet exist.",
+    "",
+    "—Ron Rivest (on quantum computing, 2021)"
+  },
+  {
+    "The magic words are squeamish ossifrage.",
+    "",
+    "—Ron Rivest"
+  },
+  {
+    "In science it often happens that scientists say, 'You know that's a really good argument; my position is mistaken,' and then they would actually change their minds and you never hear that old view from them again. They really do it. It doesn't happen as often as it should, because scientists are human and change is sometimes painful. But it happens every day. I cannot recall the last time something like that happened in politics or religion.",
+    "",
+    "—Carl Sagan (1987)"
+  },
+  {
+    "The RSA crypto system is an acronym of it's creators: Ron Rivest, Adi Shamir and Leonard Adleman",
+    "",
+    "—Anonymous"
+  },
 }
 
 -- Function to wrap a string to fit the specified width
