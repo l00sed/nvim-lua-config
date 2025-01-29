@@ -44,7 +44,7 @@ autocmd('BufWritePre', { pattern = '*', command = [[%s/\s\+$//e]] })
 -- Set "messages" syntax for these log files
 autocmd({ 'BufNewFile', 'BufReadPost' }, {
   pattern = '*messages*',
-  command = [[:set filetype=messages]]
+  command = 'setf messages'
 })
 
 -- No fold enabled
@@ -108,7 +108,7 @@ autocmd('FileType', {
 
 -- -- Django
 autocmd('BufWinEnter', {
-  pattern = '*.html', command = 'set filetype=htmldjango'
+  pattern = '*.html', command = 'setf htmldjango'
 })
 autocmd('FileType', {
   pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'

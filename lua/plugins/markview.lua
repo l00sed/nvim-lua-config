@@ -244,12 +244,19 @@ local opts = {
     -- false = don't show preview
     enable = true,
     -- Buffer types to ignored
-    ignore_buftypes = { "nofile" },
+    ignore_buftypes = {},
     -- Delay, in miliseconds
     -- to wait before a redraw occurs(after an event is triggered)
     debounce = 50,
     -- Filetypes where the plugin is enabled
-    filetypes = { "markdown", "quarto", "rmd", "mdx", "latex" },
+    filetypes = {
+      "markdown",
+      "quarto",
+      "rmd",
+      "mdx",
+      "latex",
+      "codecompanion"
+    },
     -- Max file size that is rendered entirely
     max_buf_lines = 1000,
     -- Modes where preview is shown

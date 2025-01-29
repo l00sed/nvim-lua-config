@@ -78,10 +78,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        ft = "codecompanion"
-      },
     },
     config = function()
       require("plugins.codecompanion")
@@ -90,23 +86,21 @@ return {
 
 	-- Colorizer
 	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({
-				"*",
-			}, {
-				RGB = true, -- #RGB hex codes
-				RRGGBB = true, -- #RRGGBB hex codes
-				names = true, -- "Name" codes like Blue
-				RRGGBBAA = true, -- #RRGGBBAA hex codes
-				rgb_fn = true, -- CSS rgb() and rgba() functions
-				hsl_fn = true, -- CSS hsl() and hsla() functions
-				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-				-- Available modes: foreground, background
-				mode = "background", -- Set the display mode.
-			})
-		end,
+	  "norcalli/nvim-colorizer.lua",
+	  config = function()
+	    require("colorizer").setup({"*"}, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        names = true, -- "Name" codes like Blue
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        -- Available modes: foreground, background
+        mode = "background", -- Set the display mode.
+      })
+	  end
 	},
 
 	-- Treesitter
@@ -146,18 +140,6 @@ return {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "make",
 	},
-
-	-- Context
-	--{
-	--	"utilyre/barbecue.nvim",
-	--	dependencies = {
-	--		"SmiteshP/nvim-navic",
-	--		"nvim-tree/nvim-web-devicons", -- optional dependency
-	--	},
-	--	config = function()
-	--		require("plugins.barbecue")
-	--	end,
-	--},
 
   {
     'Bekaboo/dropbar.nvim',
@@ -268,7 +250,6 @@ return {
   {
     "OXY2DEV/markview.nvim",
     lazy = false,      -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons"
@@ -277,18 +258,6 @@ return {
       require('plugins.markview')
     end
   },
-
-  --{
-  --  'MeanderingProgrammer/render-markdown.nvim',
-  --  opts = {},
-  --  dependencies = {
-  --    'nvim-treesitter/nvim-treesitter',
-  --    'nvim-tree/nvim-web-devicons'
-  --  },
-  --  config = function()
-  --    require("plugins.render-markdown")
-  --  end,
-  --},
 
 	-- Prettier formatting
 	-- Requires null-ls
