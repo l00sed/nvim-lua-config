@@ -35,6 +35,7 @@ local utils = require('utils')
 -- but still configure these servers.
 local excludes = {
 --  "pyright",
+  "eslint"
 }
 for _, server in ipairs(servers) do
   for _, exclude in ipairs(excludes) do
@@ -125,10 +126,7 @@ for _, lsp in ipairs(servers) do
         'astro',
       },
       -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-      root_dir = function(fname)
-        root_file = util.insert_package_json(root_file, 'eslintConfig', fname)
-        return util.root_pattern(unpack(root_file))(fname)
-      end,
+      root_dir = lspconfig_util.root_pattern(root_file),
       -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
       settings = {
         validate = 'on',
@@ -186,9 +184,9 @@ for _, lsp in ipairs(servers) do
         end
 
         -- Support Yarn2 (PnP) projects
-        local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
-        local pnp_js = util.path.join(new_root_dir, '.pnp.js')
-        if util.path.exists(pnp_cjs) or util.path.exists(pnp_js) then
+        local pnp_cjs = lspconfig_util.path.join(new_root_dir, '.pnp.cjs')
+        local pnp_js = lspconfig_util.path.join(new_root_dir, '.pnp.js')
+        if lspconfig_util.path.exists(pnp_cjs) or lspconfig_util.path.exists(pnp_js) then
           config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
         end
       end,
@@ -500,7 +498,22 @@ for _, lsp in ipairs(servers) do
     default_config = {
       cmd = volar_cmd,
       root_dir = volar_root_dir,
-      on_new_config = lsp_utils.on_new_config,
+      on_new_config = function(config, new_root_dir)
+        -- The "workspaceFolder" is a VSCode concept. It limits how far the
+        -- server will traverse the file system when locating the ESLint config
+        -- file (e.g., .eslintrc).
+        config.settings.workspaceFolder = {
+          uri = new_root_dir,
+          name = vim.fn.fnamemodify(new_root_dir, ':t'),
+        }
+
+        -- Support Yarn2 (PnP) projects
+        local pnp_cjs = lspconfig_util.path.join(new_root_dir, '.pnp.cjs')
+        local pnp_js = lspconfig_util.path.join(new_root_dir, '.pnp.js')
+        if lspconfig_util.path.exists(pnp_cjs) or lspconfig_util.path.exists(pnp_js) then
+          config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
+        end
+      end,
       init_options = {
         typescript = {
           -- Requires npm to be installed through NVM
