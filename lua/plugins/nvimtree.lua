@@ -15,6 +15,29 @@
 
 local api = require('nvim-tree.api')
 
+-- Override the default delete mechanism with "trash-cli"
+-- to allow restoration if files are accidentally deleted
+local function nvim_tree_trash()
+  local node = api.tree.get_node_under_cursor()
+  local trash_cmd = "trash "
+
+  local function get_user_input_char()
+    local c = vim.fn.getchar()
+    return vim.fn.nr2char(c)
+  end
+
+  print("trash " .. node.name .. "? y/n")
+
+  if (get_user_input_char():match('^y') and node) then
+    vim.fn.jobstart(trash_cmd .. node.absolute_path, {
+      detach = true,
+      on_exit = function (job_id, data, event) api.tree.reload() end,
+    })
+  end
+
+  vim.api.nvim_command('normal :esc<CR>')
+end
+
 local on_attach = function(bufnr)
   local opts = function()
     return { desc='nvim-tree', buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -82,7 +105,7 @@ local on_attach = function(bufnr)
   vim.keymap.set('n', ']c',    api.node.navigate.git.next,            opts('Next Git'), {
     silent = true, desc = 'Navigate to the next git change.'
   })
-  vim.keymap.set('n', 'd',     api.fs.remove,                         opts('Delete'), {
+  vim.keymap.set('n', 'd',     nvim_tree_trash,                       opts('Delete'), {
     silent = true, desc = 'Delete.'
   })
   vim.keymap.set('n', 'D',     api.fs.trash,                          opts('Trash'), {
@@ -260,7 +283,7 @@ local function open_nvim_tree(data)
   api.tree.open()
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+--vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 -- NVIM tree
 local g = vim.g
