@@ -84,6 +84,13 @@ return {
     end
   },
 
+  {
+    "milanglacier/minuet-ai.nvim",
+    config = function()
+      require("plugins.minuet")
+    end
+  },
+
 	-- Colorizer
 	{
 	  "norcalli/nvim-colorizer.lua",

@@ -23,6 +23,8 @@ local char_top_right = "╮"
 local char_bottom_right = "╯"
 local char_bottom_left = "╰"
 
+-- NOTE: Don't use the emdash "—" in quotes, it breaks the formatting
+
 local predefined_quotes = {
   {
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
@@ -335,7 +337,7 @@ local predefined_quotes = {
     "—Anonymous"
   },
   {
-    "Don't gather requirements— dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
+    "Don't gather requirements, dig for them.\nRequirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.\n",
     "",
     "—Anonymous"
   },
@@ -791,7 +793,7 @@ local predefined_quotes = {
     "—Leonard Adleman"
   },
   {
-    "But biology and computer science— life and computation— are related. I am confident that at their interface great discoveries await those who seek them.",
+    "But biology and computer science, life and computation, are related. I am confident that at their interface great discoveries await those who seek them.",
     "",
     "—Leonard Adleman"
   },

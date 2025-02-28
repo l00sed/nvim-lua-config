@@ -201,10 +201,18 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip'  },
+    { name = 'minuet' },
     { name = 'nvim_lua' },
     { name = 'path'     },
     { name = 'buffer'   },
     { name = 'spell'    },
-    --{ name = 'calc'     },
+  },
+
+  performance = {
+    -- It is recommended to increase the timeout duration due to
+    -- the typically slower response speed of LLMs compared to
+    -- other completion sources. This is not needed when you only
+    -- need manual completion.
+    fetching_timeout = 2000,
   },
 })
