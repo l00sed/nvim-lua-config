@@ -160,6 +160,9 @@ command('HelpTags', 'Telescope help_tags', { bang = true })
 -- Create ctags
 command('MakeCTags', '!ctags -R --exclude=@.ctagsignore .', { bang = true })
 
+-- Override colorscheme command
+command('ThemeLight', 'colorscheme Tomorrow | so ~/.config/nvim/lua/plugins/indent-blankline.lua', { bang = true })
+
 -- More Tmux-like magic
 cmd [[
 function! ConfirmQuit(writeFile)
