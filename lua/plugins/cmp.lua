@@ -201,7 +201,8 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip'  },
-    { name = 'minuet' },
+    --{ name = 'copilot', group_index = 2 },
+    --{ name = 'minuet' },
     { name = 'nvim_lua' },
     { name = 'path'     },
     { name = 'buffer'   },

@@ -30,7 +30,19 @@ local servers = {
 }
 
 local ensure_installed_list = {}
-local utils = require('utils')
+
+-- Capture shell command
+function os.capture(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
 -- Don't use Mason's auto-installer,
 -- but still configure these servers.
 local excludes = {
@@ -43,17 +55,6 @@ for _, server in ipairs(servers) do
       table.insert(ensure_installed_list, server)
     end
   end
-end
-
-function os.capture(cmd, raw)
-  local f = assert(io.popen(cmd, 'r'))
-  local s = assert(f:read('*a'))
-  f:close()
-  if raw then return s end
-  s = string.gsub(s, '^%s+', '')
-  s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
-  return s
 end
 
 require('mason').setup({

@@ -84,69 +84,96 @@ return {
     end
   },
 
+  -- GitHub Copilot
+  --{
+  --  "zbirenbaum/copilot.lua",
+  --  cmd = "Copilot",
+  --  event = "InsertEnter",
+  --  config = function()
+  --    require("plugins.copilot")
+  --  end
+  --},
+
+  -- nvim-cmp integration for Copilot
+  --{
+  --  "zbirenbaum/copilot-cmp",
+  --  config = function ()
+  --    require("copilot_cmp").setup()
+  --  end
+  --},
+
+  -- AI code helper
+  --{
+  --  "milanglacier/minuet-ai.nvim",
+  --  config = function()
+  --    require("plugins.minuet")
+  --  end
+  --},
+
+  -- Image Viewer
   {
-    "milanglacier/minuet-ai.nvim",
+    "3rd/image.nvim",
     config = function()
-      require("plugins.minuet")
+      require("plugins.image")
     end
   },
 
-	-- Colorizer
-	{
-	  "norcalli/nvim-colorizer.lua",
-	  config = function()
-	    require("colorizer").setup({"*"}, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
-        names = true, -- "Name" codes like Blue
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-        -- Available modes: foreground, background
-        mode = "background", -- Set the display mode.
-      })
-	  end
-	},
+  -- Colorizer
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({"*"}, {
+      RGB = true, -- #RGB hex codes
+      RRGGBB = true, -- #RRGGBB hex codes
+      names = true, -- "Name" codes like Blue
+      RRGGBBAA = true, -- #RRGGBBAA hex codes
+      rgb_fn = true, -- CSS rgb() and rgba() functions
+      hsl_fn = true, -- CSS hsl() and hsla() functions
+      css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+      css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      -- Available modes: foreground, background
+      mode = "background", -- Set the display mode.
+    })
+    end
+  },
 
-	-- Treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("plugins.treesitter")
-		end,
-	},
+  -- Treesitter
+  {
+      "nvim-treesitter/nvim-treesitter",
+      config = function()
+          require("plugins.treesitter")
+      end,
+  },
 
-	-- Snippets
-	{
-		"L3MON4D3/LuaSnip",
-		config = function()
-			require("plugins.snippets")
-		end,
-	},
+  -- Snippets
+  {
+      "L3MON4D3/LuaSnip",
+      config = function()
+          require("plugins.snippets")
+      end,
+  },
 
-	-- Keymap helper
-	{
-		"folke/which-key.nvim",
-		config = function()
-			require("plugins.which-key")
-		end,
-	},
+  -- Keymap helper
+  {
+      "folke/which-key.nvim",
+      config = function()
+          require("plugins.which-key")
+      end,
+  },
 
-	-- Signature help
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("plugins.lsp_signature")
-		end,
-	},
+  -- Signature help
+  {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+          require("plugins.lsp_signature")
+      end,
+  },
 
-	-- FZF Native
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
-	},
+  -- FZF Native
+  {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+  },
 
   {
     'Bekaboo/dropbar.nvim',
