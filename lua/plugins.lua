@@ -6,6 +6,18 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 
+  -- Use Luarocks lua package management
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    opts = {
+      rocks = { "lunajson" }, -- specifies a list of rocks to install
+      luarocks_build_args = {
+        "--with-lua=~/.lua/bin/lua"
+      }, -- extra options to pass to luarocks's configuration script
+    },
+  },
+
 	{
     "nvimtools/none-ls.nvim",
     dependencies = "nvimtools/none-ls-extras.nvim",
