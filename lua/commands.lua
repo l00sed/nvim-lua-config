@@ -160,6 +160,12 @@ command('HelpTags', 'Telescope help_tags', { bang = true })
 -- Create ctags
 command('MakeCTags', '!ctags -R --exclude=@.ctagsignore .', { bang = true })
 
+-- Make write (and write-quit) case insensitive
+command('W', 'w', { bang = true })
+command('Wq', 'wq', { bang = true })
+command('WQ', 'wq', { bang = true })
+command('Q', 'q', { bang = true })
+
 -- More Tmux-like magic
 cmd [[
 function! ConfirmQuit(writeFile)
