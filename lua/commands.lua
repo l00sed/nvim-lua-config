@@ -166,6 +166,9 @@ command('Wq', 'wq', { bang = true })
 command('WQ', 'wq', { bang = true })
 command('Q', 'q', { bang = true })
 
+-- Override colorscheme command
+command('ThemeLight', 'colorscheme Tomorrow | so ~/.config/nvim/lua/plugins/indent-blankline.lua', { bang = true })
+
 -- More Tmux-like magic
 cmd [[
 function! ConfirmQuit(writeFile)
