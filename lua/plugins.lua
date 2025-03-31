@@ -96,6 +96,13 @@ return {
     end
   },
 
+  {
+    'github/copilot.vim',
+    config = function()
+      require("plugins.copilotvim")
+    end
+  },
+
   -- GitHub Copilot
   --{
   --  "zbirenbaum/copilot.lua",
