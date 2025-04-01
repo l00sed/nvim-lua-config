@@ -12,7 +12,7 @@ function formatDocument(client, bufnr)
 	local event = "BufWritePre"
 	local async = event == "BufWritePost"
 
-	if client.supports_method("textDocument/formatting") then
+	if client:supports_method("textDocument/formatting") then
 		vim.keymap.set("n", "<Leader>p", function()
 			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
 		end, { buffer = bufnr, desc = "[lsp] format" })
@@ -29,7 +29,7 @@ function formatDocument(client, bufnr)
 		--})
 	end
 
-	if client.supports_method("textDocument/rangeFormatting") then
+	if client:supports_method("textDocument/rangeFormatting") then
 		vim.keymap.set("x", "<Leader>p", function()
 			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
 		end, { buffer = bufnr, desc = "[lsp] format" })
