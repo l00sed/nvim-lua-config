@@ -312,50 +312,6 @@ return {
     end
   },
 
-	-- Prettier formatting
-	-- Requires null-ls
-	{
-		"MunifTanjim/prettier.nvim",
-		config = function()
-			require("prettier").setup({
-				bin = "prettier",
-				filetypes = {
-					"css",
-					"djangohtml",
-					"graphql",
-					"html",
-					"javascript",
-					"javascriptreact",
-					"json",
-					"less",
-					"markdown",
-					"md",
-					"scss",
-					"solidity",
-					"toml",
-					"txt",
-					"typescript",
-					"typescriptreact",
-					"vue",
-					"yaml",
-				},
-				["null-ls"] = {
-					condition = function()
-						return prettier.config_exists({
-							-- if false, skips checking package.json for "prettier" key
-							check_package_json = true,
-						})
-					end,
-					runtime_condition = function(params)
-						-- return false to skip running prettier
-						return true
-					end,
-					timeout_ms = 10000,
-				},
-			})
-		end,
-	},
-
 	-- Markdown ToC
 	"mzlogin/vim-markdown-toc",
 

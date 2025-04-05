@@ -131,8 +131,8 @@ colors = {
   ["fg_modified"] = '#d69821',
   ["fg_special"] = 'white',
   ["fg_subtle"] = '#555555',
-  ["bg_current"] = 'None',
-  ["bg_visible"] = 'None',
+  ["bg_current"] = '#000000',
+  ["bg_visible"] = '#000000',
   ["bg_inactive"] = '#0f0f0f',
 }
 
@@ -174,7 +174,7 @@ set_hl(0, 'BufferInactiveTarget', { fg = colors['fg_target'], bg = colors['bg_in
 set_hl(0, 'BufferDefaultInactiveTarget', { bg = colors['bg_inactive'] })
 -- Tabpages
 set_hl(0, 'BufferTabpages', { fg = colors['fg_special'], bg = colors['bg_inactive'], bold = true })
-set_hl(0, 'BufferTabpageFill', { fg = colors['fg_inactive'], bg = 'None' })
+set_hl(0, 'BufferTabpageFill', { fg = colors['fg_inactive'], bg = '#000000' })
 -- Offset
 set_hl(0, 'BufferOffset', { link = 'BufferTabpageFill' })
 -- Error
