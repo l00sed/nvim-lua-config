@@ -26,9 +26,10 @@ end
 
 -- ============================================
 -- Use Ollama as default
-local agent = "ollama" -- or "copilot"
+--local agent = "ollama"
+local agent = "copilot"
 -- Default model for Ollama to use (ignored with copilot)
-local model = "gemma3:12b"
+--local model = "gemma3:12b"
 
 local cwdGitRoot = os.capture('git rev-parse --show-toplevel')
 config = join(cwdGitRoot, config)

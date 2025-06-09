@@ -132,6 +132,11 @@ autocmd('FileType', {
   command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
 })
 
+autocmd('FileType', {
+  pattern = 'vue',
+  command = 'setl breakindent tw=0 wrap lbr sw=2 ts=2 sts=2'
+})
+
 -- Set filetype to bash for .zsh-theme
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.zsh-theme', command = 'setf bash'

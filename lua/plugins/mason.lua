@@ -25,8 +25,8 @@ local servers = {
   "tailwindcss",
   --"texlab",
   "ts_ls",
-  "volar",
-  --"vuels",
+  --"volar",
+  "vue_ls",
 }
 
 local ensure_installed_list = {}
@@ -492,7 +492,7 @@ for _, lsp in ipairs(servers) do
   end
 
   -- Typescript must be installed
-  if (lsp == "volar") then
+  if (lsp == "vue_ls") then
     local volar_cmd = { 'vue-language-server', '--stdio' }
     local volar_root_dir = lspconfig_util.root_pattern('package.json')
 
@@ -568,7 +568,7 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  lspconfig[lsp].setup({
+  vim.lsp.config(lsp, {
     default_config = default_config,
     on_attach = common_on_attach,
     capabilities = capabilities,
