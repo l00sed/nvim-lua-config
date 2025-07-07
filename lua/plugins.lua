@@ -18,6 +18,19 @@ return {
     },
   },
 
+  -- Fancy Markdown
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,      -- Recommended
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+      require('plugins.markview')
+    end
+  },
+
 	{
     "nvimtools/none-ls.nvim",
     dependencies = "nvimtools/none-ls-extras.nvim",
@@ -221,7 +234,10 @@ return {
 	-- Barbar.nvim (bufferline tabs)
 	{
 		"romgrk/barbar.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		dependencies = {
+      'nvim-tree/nvim-tree.lua',
+      'nvim-tree/nvim-web-devicons',
+    },
 		config = function()
 			require("plugins.barbar")
 		end,
@@ -298,19 +314,6 @@ return {
 			})
 		end,
 	},
-
-  -- Fancy Markdown
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,      -- Recommended
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-    config = function()
-      require('plugins.markview')
-    end
-  },
 
 	-- Markdown ToC
 	"mzlogin/vim-markdown-toc",

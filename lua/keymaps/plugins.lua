@@ -9,10 +9,14 @@ map({ "n" }, "<M-k>", "<Cmd>TmuxNavigateUp<CR>", { silent = true, desc = "Naviga
 map({ "n" }, "<M-l>", "<Cmd>TmuxNavigateRight<CR>", { silent = true, desc = "Navigate right (Vim/Tmux agnostic)" })
 map({ "n" }, "<M-\\>", "<Cmd>TmuxNavigatePrevious<CR>", { silent = true, desc = "Navigate to the previous pane (Vim/Tmux agnostic)" })
 -- Tmux/Vim resizing
-map({ "n" }, "<C-h>", "<Cmd>TmuxResizeLeft<CR> | <CMD>lua require('bufferline.api').set_offset(require('nvim-tree.view').View.width)<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
-map({ "n" }, "<C-j>", "<Cmd>TmuxResizeDown<CR> | <CMD>lua require('bufferline.api').set_offset(require('nvim-tree.view').View.width)<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
-map({ "n" }, "<C-k>", "<Cmd>TmuxResizeUp<CR> | <CMD>lua require('bufferline.api').set_offset(require('nvim-tree.view').View.width)<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
-map({ "n" }, "<C-l>", "<Cmd>TmuxResizeRight<CR> | <CMD>lua require('bufferline.api').set_offset(require('nvim-tree.view').View.width)<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
+map({ "n" }, "<C-h>", "<Cmd>TmuxResizeLeft<CR> | <CMD>lua require('bufferline.api').set_offset(vim.api.nvim_win_get_width(require('nvim-tree.api').tree.winid()))<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
+map({ "n" }, "<C-j>", "<Cmd>TmuxResizeDown<CR> | <CMD>lua require('bufferline.api').set_offset(vim.api.nvim_win_get_width(require('nvim-tree.api').tree.winid()))<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-k>", "<Cmd>TmuxResizeUp<CR> | <CMD>lua require('bufferline.api').set_offset(vim.api.nvim_win_get_width(require('nvim-tree.api').tree.winid()))<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+map({ "n" }, "<C-l>", "<Cmd>TmuxResizeRight<CR> | <CMD>lua require('bufferline.api').set_offset(vim.api.nvim_win_get_width(require('nvim-tree.api').tree.winid()))<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
+--map({ "n" }, "<C-h>", "<Cmd>TmuxResizeLeft<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
+--map({ "n" }, "<C-j>", "<Cmd>TmuxResizeDown<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+--map({ "n" }, "<C-k>", "<Cmd>TmuxResizeUp<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
+--map({ "n" }, "<C-l>", "<Cmd>TmuxResizeRight<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
 -- Split vertically
 map({ "n" }, "<leader>%", "<Cmd>vnew<CR>", { silent = true, desc = "Vertical split (Tmux-style)" })
 -- Split horizontally

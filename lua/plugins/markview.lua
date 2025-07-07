@@ -269,6 +269,9 @@ local opts = {
     headings = headings,
     horizontal_rules = horizontal_rules
   },
+  experimental = {
+    check_rtp = false
+  },
   -- Highlight groups to use
   -- "dynamic" | "light" | "dark"
   highlight_groups = "dynamic",
