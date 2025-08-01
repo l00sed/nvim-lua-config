@@ -76,6 +76,7 @@ set_hl(0, 'BufferLineSeparatorSelected', { fg = '#000000', bg = 'none' })
 
 -- Dropbar Transparency
 set_hl(0, 'WinBar', { bg = 'none', ctermbg = 'None' })
+set_hl(0, 'WinBarNC', { fg = theme['gray-55'], bg = 'none', ctermbg = 'None' })
 
 -- Barbar Tabs Trasparency
 set_hl(0, 'TabLine', { bg = 'none', ctermbg = 'None' })
