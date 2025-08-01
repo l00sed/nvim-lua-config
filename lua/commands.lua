@@ -61,8 +61,8 @@ autocmd('FileType', {
 
 -- Javascript tab instead of spaces
 autocmd('FileType', {
-  pattern = 'javascript',
-  command = 'set sw=2 ts=2 sts=2'
+  pattern = '*.{js,jsx,ts,tsx}',
+  command = 'set sw=2 ts=2 sts=2 expandtab'
 })
 
 -- -- PHP

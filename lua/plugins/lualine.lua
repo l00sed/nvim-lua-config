@@ -9,7 +9,7 @@ local gruvbox = function()
   local colors = { -- Gruvbox Dark
     darkgray = "#282828",
     gray = "#928374",
-    innerbg = "#000000",
+    innerbg = nil,
     outerbg = "#1d2021",
     normal = "#458487",
     insert = "#689c69",
@@ -134,7 +134,7 @@ require('lualine').setup({
     lualine_x = { 'encoding' },
     lualine_y = { 'progress' },
     lualine_z = {
-      { function () return '' end },
+      { function () return '○' end },
       {
         'location',
         color = { gui='bold' }
