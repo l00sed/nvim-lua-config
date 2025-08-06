@@ -4,28 +4,21 @@
 local servers = {
   "bashls",
   "biome",
-  --"clangd",
   "cssls",
   "css_variables",
   "cssmodules_ls",
   "docker_compose_language_service",
   "dockerls",
   "eslint",
-  --"grammarly",
-  --"html",
   "intelephense",
   "jsonls",
-  --"ltex",
-  --"nil_ls",
+  "lua_ls",
   --"pyright",
   "pylsp",
   "rnix",
   "stylelint_lsp",
-  --"sumneko_lua",
   "tailwindcss",
-  --"texlab",
-  "ts_ls",
-  --"volar",
+  "vtsls",
   "vue_ls",
 }
 
@@ -96,7 +89,12 @@ local default_config = {}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+local raw_nvm = tostring(os.capture('export NVM_DIR="$HOME/.nvm"; source $NVM_DIR/nvm.sh && nvm alias default'))
+local node_version = string.sub(raw_nvm, string.find(raw_nvm, "v"), -2)
+local nvm_path = os.getenv("HOME") .. '/.nvm/versions/node/' .. node_version
+
 for _, lsp in ipairs(servers) do
+  -- ESLint (Javascript and Typescript)
   if (lsp == "eslint") then
     local root_file = {
       '.eslintrc',
@@ -224,7 +222,8 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  if (lsp == "sumneko_lua") then
+  -- Lua Language Server
+  if (lsp == "lua_ls") then
     settings = {
       Lua = {
         diagnostics = {
@@ -242,6 +241,7 @@ for _, lsp in ipairs(servers) do
     }
   end
 
+  -- PHP Language Server
   if (lsp == "intelephense") then
     if not configs.intelephense then
       configs.intelephense = {
@@ -337,6 +337,7 @@ for _, lsp in ipairs(servers) do
     }
   end
 
+  -- CSS Language Server
   if (lsp == "cssls") then
     settings = {
       css = {
@@ -352,23 +353,8 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  -- Pyright (replaced with pylsp)
-  if (lsp == "pyright") then
-    settings = {
-      python = {
-        pythonPath = os.capture('which python3'),
-        analysis = {
-          typeCheckingMode = "basic", -- off, basic, strict
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
-          autoImportCompletions = true,
-          -- This will generally speed up Neovim Python projects vs "workspace"
-          diagnosticMode = "openFilesOnly",
-        }
-      }
-    }
-  end
-
+  -- Python Language Server
+  -- Uses the flake8 plugin for linting
   if (lsp == "pylsp") then
     settings = {
       pylsp = {
@@ -381,7 +367,7 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  -- Tailwind
+  -- Tailwind Language Server
   if (lsp == "tailwindcss") then
     settings = {
       tailwindCSS = {
@@ -448,131 +434,72 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  -- Typescript
-  if (lsp == "ts_ls") then
-    default_config = {
-      init_options = {
-        npmLocation = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. 'bin/npm',
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/@vue/language-server',
-            languages = { "javascript", "typescript", "vue" }
-          }
-        }
-      },
-      root_dir = lspconfig_util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
-        "vue"
-      },
-      settings = {
-        typescript = {
-          tsserver = {
-            useSyntaxServer = false,
-          },
-          inlayHints = {
-            includeInlayParameterNameHints = 'all',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true
-          }
-        }
-      }
-    }
-  end
-
-  -- Typescript must be installed
-  if (lsp == "vue_ls") then
-    local volar_cmd = { 'vue-language-server', '--stdio' }
-    local volar_root_dir = lspconfig_util.root_pattern('package.json')
-
-    default_config = {
-      cmd = volar_cmd,
-      root_dir = volar_root_dir,
-      on_new_config = function(config, new_root_dir)
-        -- The "workspaceFolder" is a VSCode concept. It limits how far the
-        -- server will traverse the file system when locating the ESLint config
-        -- file (e.g., .eslintrc).
-        config.settings.workspaceFolder = {
-          uri = new_root_dir,
-          name = vim.fn.fnamemodify(new_root_dir, ':t'),
-        }
-
-        -- Support Yarn2 (PnP) projects
-        local pnp_cjs = lspconfig_util.path.join(new_root_dir, '.pnp.cjs')
-        local pnp_js = lspconfig_util.path.join(new_root_dir, '.pnp.js')
-        if lspconfig_util.path.exists(pnp_cjs) or lspconfig_util.path.exists(pnp_js) then
-          config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
-        end
-      end,
-      init_options = {
-        typescript = {
-          -- Requires npm to be installed through NVM
-          tsdk = os.getenv("HOME") .. '/.nvm/versions/node/' .. os.capture('node -v') .. '/lib/node_modules/typescript/lib'
-        },
-        vue = {
-          hybridMode = false
-        },
-        languageFeatures = {
-          implementation = true, -- new in @volar/vue-language-server v0.33
-          references = true,
-          definition = true,
-          typeDefinition = true,
-          callHierarchy = true,
-          hover = true,
-          rename = true,
-          renameFileRefactoring = true,
-          signatureHelp = true,
-          codeAction = true,
-          workspaceSymbol = true,
-          completion = {
-            defaultTagNameCase = 'both',
-            defaultAttrNameCase = 'kebabCase',
-            getDocumentNameCasesRequest = false,
-            getDocumentSelectionRequest = false,
-          }
-        }
-      },
-      settings = {
-        typescript = {
-          inlayHints = {
-            enumMemberValues = {
-              enabled = true,
-            },
-            functionLikeReturnTypes = {
-              enabled = true,
-            },
-            propertyDeclarationTypes = {
-              enabled = true,
-            },
-            parameterTypes = {
-              enabled = true,
-              suppressWhenArgumentMatchesName = true,
-            },
-            variableTypes = {
-              enabled = true,
+  -- Typescript Language Server
+  -- Install with Node:
+  --   npm i -g @vtsls/language-server
+  --   npm i -g typescript
+  if (lsp == "vtsls") then
+    settings = {
+      vtsls = {
+        tsserver = {
+          globalPlugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = nvm_path .. '/lib/node_modules/@vue/language-server',
+              languages = { 'vue' },
+              configNamespace = 'typescript'
             }
           }
         }
       }
     }
+    filetypes = {
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+      "vue"
+    }
+    on_attach = function(client, bufnr)
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  end
+
+  -- Vue Language Server
+  -- Install with Node:
+  --  npm i -g @vue/language-server
+  -- requires the vtsls config above
+  if (lsp == "vue_ls") then
+    settings = {
+      typescript = {
+        inlayHints = {
+          enumMemberValues = {
+            enabled = true,
+          },
+          functionLikeReturnTypes = {
+            enabled = true,
+          },
+          propertyDeclarationTypes = {
+            enabled = true,
+          },
+          parameterTypes = {
+            enabled = true,
+            suppressWhenArgumentMatchesName = true,
+          },
+          variableTypes = {
+            enabled = true,
+          },
+        },
+      },
+    }
   end
 
   vim.lsp.config(lsp, {
     default_config = default_config,
+    on_init = on_init,
     on_attach = common_on_attach,
     capabilities = capabilities,
     settings = settings,
-    configs = configs,
+    filetypes = filetypes,
+    configs = configs
   })
 end

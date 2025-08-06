@@ -8,6 +8,9 @@ local D = vim.diagnostic
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 
+-- NOTE: Suppress deprecation warnings
+vim.deprecate = function() end
+
 -- Fix bug in vim to properly interpret RGB values.
 cmd [[let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"]]
 cmd [[let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"]]
