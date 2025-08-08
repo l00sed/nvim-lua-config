@@ -1,6 +1,8 @@
 -- Enable language servers with common settings
 -- For available values, look here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- Or run:
+-- :help lspconfig-all
 local servers = {
   "bashls",
   "biome",
@@ -10,6 +12,7 @@ local servers = {
   "docker_compose_language_service",
   "dockerls",
   "eslint",
+  "html",
   "intelephense",
   "jsonls",
   "lua_ls",
@@ -25,7 +28,7 @@ local servers = {
 local ensure_installed_list = {}
 
 -- Capture shell command
-function os.capture(cmd, raw)
+function CmdCapture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
   f:close()
@@ -72,26 +75,36 @@ require('mason-lspconfig').setup({
   ensure_installed = ensure_installed_list
 })
 
-local lspconfig = require('lspconfig')
 local lspconfig_util = require('lspconfig.util')
 local lsp_utils = require('lsp.utils')
 
 -- Setup border
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-local common_on_attach = lsp_utils.common_on_attach
-local settings = {}
-local configs = {}
-local init_options = {}
-local default_config = {}
-
 -- add capabilities from nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local raw_nvm = tostring(os.capture('export NVM_DIR="$HOME/.nvm"; source $NVM_DIR/nvm.sh && nvm alias default'))
-local node_version = string.sub(raw_nvm, string.find(raw_nvm, "v"), -2)
+local raw_nvm = tostring(CmdCapture('export NVM_DIR="$HOME/.nvm"; source $NVM_DIR/nvm.sh && nvm alias default')) or ''
+local v, node_version
+if raw_nvm ~= '' and raw_nvm ~= nil then
+  v = string.find(raw_nvm, 'v')
+  if v ~= '' and v ~= nil then
+    node_version = string.sub(raw_nvm, v, -2)
+  end
+else
+  vim.notify('NVM is not installed or not configured properly.', vim.log.levels.ERROR)
+  return
+end
+
 local nvm_path = os.getenv("HOME") .. '/.nvm/versions/node/' .. node_version
+
+local default_config = {}
+local configs = {}
+local settings = {}
+local filetypes = {}
+local on_init = function () end
+local on_attach = lsp_utils.common_on_attach
 
 for _, lsp in ipairs(servers) do
   -- ESLint (Javascript and Typescript)
@@ -378,59 +391,59 @@ for _, lsp in ipairs(servers) do
             "Class \\=([^,]*),", "\\`([^\\`]*)\\`"
           }
         }
-      },
-      filetypes = {
-        "aspnetcorerazor",
-        "astro",
-        "astro-markdown",
-        "blade",
-        "clojure",
-        "django-html",
-        "htmldjango",
-        "edge",
-        "eelixir",
-        "elixir",
-        "ejs",
-        "erb",
-        "eruby",
-        "gohtml",
-        "gohtmltmpl",
-        "haml",
-        "handlebars",
-        "hbs",
-        "html",
-        "htmlangular",
-        "html-eex",
-        "heex",
-        "jade",
-        "leaf",
-        "liquid",
-        "markdown",
-        "mdx",
-        "mustache",
-        "njk",
-        "nunjucks",
-        "php",
-        "razor",
-        "slim",
-        "twig",
-        "css",
-        "less",
-        "postcss",
-        "sass",
-        "scss",
-        "stylus",
-        "sugarss",
-        "javascript",
-        "javascriptreact",
-        "reason",
-        "rescript",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "svelte",
-        "templ"
       }
+    }
+    filetypes = {
+      "aspnetcorerazor",
+      "astro",
+      "astro-markdown",
+      "blade",
+      "clojure",
+      "django-html",
+      "htmldjango",
+      "edge",
+      "eelixir",
+      "elixir",
+      "ejs",
+      "erb",
+      "eruby",
+      "gohtml",
+      "gohtmltmpl",
+      "haml",
+      "handlebars",
+      "hbs",
+      "html",
+      "htmlangular",
+      "html-eex",
+      "heex",
+      "jade",
+      "leaf",
+      "liquid",
+      "markdown",
+      "mdx",
+      "mustache",
+      "njk",
+      "nunjucks",
+      "php",
+      "razor",
+      "slim",
+      "twig",
+      "css",
+      "less",
+      "postcss",
+      "sass",
+      "scss",
+      "stylus",
+      "sugarss",
+      "javascript",
+      "javascriptreact",
+      "reason",
+      "rescript",
+      "typescript",
+      "typescriptreact",
+      "vue",
+      "svelte",
+      "templ"
     }
   end
 
@@ -493,13 +506,17 @@ for _, lsp in ipairs(servers) do
     }
   end
 
-  vim.lsp.config(lsp, {
-    default_config = default_config,
-    on_init = on_init,
-    on_attach = common_on_attach,
-    capabilities = capabilities,
-    settings = settings,
-    filetypes = filetypes,
-    configs = configs
-  })
+  if (default_config ~= nil or settings ~= nil) then
+    vim.lsp.config(lsp, {
+      default_config = default_config,
+      on_init = on_init,
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = settings,
+      filetypes = filetypes,
+      configs = configs
+    })
+  else
+    vim.lsp.config(lsp)
+  end
 end
