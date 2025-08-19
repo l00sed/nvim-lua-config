@@ -19,6 +19,7 @@ local servers = {
   --"pyright",
   "pylsp",
   "rnix",
+  "ruff",
   "stylelint_lsp",
   "tailwindcss",
   "vtsls",
@@ -377,6 +378,12 @@ for _, lsp in ipairs(servers) do
           }
         }
       }
+    }
+  end
+
+  if (lsp == "ruff") then
+    filetypes = {
+      "python"
     }
   end
 

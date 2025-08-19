@@ -290,3 +290,10 @@ local opts = {
 }
 
 require("markview").setup(opts)
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "MarkviewAttach",
+  callback = function ()
+    vim.opt_local.number = false
+  end
+})

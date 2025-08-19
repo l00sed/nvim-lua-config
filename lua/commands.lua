@@ -6,8 +6,8 @@ local command = vim.api.nvim_create_user_command
 local set_hl = vim.api.nvim_set_hl
 
 -- Disable default commands (uses CTRL modifier)
-cmd[[let g:tmux_navigator_no_mappings = 1]]
-cmd[[let g:tmux_resizer_no_mappings = 1]]
+cmd('let g:tmux_navigator_no_mappings = 1')
+cmd('let g:tmux_resizer_no_mappings = 1')
 
 -- Underline / Undercurl
 cmd [[
@@ -28,14 +28,6 @@ autocmd('BufLeave', {
   group = reopen,
   command = 'let g:lastBufName = @%'
 })
-
--- Reopen the last closed buffer with :Last
-cmd [[
-function! RessurrectLast()
-  exe "tabnew " . g:lastBufName
-endfunction
-command -nargs=0 Last call RessurrectLast()
-]]
 
 -- Remove trailing whitespaces
 -- (if a file requires trailing spaces, exclude its type using the regex)
@@ -59,9 +51,9 @@ autocmd('FileType', {
   command = 'set sw=4 ts=4 sts=4 expandtab'
 })
 
--- Javascript tab instead of spaces
+-- Javascript and Lua— 2 spaces
 autocmd('FileType', {
-  pattern = '*.{js,jsx,ts,tsx}',
+  pattern = '*.{js,jsx,ts,tsx,lua,html}',
   command = 'set sw=2 ts=2 sts=2 expandtab'
 })
 
@@ -109,9 +101,6 @@ autocmd('FileType', {
 -- -- Django
 autocmd('BufWinEnter', {
   pattern = '*.html', command = 'setf htmldjango'
-})
-autocmd('FileType', {
-  pattern = 'htmldjango', command = 'set sw=2 ts=2 sts=2'
 })
 
 -- -- Indent wrapped lines for markdown
