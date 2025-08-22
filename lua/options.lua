@@ -91,7 +91,7 @@ w.colorcolumn                 = [[NONE]]
 --o.shellcmdflag                = '-ic'
 wo.number                     = true
 wo.relativenumber             = false
-wo.signcolumn                 = 'yes'
+wo.signcolumn                 = 'yes:1'
 wo.cursorline                 = true
 -- Enable blinking together with different cursor shapes for insert/command mode, and cursor highlighting:
 o.guicursor                   = 'n-v-c:block,'..

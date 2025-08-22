@@ -42,19 +42,19 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
 -- No fold enabled
 autocmd('FileType', {
   pattern = { 'lazy', 'TelescopePrompt', 'TelescopeResults' },
-  command = 'set nofen'
+  command = 'setl nofen'
 })
 
 -- Python set tab instead of spaces
 autocmd('FileType', {
   pattern = 'python',
-  command = 'set sw=4 ts=4 sts=4 expandtab'
+  command = 'setl tw=0 sw=4 ts=4 sts=4 expandtab'
 })
 
--- Javascript and Lua— 2 spaces
+-- Javascript, Typescript, React, and Lua— 2 spaces
 autocmd('FileType', {
-  pattern = '*.{js,jsx,ts,tsx,lua,html}',
-  command = 'set sw=2 ts=2 sts=2 expandtab'
+  pattern = '*.{json,cjs,js,jsx,ts,tsx,lua,html}',
+  command = 'setl tw=0 sw=2 ts=2 sts=2 expandtab'
 })
 
 -- -- PHP
@@ -84,7 +84,7 @@ local jsx_group = augroup('JSXGroup', { clear = true })
 autocmd('BufWinEnter', {
   group = jsx_group,
   pattern = '*.jsx',
-  command = 'set filetype=javascriptreact'
+  command = 'setf javascriptreact'
 })
 autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.{js,jsx,ts,tsx}', command = ':syntax sync fromstart'
