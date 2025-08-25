@@ -91,7 +91,7 @@ local v, node_version
 if raw_nvm ~= '' and raw_nvm ~= nil then
   v = string.find(raw_nvm, 'v')
   if v ~= '' and v ~= nil then
-    node_version = string.sub(raw_nvm, v, -2)
+    node_version = string.sub(raw_nvm, v, -1)
   end
 else
   vim.notify('NVM is not installed or not configured properly.', vim.log.levels.ERROR)
@@ -479,9 +479,9 @@ for _, lsp in ipairs(servers) do
       "typescript.tsx",
       "vue"
     }
-    on_attach = function(client, bufnr)
-      client.server_capabilities.semanticTokensProvider = nil
-    end
+    --on_attach = function(client, bufnr)
+    --  client.server_capabilities.semanticTokensProvider = nil
+    --end
   end
 
   -- Vue Language Server
@@ -489,28 +489,8 @@ for _, lsp in ipairs(servers) do
   --  npm i -g @vue/language-server
   -- requires the vtsls config above
   if (lsp == "vue_ls") then
-    settings = {
-      typescript = {
-        inlayHints = {
-          enumMemberValues = {
-            enabled = true,
-          },
-          functionLikeReturnTypes = {
-            enabled = true,
-          },
-          propertyDeclarationTypes = {
-            enabled = true,
-          },
-          parameterTypes = {
-            enabled = true,
-            suppressWhenArgumentMatchesName = true,
-          },
-          variableTypes = {
-            enabled = true,
-          },
-        },
-      },
-    }
+    filetypes = { "vue" }
+    root_markers = { "package.json" }
   end
 
   if (default_config ~= nil or settings ~= nil) then
