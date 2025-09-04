@@ -21,9 +21,9 @@ return {
   -- Fancy Markdown
   {
     "OXY2DEV/markview.nvim",
-    lazy = false,      -- Recommended
+    lazy = false, -- Recommended
+    priority = 49, -- Load before nvim-treesitter for best results
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons"
     },
     config = function()
@@ -198,6 +198,12 @@ return {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false, -- Recommended
+    priority = 50, -- Load before most other plugins
+    build = ':TSUpdate',
+    dependencies = {
+      'OXY2DEV/markview.nvim'
+    },
     config = function()
       require("plugins.treesitter")
     end,

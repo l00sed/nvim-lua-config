@@ -57,21 +57,6 @@ local headings = {
   }
 }
 
-local code_blocks = {
-  enable = true,
-  icons = "devicons",
-  style = "language",
-  border_hl = "MarkviewCode",
-  info_hl = "MarkviewCodeInfo",
-  min_width = 40,
-  pad_amount = 3,
-  pad_char = " ",
-  language_names = nil,
-  language_direction = "right",
-  sign = false,
-  sign_hl = nil
-}
-
 local horizontal_rules = {
   enable = true,
   parts = {
@@ -152,92 +137,10 @@ local horizontal_rules = {
   }
 }
 
-local latex = {
-  enable = true,
-  --- Bracket conceal configuration.
-  --- Shows () in specific cases
-  parenthesis = {
-    enable = true,
-    --- Highlight group for the ()
-    ---@type string
-    hl = "@punctuation.brackets"
-  },
-  --- LaTeX blocks renderer
-  superscripts = {
-    enable = true,
-    --- Highlight group for the block
-    ---@type string
-    hl = "MarkviewLatexSuperscript",
-    --- Virtual text to show on the bottom
-    --- right.
-    --- First value is the text and second value
-    --- is the highlight group.
-    ---@type string[]
-    text = { " LaTeX ", "Special" }
-  },
-  --- Configuration for inline LaTeX maths
-  inlines = {
-    enable = true
-  },
-  --- Configuration for operators(e.g. "\frac{1}{2}")
-  commands = {
-    enable = true,
-    configs = {
-      sin = {
-        --- Configuration for the extmark added
-        --- to the name of the operator(e.g. "\sin").
-        ---
-        --- see `nvim_buf_set_extmark()` for all the
-        --- options.
-        ---@type table
-        operator = {
-            conceal = "",
-            virt_text = { { "𝚜𝚒𝚗", "Special" } }
-        },
-        --- Configuration for the arguments of this
-        --- operator.
-        --- Item index is used to apply the configuration
-        --- to a specific argument
-        ---@type table[]
-        args = {
-          {
-            --- Extmarks are only added
-            --- if a config for it exists.
-            --- Configuration for the extmark
-            --- added before this argument.
-            ---
-            --- see `nvim_buf_set_extmark` for more.
-            before = {},
-            --- Configuration for the extmark
-            --- added after this argument.
-            ---
-            --- see `nvim_buf_set_extmark` for more.
-            after = {},
-            --- Configuration for the extmark
-            --- added to the range of text of
-            --- this argument.
-            ---
-            --- see `nvim_buf_set_extmark` for more.
-            scope = {}
-          }
-        }
-      }
-    }
-  },
-  --- Configuration for LaTeX symbols.
-  symbols = {
-    enable = true,
-    --- Highlight group for the symbols.
-    ---@type string?
-    hl = "@operator.latex"
-  },
-  subscripts = {
-    enable = true,
-    hl = "MarkviewLatexSubscript"
-  }
-}
-
 local opts = {
+  experimental = {
+    check_rtp_message = false,
+  },
   preview = {
     -- Initial plugin state,
     -- true = show preview
@@ -266,27 +169,35 @@ local opts = {
     draw_range = 100,
   },
   markdown = {
+    enable = true,
+    block_quotes = {},
+    code_blocks = {
+      enable = true,
+      border_hl = "MarkviewCode",
+      info_hl = "MarkviewCodeInfo",
+      label_direction = "right",
+      min_width = 40,
+      pad_amount = 2,
+      pad_char = " ",
+      sign = false,
+      sign_hl = nil,
+      style = "block",
+      language_names = nil
+    },
     headings = headings,
-    horizontal_rules = horizontal_rules
+    horizontal_rules = horizontal_rules,
+    list_items = {},
+    tables = {},
+    metadata_plus = {},
+    metadata_minus = {},
+    reference_definitions = {}
   },
-  experimental = {
-    check_rtp = false
-  },
+  markdown_inline = {},
   -- Highlight groups to use
   -- "dynamic" | "light" | "dark"
   highlight_groups = "dynamic",
   -- Modes where hybrid mode is enabled
   hybrid_modes = nil,
-  -- Rendering related configuration
-  block_quotes = {},
-  checkboxes = {},
-  code_blocks = code_blocks,
-  escaped = {},
-  footnotes = {},
-  html = {},
-  inline_codes = {},
-  latex = latex,
-  links = {},
 }
 
 require("markview").setup(opts)
