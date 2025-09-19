@@ -28,7 +28,11 @@ plugins = require("lazy").stats()
 startify.file_icons.provider = "devicons"
 
 -- Set header
-startify.section.header.val = wizard.wizardsays()
+if (wizard ~= nil) then
+  startify.section.header.val = wizard.wizardsays()
+else
+  startify.section.header.val = { "" }
+end
 
 -- disable folding, wrapping in alpha
 cmd [[au FileType alpha setl nofen nowrap breakindent]]
