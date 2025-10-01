@@ -158,7 +158,9 @@ local opts = {
       "rmd",
       "mdx",
       "latex",
-      "codecompanion"
+      "codecompanion",
+      "copilot-chat",
+      "opencode_output"
     },
     -- Max file size that is rendered entirely
     max_buf_lines = 1000,
