@@ -53,8 +53,11 @@ require('opencode').setup({
     display_cost = true, -- Display cost in the footer
     window_highlight = 'Normal:OpencodeBackground,FloatBorder:OpencodeBorder', -- Highlight group for the opencode window
     icons = {
-      preset = 'emoji', -- 'emoji' | 'text'. Choose UI icon style (default: 'emoji')
-      overrides = {},   -- Optional per-key overrides, see section below
+      preset = '', -- 'emoji' | 'text'. Choose UI icon style (default: 'emoji')
+      overrides = {
+        header_user = '>',
+        header_assistant = '▌'
+      }
     },
     output = {
       tools = {
