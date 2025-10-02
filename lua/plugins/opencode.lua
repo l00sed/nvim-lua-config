@@ -56,7 +56,26 @@ require('opencode').setup({
       preset = '', -- 'emoji' | 'text'. Choose UI icon style (default: 'emoji')
       overrides = {
         header_user = '>',
-        header_assistant = '▌'
+        --header_assistant = '▌',
+        header_assistant = '󰙴 ',
+        snapshot = ' ',
+        edit = '󰲶 ',
+        run = ' ',
+        task = '󰄴 ',
+        read = ' ',
+        write = ' ',
+        plan = ' ',
+        search = ' ',
+        web = '󰖟 ',
+        list = ' ',
+        tool = '󰖷 ',
+        restore_point = '󰒋 ',
+        restore_count = ' ',
+        file = '󰈙 ',
+        status_on = ' ',
+        status_off = ' ',
+        border = '▌ ',
+        bullet = '∙',
       }
     },
     output = {
