@@ -109,3 +109,6 @@ map({ "v" }, "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<CR>",
 map({ "n" }, "<leader>sp", "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", { silent = true, desc = "Search on current file" })
 -- CodeCompanion
 map({ "n" }, "<leader>cc", "<cmd>CodeCompanionChat<CR>", { silent = true, desc = "Toggle CodeCompanion Chat" })
+-- Tidal
+map({ "n" }, "<leader>tl", "<cmd>TidalLaunch<CR>", { silent = true, desc = "Launch Tidal Cycles" })
+map({ "n" }, "<leader>tq", "<cmd>TidalQuit<CR>", { silent = true, desc = "Quit Tidal Cycles" })

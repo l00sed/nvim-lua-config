@@ -15,6 +15,7 @@ require('nvim-treesitter.configs').setup({
     "css",
     "cpp",
     "cuda",
+    "haskell",
     "html",
     "javascript",
 		"json",
