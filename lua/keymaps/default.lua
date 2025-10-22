@@ -10,6 +10,11 @@ map({ "v" }, "<C-c>", '"+y', { silent = true, desc = "Yank/copy from visual mode
 -- Toggle Wrap
 map({ "n" }, '<leader>tw', '<Cmd>lua require("utils").toggle_wrap()<CR>', { silent = true, desc = "Toggle wrapped lines", noremap = true })
 
+-- Split vertically
+map({ "n" }, "<leader>%", "<Cmd>vnew<CR>", { silent = true, desc = "Vertical split (Tmux-style)" })
+-- Split horizontally
+map({ "n" }, '<leader>"', "<Cmd>new<CR>", { silent = true, desc = "Horizontal split (Tmux-style)" })
+
 -- Tab navigation in vim
 -- NOTE: Commented out in favor of the barbar.nvim "Buffer{Next,Prev,Close}" commands
 

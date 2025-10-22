@@ -17,10 +17,6 @@ map({ "n" }, "<C-l>", "<Cmd>TmuxResizeRight<CR> | <CMD>lua require('bufferline.a
 --map({ "n" }, "<C-j>", "<Cmd>TmuxResizeDown<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
 --map({ "n" }, "<C-k>", "<Cmd>TmuxResizeUp<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane vertically' })
 --map({ "n" }, "<C-l>", "<Cmd>TmuxResizeRight<CR>", { remap = true, silent = true, desc = 'Resize Neovim pane horizontally' })
--- Split vertically
-map({ "n" }, "<leader>%", "<Cmd>vnew<CR>", { silent = true, desc = "Vertical split (Tmux-style)" })
--- Split horizontally
-map({ "n" }, '<leader>"', "<Cmd>new<CR>", { silent = true, desc = "Horizontal split (Tmux-style)" })
 -- Kill neovim pane like Tmux
 map({ "n" }, "<leader>x", "<Cmd>call ConfirmQuit(0)<CR>", { silent = true, desc = "Kill Neovim pane (Tmux-style)" })
 -- Used with the ToggleOnly plugin, zoom the neovim pane like Tmux
