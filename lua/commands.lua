@@ -39,6 +39,17 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
   command = 'setf messages'
 })
 
+-- Tidal Cycles helpers
+-- Auto-launch tidal
+autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.tidal',
+  command = 'TidalLaunch'
+})
+autocmd({ 'WinNew' }, {
+  pattern = 'term://*',
+  command = 'setl nonumber'
+})
+
 -- No fold enabled
 autocmd('FileType', {
   pattern = { 'lazy', 'TelescopePrompt', 'TelescopeResults' },

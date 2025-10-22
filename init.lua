@@ -1,3 +1,8 @@
+-- Add luarocks installed packages to Lua path (LuaJIT uses 5.1 compatibility)
+local home = os.getenv("HOME")
+package.path = package.path .. ";" .. home .. "/.luarocks/share/lua/5.1/?.lua;" .. home .. "/.luarocks/share/lua/5.1/?/init.lua"
+package.cpath = package.cpath .. ";" .. home .. "/.luarocks/lib/lua/5.1/?.so"
+
 -- Bootstrap lazy.nvim plugin loader
 ------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
