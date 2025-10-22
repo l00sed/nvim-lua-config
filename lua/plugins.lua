@@ -419,9 +419,9 @@ return {
     end,
   },
 
-  -- Tidal Cycles
+  -- TidalCycles integration
   {
-    "grddavies/tidal.nvim",
+    "thgrund/tidal.nvim",
     opts = {
       --- Configure TidalLaunch command
       boot = {
@@ -434,6 +434,40 @@ return {
           --- Tidal boot file path
           file = os.getenv("HOME") .. "/.config/tidal/BootTidal.hs",
           enabled = true,
+          highlight = {
+            autostart = true,
+            styles = {
+              osc = {
+                ip = "127.0.0.1",
+                port = 3335,
+              },
+              -- [Tidal ID] -> hl style
+              --custom = {
+              --  ["1"] = { bg = "#cc241d", foreground = "#ffffff" },
+              --  ["2"] = { bg = "#d65d0e", foreground = "#ffffff" },
+              --  ["3"] = { bg = "#d78821", foreground = "#000000" },
+              --  ["4"] = { bg = "#b8bb26", foreground = "#000000" },
+              --  ["5"] = { bg = "#98971a", foreground = "#000000" },
+              --  ["6"] = { bg = "#689d6a", foreground = "#000000" },
+              --  ["7"] = { bg = "#458588", foreground = "#ffffff" },
+              --  ["8"] = { bg = "#d3869b", foreground = "#000000" },
+              --},
+              global = {
+                baseName = "CodeHighlight",
+                style = {
+                  bg = "#ff8800",
+                  foreground = "#000000"
+                }
+              },
+            },
+            events = {
+              osc = {
+                ip = "127.0.0.1",
+                port = 6013,
+              },
+            },
+            fps = 30,
+          },
         },
         sclang = {
           --- Command to launch SuperCollider
@@ -449,7 +483,7 @@ return {
       --- Set to false to disable all default mappings
       --- @type table | nil
       mappings = {
-        send_line = { mode = { "i", "n" }, key = "<S-CR>" },
+        send_line = { mode = { "n" }, key = "<C-e>" },
         send_visual = { mode = { "x" }, key = "<leader><CR>" },
         send_block = { mode = { "i", "n", "x" }, key = "<M-CR>" },
         send_node = { mode = "n", key = "<leader>kk" },
