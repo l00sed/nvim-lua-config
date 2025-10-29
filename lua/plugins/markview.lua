@@ -163,7 +163,7 @@ local opts = {
       "opencode_output"
     },
     -- Max file size that is rendered entirely
-    max_buf_lines = 1000,
+    max_buf_lines = 100000,
     -- Modes where preview is shown
     modes = { "n", "no", "c" },
     -- Lines from the cursor to draw when the

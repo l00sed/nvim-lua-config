@@ -36,6 +36,7 @@ function CmdCapture(cmd, raw)
   if raw then return s end
   s = string.gsub(s, '^%s+', '')
   s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '\27%[[0-9;]*m', '')
   s = string.gsub(s, '[\n\r]+', ' ')
   return s
 end
@@ -86,7 +87,7 @@ require('lspconfig.ui.windows').default_options.border = 'rounded'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local raw_nvm = tostring(CmdCapture('export NVM_DIR="$HOME/.nvm"; source $NVM_DIR/nvm.sh && nvm alias default')) or ''
+local raw_nvm = tostring(CmdCapture('source $HOME/.nvm/nvm.sh && nvm alias default')) or ''
 local v, node_version
 if raw_nvm ~= '' and raw_nvm ~= nil then
   v = string.find(raw_nvm, 'v')
@@ -104,6 +105,7 @@ local default_config = {}
 local configs = {}
 local settings = {}
 local filetypes = {}
+local before_init = function () end
 local on_init = function () end
 local on_attach = lsp_utils.common_on_attach
 
@@ -496,6 +498,7 @@ for _, lsp in ipairs(servers) do
   if (default_config ~= nil or settings ~= nil) then
     vim.lsp.config(lsp, {
       default_config = default_config,
+      before_init = before_init,
       on_init = on_init,
       on_attach = on_attach,
       capabilities = capabilities,

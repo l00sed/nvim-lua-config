@@ -91,7 +91,7 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
-      "unqool/cmp-tidal",
+      "l00sed/cmp-tidal",
     },
     config = function()
       require("plugins.cmp")
