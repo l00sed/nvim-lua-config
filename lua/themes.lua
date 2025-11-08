@@ -108,6 +108,12 @@ set_hl(0, 'MarkviewHeading3', { fg = '#000000', bg = theme['orange-25'] })
 set_hl(0, 'MarkviewHeading4', { fg = '#000000', bg = theme['red-25'] })
 set_hl(0, 'MarkviewHeading5', { fg = '#000000', bg = theme['purple-25'] })
 set_hl(0, 'MarkviewHeading6', { fg = '#000000', bg = theme['blue-25'] })
+set_hl(0, '@markup.heading.1.markdown', { link = 'MarkviewHeading1' })
+set_hl(0, '@markup.heading.2.markdown', { link = 'MarkviewHeading2' })
+set_hl(0, '@markup.heading.3.markdown', { link = 'MarkviewHeading3' })
+set_hl(0, '@markup.heading.4.markdown', { link = 'MarkviewHeading4' })
+set_hl(0, '@markup.heading.5.markdown', { link = 'MarkviewHeading5' })
+set_hl(0, '@markup.heading.6.markdown', { link = 'MarkviewHeading6' })
 
 -- Italic comments
 set_hl(0, 'Comment', { bg = 'none', fg = theme['gray-55'], italic = true })
