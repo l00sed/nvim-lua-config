@@ -150,7 +150,7 @@ local opts = {
     ignore_buftypes = {},
     -- Delay, in miliseconds
     -- to wait before a redraw occurs(after an event is triggered)
-    debounce = 50,
+    debounce = 250,
     -- Filetypes where the plugin is enabled
     filetypes = {
       "markdown",

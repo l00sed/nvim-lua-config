@@ -317,7 +317,7 @@ require("nvim-tree").setup({
   },
   git = {
     ignore = false,
-    timeout = 500,
+    timeout = 600,
   },
   trash = {
     cmd = "trash",
