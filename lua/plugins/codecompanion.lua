@@ -277,17 +277,26 @@ require("codecompanion").setup({
     -- To start Ollama server (and start at startup), run:
     --  MacOS:
     --  brew services start ollama
-    provider = "delta"
+    provider = "delta",
+    show_context = true,
+    show_settings = true,
+    show_token_count = true,
+    show_tools_processing = true,
   },
   strategies = {
     chat = {
-      adapter = agent,
+      adapter = "opencode",
+      name = "copilot",
+      model = "claude-sonnet-4.5"
     },
     inline = {
-      adapter = agent,
+      name = "copilot",
+      model = "claude-sonnet-4.5"
     },
     agent = {
-      adapter = agent,
+      adapter = "opencode",
+      name = "copilot",
+      model = "claude-sonnet-4.5"
     }
   },
   adapters = {
@@ -307,6 +316,24 @@ require("codecompanion").setup({
         }
       })
     end
+  },
+  memory = {
+    default = {
+      description = "Collection of common files for all projects",
+      files = {
+        ".clinerules",
+        ".cursorrules",
+        ".goosehints",
+        ".rules",
+        ".windsurfrules",
+        ".github/copilot-instructions.md",
+        "AGENT.md",
+        "AGENTS.md",
+        { path = "CLAUDE.md", parser = "claude" },
+        { path = "CLAUDE.local.md", parser = "claude" },
+        { path = "~/.claude/CLAUDE.md", parser = "claude" }
+      }
+    }
   },
   opts = {
     ---@param adapter CodeCompanion.Adapter

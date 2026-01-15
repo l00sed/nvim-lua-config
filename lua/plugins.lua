@@ -130,12 +130,12 @@ return {
   },
 
   -- Image Viewer
-  {
-    "3rd/image.nvim",
-    config = function()
-      require("plugins.image")
-    end
-  },
+  --{
+  --  "3rd/image.nvim",
+  --  config = function()
+  --    require("plugins.image")
+  --  end
+  --},
 
   -- Colorizer
   {
