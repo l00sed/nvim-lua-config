@@ -497,7 +497,7 @@ return {
         --- @type vim.api.keyset.highlight
         highlight = { link = "IncSearch" },
         --- Duration to apply the highlight for
-        timeout = 150,
+        timeout = 500,
       },
     },
     -- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
