@@ -24,16 +24,28 @@ function os.capture(cmd, raw)
   return s
 end
 
--- ============================================
--- Use Ollama as default
---local agent = "ollama"
-local agent = "copilot"
--- Default model for Ollama to use (ignored with copilot)
---local model = "gemma3:12b"
-
 local cwdGitRoot = os.capture('git rev-parse --show-toplevel')
 config = join(cwdGitRoot, config)
 local configExists = exists(config)
+
+-- --------------------------------------------
+-- Set the adapter
+-- --------------------------------------------
+-- To start Ollama server (and start at startup)...
+-- -- macOS: brew services start ollama
+local adapter_options = { "ollama", "copilot", "opal" }
+-- Change this index to set the default adapter
+vim.env.ADAPTER = adapter_options[2]
+
+-- --------------------------------------------
+-- Setup the default model for each adapter
+-- --------------------------------------------
+local model_options = {
+  ollama = "gemma3:12b",                             -- Ollama
+  copilot = "claude-sonnet-4.5",                     -- Copilot
+  opal = "Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4"  -- Opal
+}
+vim.env.MODEL = model_options[vim.env.ADAPTER]
 
 local content = {}
 if configExists == true then
@@ -65,7 +77,7 @@ if configExists == true then
   local vitest = has_value(content.keyKnowledge, "vitest")
   local vue = has_value(content.keyKnowledge, "vue")
 
-  agent = content.agent
+  --adapter = content.adapter
   keyKnowledge = table.concat(content.keyKnowledge, ", ")
   languages = " " .. table.concat(content.languages, ", ") .. " "
 
@@ -274,39 +286,69 @@ end
 
 require("codecompanion").setup({
   display = {
-    -- To start Ollama server (and start at startup), run:
-    --  MacOS:
-    --  brew services start ollama
-    provider = "delta"
-  },
-  strategies = {
-    chat = {
-      adapter = agent,
-    },
-    inline = {
-      adapter = agent,
-    },
-    agent = {
-      adapter = agent,
-    }
+    provider = "delta" -- Use 'delta' for a more compact diff view
   },
   adapters = {
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        name = model,
-        schema = {
-          model = {
-            default = model
-          },
-          num_ctx = {
-            default = 16384
-          },
-          num_predict = {
-            default = -1
+    -- Currently not investigating the ACP adapters
+    http = {
+      copilot = function()
+        -- configure copilot adapter
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            model = {
+              default = vim.env.MODEL
+            }
           }
-        }
-      })
-    end
+        })
+      end,
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          schema = {
+            model = {
+              default = model
+            },
+            num_ctx = {
+              default = 16384
+            },
+            num_predict = {
+              default = -1
+            }
+          }
+        })
+      end,
+      opal = function()
+        -- configure opal adapter
+        return require("codecompanion.adapters").extend("openai_compatible", {
+          env = {
+            url = os.getenv("OPAL_API_URL"),
+            api_key = os.getenv("OPAL_API_KEY")
+          },
+          schema = {
+            model = {
+              default = vim.env.MODEL
+            }
+          }
+        })
+      end
+    }
+  },
+  interactions = {
+    chat = {
+      adapter = vim.env.ADAPTER,
+      model = vim.env.MODEL
+    },
+    inline = {
+      adapter = vim.env.ADAPTER,
+      model = vim.env.MODEL
+    },
+    cmd = {
+      adapter = vim.env.ADAPTER,
+      model = vim.env.MODEL
+    },
+    background = {
+      adapter = vim.env.ADAPTER,
+      model = vim.env.MODEL
+    },
   },
   opts = {
     ---@param adapter CodeCompanion.Adapter
