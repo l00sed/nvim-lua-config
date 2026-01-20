@@ -32,7 +32,7 @@ local configExists = exists(config)
 -- Set the adapter
 -- --------------------------------------------
 -- To start Ollama server (and start at startup)...
--- -- macOS: brew services start ollama
+-- -- macOS: brew services start ollama OR ollama serve
 local adapter_options = { "ollama", "copilot", "opal" }
 -- Change this index to set the default adapter
 vim.env.ADAPTER = adapter_options[2]
@@ -41,7 +41,7 @@ vim.env.ADAPTER = adapter_options[2]
 -- Setup the default model for each adapter
 -- --------------------------------------------
 local model_options = {
-  ollama = "gemma3:12b",                             -- Ollama
+  ollama = "qwen2.5:7b-instruct",                    -- Ollama
   copilot = "claude-sonnet-4.5",                     -- Copilot
   opal = "Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4"  -- Opal
 }
@@ -305,7 +305,7 @@ require("codecompanion").setup({
         return require("codecompanion.adapters").extend("ollama", {
           schema = {
             model = {
-              default = model
+              default = vim.env.MODEL
             },
             num_ctx = {
               default = 16384
@@ -334,6 +334,7 @@ require("codecompanion").setup({
   },
   interactions = {
     chat = {
+      --adapter = "opencode",
       adapter = vim.env.ADAPTER,
       model = vim.env.MODEL
     },
