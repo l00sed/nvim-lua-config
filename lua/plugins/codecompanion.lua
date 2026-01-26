@@ -289,25 +289,13 @@ require("codecompanion").setup({
     -- To start Ollama server (and start at startup), run:
     --  MacOS:
     --  brew services start ollama
-    provider = "delta"
+    provider = "delta",
     show_context = true,
     show_settings = true,
     show_token_count = true,
     show_tools_processing = true,
   },
-  strategies = {
-    chat = {
-      adapter = agent,
-    },
-    inline = {
-      adapter = agent,
-    },
-    agent = {
-      adapter = agent,
-    }
-  },
   adapters = {
-    -- Currently not investigating the ACP adapters
     http = {
       copilot = function()
         -- configure copilot adapter
