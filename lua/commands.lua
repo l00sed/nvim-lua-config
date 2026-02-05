@@ -194,3 +194,9 @@ function! ConfirmQuit(writeFile)
   endif
 endfu
 ]]
+
+-- Set treesitter syntax highlighting
+autocmd('FileType', {
+  pattern = { 'python', 'lua', 'javascript', 'typescript', 'tsx', 'c', 'cpp', 'rust', 'go', 'html', 'css', 'json', 'yaml', 'markdown' },
+  callback = function() vim.treesitter.start() end
+})

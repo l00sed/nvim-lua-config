@@ -41,9 +41,10 @@ vim.env.ADAPTER = adapter_options[2]
 -- Setup the default model for each adapter
 -- --------------------------------------------
 local model_options = {
-  ollama = "qwen2.5:7b-instruct",                    -- Ollama
-  copilot = "claude-sonnet-4.5",                     -- Copilot
-  opal = "Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4"  -- Opal
+  --ollama = "qwen2.5:7b-instruct",
+  ollama = "glm-4.7-flash:latest",
+  copilot = "claude-sonnet-4.5",
+  opal = "Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4"
 }
 vim.env.MODEL = model_options[vim.env.ADAPTER]
 
@@ -68,6 +69,7 @@ if configExists == true then
   local django = has_value(content.keyKnowledge, "django")
   local js = has_value(content.keyKnowledge, "javascript")
   local next = has_value(content.keyKnowledge, "next")
+  local npm = has_value(content.keyKnowledge, "npm")
   local nuxt = has_value(content.keyKnowledge, "nuxt")
   local python = has_value(content.keyKnowledge, "python")
   local react = has_value(content.keyKnowledge, "react")
