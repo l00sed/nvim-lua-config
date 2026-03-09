@@ -1,5 +1,5 @@
 local g = vim.g
-local o = vim.o
+local o = vim.opt
 local w = vim.w
 local wo = vim.wo
 local ft = vim.filetype
