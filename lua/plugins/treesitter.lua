@@ -26,5 +26,6 @@ require('nvim-treesitter').install({
   "yaml",
 })
 
+vim.treesitter.language.register('javascript', { 'jsx' })
 vim.treesitter.language.register('markdown', 'mdx')
 vim.treesitter.language.register('markdown', 'vimwiki')
