@@ -204,7 +204,7 @@ cmp.setup({
     --{ name = 'copilot', group_index = 2 },
     --{ name = 'minuet' },
     { name = 'tidal' },
-    { name = "tidal_samples" },
+    { name = 'tidal_samples' },
     { name = 'nvim_lua' },
     { name = 'path'     },
     { name = 'buffer'   },

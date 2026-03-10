@@ -1,6 +1,5 @@
 local g = vim.g
-local o = vim.o
-local opt = vim.opt
+local o = vim.opt
 local w = vim.w
 local wo = vim.wo
 local ft = vim.filetype
@@ -53,8 +52,8 @@ o.history                     = 10000
 o.redrawtime                  = 10000
 o.autoread                    = true
 o.swapfile                    = false
- -- Prevents an annoying "Press ENTER or type command to continue" message on any buffer event
-o.dir                         = "~/tmp"
+-- Prevents an annoying "Press ENTER or type command to continue" message on any buffer event
+o.dir                         = vim.fn.expand("~/tmp")
 o.backup                      = false
 o.writebackup                 = false
 o.ignorecase                  = true -- Ignore case when using lowercase in search
@@ -80,8 +79,9 @@ o.fileencoding                = "utf-8"
 o.ls                          = 2
 o.shortmess                   = "c"
 o.spell                       = true
-opt.spelllang                 = "en_us"
-opt.completeopt               = "menuone,noinsert,noselect"
+o.spelllang                   = "en_us"
+o.spellfile                   = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+o.completeopt                 = "menuone,noinsert,noselect"
 o.wildmode                    = "longest,full" -- Display auto-complete in Command Mode
 o.timeoutlen                  = 600
 o.updatetime                  = 600 -- Delay until write to Swap and HoldCommand event
