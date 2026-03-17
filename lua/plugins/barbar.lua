@@ -96,30 +96,32 @@ require('bufferline').setup({
   no_name_title = nil,
 })
 
-local nvim_tree_events = require('nvim-tree.events')
-local api = require('nvim-tree.api')
 local bufferline_api = require('bufferline.api')
 
 local function get_tree_size()
-  -- Get the ID of the nvim-tree window
-  local winid = api.tree.winid()
-  -- Return the width of the nvim-tree window
-  if (winid) then
-    return vim.api.nvim_win_get_width(winid)
-  else
+  local ok, api = pcall(require, 'nvim-tree.api')
+  if not ok then
     return 0
   end
+
+  local winid = api.tree.winid()
+  if winid then
+    return vim.api.nvim_win_get_width(winid)
+  end
+
+  return 0
 end
 
--- Set the offset for bufferline when nvim-tree is opened
-nvim_tree_events.subscribe('TreeOpen', function()
-  bufferline_api.set_offset(30)
-end)
+local has_tree_events, nvim_tree_events = pcall(require, 'nvim-tree.events')
+if has_tree_events then
+  nvim_tree_events.subscribe('TreeOpen', function()
+    bufferline_api.set_offset(30)
+  end)
 
--- Set the offset to 0 when nvim-tree is closed
-nvim_tree_events.subscribe('TreeClose', function()
-  bufferline_api.set_offset(0)
-end)
+  nvim_tree_events.subscribe('TreeClose', function()
+    bufferline_api.set_offset(0)
+  end)
+end
 
 -- Resize the bufferline offset to match the nvim-tree window width
 autocmd('WinResized', {

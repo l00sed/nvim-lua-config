@@ -4,6 +4,10 @@ return {
    "williamboman/mason.nvim", -- Helper for installing most language servers
    "williamboman/mason-lspconfig.nvim",
    "neovim/nvim-lspconfig",
+   event = { "BufReadPre", "BufNewFile" },
+   config = function()
+     require("plugins.mason")
+   end,
   },
 
   -- Use Luarocks lua package management
@@ -34,6 +38,7 @@ return {
   {
     "nvimtools/none-ls.nvim",
     dependencies = "nvimtools/none-ls-extras.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("plugins.none-ls")
     end,
@@ -59,6 +64,7 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
+    event = "VeryLazy",
     config = function()
       require("todo-comments").setup()
     end,
@@ -68,6 +74,14 @@ return {
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    cmd = {
+      'DiffviewOpen',
+      'DiffviewClose',
+      'DiffviewFileHistory',
+      'DiffviewFocusFiles',
+      'DiffviewToggleFiles',
+      'DiffviewRefresh',
+    },
   },
 
   -- devicons in cmp menu
@@ -105,6 +119,12 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    cmd = {
+      "CodeCompanion",
+      "CodeCompanionActions",
+      "CodeCompanionChat",
+      "CodeCompanionCmd",
+    },
     config = function()
       require("plugins.codecompanion")
     end
@@ -112,6 +132,7 @@ return {
 
   {
     'github/copilot.vim',
+    event = 'InsertEnter',
     config = function()
       require("plugins.copilotvim")
     end
@@ -119,6 +140,12 @@ return {
 
   {
     "sudo-tee/opencode.nvim",
+    cmd = {
+      "Opencode",
+      "OpencodeAsk",
+      "OpencodeOpen",
+      "OpencodeToggle",
+    },
     config = function()
       require("plugins.opencode")
     end,
@@ -140,6 +167,7 @@ return {
   -- Colorizer
   {
     "norcalli/nvim-colorizer.lua",
+    ft = { "css", "scss", "sass", "html", "javascript", "typescript", "vue", "lua", "markdown" },
     config = function()
       require("colorizer").setup({"*"}, {
       RGB = true, -- #RGB hex codes
@@ -173,6 +201,7 @@ return {
   -- Snippets
   {
     "L3MON4D3/LuaSnip",
+    event = "InsertEnter",
     config = function()
       require("plugins.snippets")
     end,
@@ -181,6 +210,7 @@ return {
   -- Keymap helper
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     config = function()
       require("plugins.which-key")
     end,
@@ -189,6 +219,7 @@ return {
   -- Signature help
   {
     "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
     config = function()
       require("plugins.lsp_signature")
     end,
@@ -215,6 +246,7 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -228,13 +260,12 @@ return {
   {
     "romgrk/barbar.nvim",
     dependencies = {
-      'nvim-tree/nvim-tree.lua',
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
       require("plugins.barbar")
     end,
-    event = "BufWinEnter",
+    event = "VeryLazy",
   },
 
   -- Seamless Vim + Tmux navigation
@@ -246,6 +277,12 @@ return {
   -- NvimTree
   {
     "nvim-tree/nvim-tree.lua",
+    cmd = {
+      "NvimTreeFindFile",
+      "NvimTreeOpen",
+      "NvimTreeToggle",
+      "NvimTreeFocus",
+    },
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("plugins.nvimtree")
@@ -269,7 +306,7 @@ return {
   -- Gitsigns
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufWinEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -288,6 +325,7 @@ return {
   -- ZenMode
   {
     "folke/zen-mode.nvim",
+    cmd = "ZenMode",
     config = function()
       require("zen-mode").setup({
         window = {
@@ -337,6 +375,7 @@ return {
   -- Smooth Scrolling
   {
     "karb94/neoscroll.nvim",
+    keys = { "<C-u>", "<C-d>", "<C-f>" },
     config = true,
   },
 
@@ -377,6 +416,8 @@ return {
   -- LaTeX for Vim
   {
     "lervag/vimtex",
+    ft = { "tex", "plaintex", "bib" },
+    cmd = { "VimtexCompile", "VimtexView", "VimtexStop", "VimtexClean" },
     config = function()
       require("plugins.vimtex")
     end,
@@ -393,6 +434,7 @@ return {
   -- Pretty/interactive indentlines
   {
     "lukas-reineke/indent-blankline.nvim",
+    event = "VeryLazy",
     main = "ibl",
     opts = {},
     config = function()
@@ -403,7 +445,7 @@ return {
   -- Pretty fold
   {
     "bbjornstad/pretty-fold.nvim",
-    --event = "BufWinEnter",
+    event = "BufReadPost",
     config = function()
       require("plugins.pretty-fold")
     end,
@@ -422,6 +464,8 @@ return {
   -- TidalCycles integration
   {
     "thgrund/tidal.nvim",
+    ft = { "tidal" },
+    cmd = { "TidalLaunch", "TidalQuit" },
     opts = {
       --- Configure TidalLaunch command
       boot = {
