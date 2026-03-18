@@ -1,13 +1,16 @@
 return {
   -- LSP Installer and Config (using mason)
   {
-   "williamboman/mason.nvim", -- Helper for installing most language servers
-   "williamboman/mason-lspconfig.nvim",
-   "neovim/nvim-lspconfig",
-   event = { "BufReadPre", "BufNewFile" },
-   config = function()
-     require("plugins.mason")
-   end,
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUpdate", "MasonLog" },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("plugins.mason")
+    end,
   },
 
   -- Use Luarocks lua package management
@@ -145,6 +148,12 @@ return {
       "OpencodeAsk",
       "OpencodeOpen",
       "OpencodeToggle",
+    },
+    keys = {
+      { '<leader>og', desc = 'Opencode toggle' },
+      { '<leader>oi', desc = 'Opencode open input' },
+      { '<leader>oo', desc = 'Opencode open output' },
+      { '<leader>oq', desc = 'Opencode close' },
     },
     config = function()
       require("plugins.opencode")
