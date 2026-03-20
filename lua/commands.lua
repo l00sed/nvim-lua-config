@@ -3,7 +3,7 @@ local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local command = vim.api.nvim_create_user_command
-local set_hl = vim.api.nvim_set_hl
+--local set_hl = vim.api.nvim_set_hl
 
 -- Disable default commands (uses CTRL modifier)
 cmd('let g:tmux_navigator_no_mappings = 1')

@@ -241,17 +241,23 @@ for _, lsp in ipairs(servers) do
   if (lsp == "lua_ls") then
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
         diagnostics = {
           -- Get the LS to recognize the vim global
-          globals = { 'vim' }
+          globals = { 'vim' },
+          -- Treat locals prefixed with _ as intentionally unused
+          unusedLocalExclude = { '_*' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.stdpath('config') .. '/lua'] = true,
-          },
-        }
+          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
       }
     }
   end
@@ -491,7 +497,7 @@ for _, lsp in ipairs(servers) do
   -- requires the vtsls config above
   if (lsp == "vue_ls") then
     filetypes = { "vue" }
-    root_markers = { "package.json" }
+    --root_markers = { "package.json" }
   end
 
   local cfg = {

@@ -51,7 +51,7 @@ for i, hl in ipairs(indent_highlights) do
   set_hl(0, 'IndentBlanklineIndent' .. i, { fg = hl, nocombine = true })
 end
 
-highlights = {}
+local highlights = {}
 for i=1,21,1 do
   highlights[i] = "IndentBlanklineIndent" .. i
 end
@@ -66,7 +66,7 @@ require("ibl").setup({
   },
   scope = {
     char = "│",
-    highlight = highlights[table.getn(highlights)],
+    highlight = highlights[#highlights],
     show_start = false,
     show_end = false,
   },

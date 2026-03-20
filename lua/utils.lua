@@ -20,7 +20,7 @@ end
 
 -- Open floating diagnostics
 function M.open_float()
-  vim.diagnostics.open_float(0, { scope = "line" })
+  vim.diagnostic.open_float(0, { scope = "line" })
 end
 
 -- Check if value exists in array
@@ -41,12 +41,9 @@ function M.invert_hex_color(color)
   local inverted_color = '#'
   -- Fetch the different components and invert them
   for i = 0, 2 do
-    -- Fetch the substring
-    local component = string.sub(color, 1 + i * 2, 2 + i * 2)
-    -- Convert to numerical
-    component = tonumber('0x' .. component)
-    -- Invert
-    component = 0xff - component
+    -- Fetch the substring and convert to numerical, then invert
+    local component_str = string.sub(color, 1 + i * 2, 2 + i * 2)
+    local component = 0xff - (tonumber('0x' .. component_str) or 0)
     -- Append
     inverted_color = inverted_color .. string.format('%.2x', component)
   end

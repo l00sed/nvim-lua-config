@@ -88,8 +88,6 @@ map({ "n" }, '<leader>al', "<Cmd>arg<CR>", { silent = true, desc = "List arglist
 -- nmap("ga", "<cmd>EasyAlign")
 -- DoGe (Documentation Generator)
 map({ "n" }, '<leader>Do', '<Cmd>DogeGenerate<CR>', { silent = true, desc = "Generate documentation for the highlighted function" })
--- Which-Key
-map({ "n" }, '<leader>W', '<Cmd>W <leader><CR>', { silent = true, desc = "Which-key window" })
 -- Neoscroll
 map({ "n" }, "<C-u>", "<Cmd>lua require('neoscroll').scroll(-20, { move_cursor=true; duration=100 })<CR>", { silent = true, desc = "Smooth-scroll up" })
 map({ "n" }, "<C-d>", "<Cmd>lua require('neoscroll').scroll(20, { move_cursor=true; duration=100 })<CR>", { silent = true, desc = "Smooth-scroll down" })

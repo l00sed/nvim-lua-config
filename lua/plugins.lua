@@ -47,22 +47,6 @@ return {
     end,
   },
 
-  -- Search and replace across multiple files
-  {
-    "s1n7ax/nvim-search-and-replace",
-    config = function()
-      require("nvim-search-and-replace").setup({
-        ignore = {
-          "**/node_modules/**",
-          "**/.git/**",
-          "**/.gitignore",
-          "**/.gitmodules",
-          "**/__pycache__/**",
-        },
-      })
-    end,
-  },
-
   -- Magically delicious todo-lists
   {
     "folke/todo-comments.nvim",
@@ -165,14 +149,6 @@ return {
     }
   },
 
-  -- Image Viewer
-  --{
-  --  "3rd/image.nvim",
-  --  config = function()
-  --    require("plugins.image")
-  --  end
-  --},
-
   -- Colorizer
   {
     "norcalli/nvim-colorizer.lua",
@@ -213,15 +189,6 @@ return {
     event = "InsertEnter",
     config = function()
       require("plugins.snippets")
-    end,
-  },
-
-  -- Keymap helper
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.which-key")
     end,
   },
 
@@ -364,63 +331,12 @@ return {
     config = true,
   },
 
-  -- Show inline usage metrics
-  {
-    'wiliamks/nice-reference.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons', --optional
-      {
-        'rmagatti/goto-preview',
-        config = function()
-          require('goto-preview').setup({})
-        end
-      } --optional
-    },
-    config = function()
-      require("plugins.nice-ref")
-    end
-  },
-
   -- Smooth Scrolling
   {
     "karb94/neoscroll.nvim",
     keys = { "<C-u>", "<C-d>", "<C-f>" },
     config = true,
   },
-
-  --{
-  --  "sphamba/smear-cursor.nvim",
-  --  opts = {
-  --    -- Cursor color. Defaults to Cursor gui color
-  --    --cursor_color = "#d3cdc3",
-  --    -- Background color. Defaults to Normal gui background color
-  --    normal_bg = "#111111",
-  --    -- Smear cursor when switching buffers
-  --    smear_between_buffers = true,
-  --    -- Smear cursor when moving within line or to neighbor lines
-  --    smear_between_neighbor_lines = true,
-  --    -- Use floating windows to display smears outside buffers.
-  --    -- May have performance issues with other plugins.
-  --    --use_floating_windows = true,
-  --    -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-  --    -- Smears will blend better on all backgrounds.
-  --    --legacy_computing_symbols_support = true,   -- How fast the smear's head moves towards the target.
-  --    -- 0: no movement, 1: instantaneous, default: 0.6
-  --    --stiffness = 0.6,
-  --    -- How fast the smear's tail moves towards the head.
-  --    -- 0: no movement, 1: instantaneous, default: 0.3
-  --    --trailing_stiffness = 0.3,
-  --    -- How much the tail slows down when getting close to the head.
-  --    -- 0: no slowdown, more: more slowdown, default: 0.1
-  --    --trailing_exponent = 0.1,
-  --    -- Stop animating when the smear's tail is within this distance (in characters) from the target.
-  --    -- Default: 0.1
-  --    --distance_stop_animating = 0.1,
-  --    -- Attempt to hide the real cursor when smearing.
-  --    -- Default: true
-  --    --hide_target_hack = true,
-  --  }
-  --},
 
   -- LaTeX for Vim
   {
@@ -475,93 +391,27 @@ return {
     "thgrund/tidal.nvim",
     ft = { "tidal" },
     cmd = { "TidalLaunch", "TidalQuit" },
-    opts = {
-      --- Configure TidalLaunch command
-      boot = {
-        tidal = {
-          --- Command to launch ghci with tidal installation
-          cmd = "ghci",
-          args = {
-            "-v0",
-          },
-          --- Tidal boot file path
-          file = os.getenv("HOME") .. "/.config/tidal/BootTidal.hs",
-          enabled = true,
-          highlight = {
-            autostart = true,
-            styles = {
-              osc = {
-                ip = "127.0.0.1",
-                port = 3335,
-              },
-              -- [Tidal ID] -> hl style
-              --custom = {
-              --  ["1"] = { bg = "#cc241d", foreground = "#ffffff" },
-              --  ["2"] = { bg = "#d65d0e", foreground = "#ffffff" },
-              --  ["3"] = { bg = "#d78821", foreground = "#000000" },
-              --  ["4"] = { bg = "#b8bb26", foreground = "#000000" },
-              --  ["5"] = { bg = "#98971a", foreground = "#000000" },
-              --  ["6"] = { bg = "#689d6a", foreground = "#000000" },
-              --  ["7"] = { bg = "#458588", foreground = "#ffffff" },
-              --  ["8"] = { bg = "#d3869b", foreground = "#000000" },
-              --},
-              global = {
-                baseName = "CodeHighlight",
-                style = {
-                  bg = "#ff8800",
-                  foreground = "#000000"
-                }
-              },
-            },
-            events = {
-              osc = {
-                ip = "127.0.0.1",
-                port = 6013,
-              },
-            },
-            fps = 30,
-          },
-        },
-        sclang = {
-          --- Command to launch SuperCollider
-          cmd = "sclang",
-          args = {},
-          --- SuperCollider boot file
-          file = os.getenv("HOME") .. "/.config/tidal/BootSuperDirt.scd",
-          enabled = true,
-        },
-        split = "v",
-      },
-      --- Default keymaps
-      --- Set to false to disable all default mappings
-      --- @type table | nil
-      mappings = {
-        send_line = { mode = { "n" }, key = "<C-e>" },
-        send_visual = { mode = { "x" }, key = "<leader><CR>" },
-        send_block = { mode = { "i", "n", "x" }, key = "<M-CR>" },
-        send_node = { mode = "n", key = "<leader>kk" },
-        send_silence = { mode = "n", key = "<leader>d" },
-        send_hush = { mode = "n", key = "<leader><Esc>" },
-      },
-      ---- Configure highlight applied to selections sent to tidal interpreter
-      selection_highlight = {
-        --- Highlight definition table
-        --- see ':h nvim_set_hl' for details
-        --- @type vim.api.keyset.highlight
-        highlight = { link = "IncSearch" },
-        --- Duration to apply the highlight for
-        timeout = 500,
-      },
-    },
+    init = function()
+      vim.filetype.add({ extension = { tidal = "tidal" } })
+      vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+        pattern = "*.tidal",
+        callback = function(ev)
+          pcall(vim.treesitter.start, ev.buf, "haskell")
+        end,
+      })
+    end,
     -- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       opts = {
         ensure_installed = {
           "haskell",
-          "supercollider" ,
+          "supercollider",
         }
       },
     },
+    config = function()
+      require("plugins.tidal")
+    end,
   }
 }

@@ -1,4 +1,4 @@
-config = {
+local config = {
   fill_char = '─',
   sections = {
     left = {

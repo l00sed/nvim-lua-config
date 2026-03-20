@@ -10,9 +10,6 @@ local opts = {
     padding = { 2, 4, 2, 4 },
     winblend = 0
   },
-  filter = function(mapping)
-    return false
-  end
 }
 
 wk.setup(opts)
