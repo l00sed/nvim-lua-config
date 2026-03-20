@@ -2,18 +2,18 @@ local json = require('lunajson')
 local config = ".codecompanion.json"
 
 -- Check if file exists
-function exists(name)
+local function exists(name)
   local f=io.open(name,"r")
   if f~=nil then io.close(f) return true else return false end
 end
 
 -- Join paths
-function join(...)
+local function join(...)
   return table.concat({ ... }, '/')
 end
 
 -- Capture shell command
-function os.capture(cmd, raw)
+local function capture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
   f:close()
@@ -24,7 +24,7 @@ function os.capture(cmd, raw)
   return s
 end
 
-local cwdGitRoot = os.capture('git rev-parse --show-toplevel')
+local cwdGitRoot = capture('git rev-parse --show-toplevel')
 config = join(cwdGitRoot, config)
 local configExists = exists(config)
 
@@ -49,16 +49,17 @@ local model_options = {
 vim.env.MODEL = model_options[vim.env.ADAPTER]
 
 local content = {}
+local codeStyle = nil
 if configExists == true then
   local file = io.open(config, "r")
-  if io.type(file) == "file" then
+  if file ~= nil then
     local read = file:read("*a")
     file:close()
     content = json.decode(read)
   end
 
   local function has_value(tab, val)
-    for index, value in ipairs(tab) do
+    for _, value in ipairs(tab) do
       if string.lower(value) == string.lower(val) then
         return true
       end
@@ -67,7 +68,6 @@ if configExists == true then
   end
 
   local django = has_value(content.keyKnowledge, "django")
-  local js = has_value(content.keyKnowledge, "javascript")
   local next = has_value(content.keyKnowledge, "next")
   local npm = has_value(content.keyKnowledge, "npm")
   local nuxt = has_value(content.keyKnowledge, "nuxt")
@@ -75,17 +75,15 @@ if configExists == true then
   local react = has_value(content.keyKnowledge, "react")
   local tailwind = has_value(content.keyKnowledge, "tailwind")
   local ts = has_value(content.keyKnowledge, "typescript")
-  local vite = has_value(content.keyKnowledge, "vite")
-  local vitest = has_value(content.keyKnowledge, "vitest")
   local vue = has_value(content.keyKnowledge, "vue")
 
   --adapter = content.adapter
-  keyKnowledge = table.concat(content.keyKnowledge, ", ")
-  languages = " " .. table.concat(content.languages, ", ") .. " "
+  local keyKnowledge = table.concat(content.keyKnowledge, ", ")
+  local languages = " " .. table.concat(content.languages, ", ") .. " "
 
   -- Refer to https://cursor.directory for more prompts
 
-  local codeStyle = "\
+  codeStyle = "\
   Code Style and Structure\
   \
   - Write clean, maintainable, and technically accurate" .. languages .. "code.\
@@ -378,10 +376,9 @@ require("codecompanion").setup({
     }
   },
   opts = {
-    ---@param adapter CodeCompanion.Adapter
     ---@return string
-    system_prompt = function(opts)
-      return codeStyle
+    system_prompt = function(_opts) ---@diagnostic disable-line: unused-local
+      return codeStyle or ''
     end
   }
 })

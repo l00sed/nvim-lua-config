@@ -67,7 +67,7 @@ local horizontal_rules = {
       --- If the value is a function the "buffer" ID
       --- is provided as the parameter.
       ---@type integer | fun(buffer: integer): nil
-      repeat_amount = function (buffer)
+      repeat_amount = function (_buffer)
         local textoff = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].textoff;
         return math.floor((vim.o.columns - textoff - 3) / 2);
       end,
@@ -107,7 +107,7 @@ local horizontal_rules = {
       --- If the value is a function the "buffer" ID
       --- is provided as the parameter.
       ---@type integer | fun(buffer: integer): nil
-      repeat_amount = function (buffer)
+      repeat_amount = function (_buffer)
         local textoff = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].textoff;
         return math.floor((vim.o.columns - textoff - 3) / 2);
       end,

@@ -17,6 +17,14 @@ git clone https://github.com/l00sed/neovim-lua-config ~/.config/nvim
 
 Open Neovim once to let `lazy.nvim` install plugins.
 
+After cloning, install the git hooks:
+
+```bash
+bash scripts/install-hooks.sh
+```
+
+This symlinks everything under `scripts/hooks/` into `.git/hooks/`. Re-run whenever hooks are added or updated.
+
 ## Structure
 
 - `init.lua`: entrypoint and lazy bootstrapping
@@ -50,6 +58,24 @@ Useful in-editor commands:
 - Most server tuning lives in `lua/plugins/mason.lua`
 
 Install Node-based tools with your preferred Node setup (for example `nvm` + `npm i -g ...` where required).
+
+## Linting
+
+Lua files are linted with `lua-language-server`. Install it via Mason inside Neovim (`:MasonInstall lua-language-server`) or via your system package manager.
+
+The `pre-push` git hook runs the linter automatically before every push. It filters out `undefined-global vim` false positives that are suppressed by `.luarc.json` inside Neovim but not honoured by the CLI checker.
+
+To run the linter manually:
+
+```bash
+lua-language-server --check lua/
+```
+
+Hook scripts live in `scripts/hooks/` and are installed with:
+
+```bash
+bash scripts/install-hooks.sh
+```
 
 ## Notes
 

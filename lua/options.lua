@@ -5,9 +5,9 @@ local wo = vim.wo
 local ft = vim.filetype
 local D = vim.diagnostic
 local cmd = vim.cmd
-local autocmd = vim.api.nvim_create_autocmd
 
 -- NOTE: Suppress deprecation warnings
+---@diagnostic disable-next-line: duplicate-set-field
 vim.deprecate = function() end
 
 -- Fix bug in vim to properly interpret RGB values.
@@ -123,13 +123,11 @@ o.guicursor                   = 'n-v-c:block,'..
 --}
 
 -- Python providers
-local pynvim_env  = "/.local/bin/pyenv/versions/pynvim/"
-python3_host_prog = os.getenv("HOME") .. pynvim_env .. "/bin/python"
-black_virtualenv  = os.getenv("HOME") .. pynvim_env
-
+local pyenv  = os.getenv("HOME") .. "/.pyenv"
+vim.g.python3_host_prog = pyenv .. "/shims/python"
 -- Disable unused providers
-loaded_perl_provider = 0
-loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 -- Diagnostics
 D.config {

@@ -101,15 +101,14 @@ end
 
 local nvm_path = os.getenv("HOME") .. '/.nvm/versions/node/' .. node_version
 
-local default_config = {}
-local configs = {}
-local settings = {}
-local filetypes = {}
-local before_init = function () end
-local on_init = function () end
-local on_attach = lsp_utils.common_on_attach
-
 for _, lsp in ipairs(servers) do
+  local default_config = nil
+  local configs = {}
+  local settings = nil
+  local filetypes = nil
+  local before_init = function () end
+  local on_init = function () end
+  local on_attach = lsp_utils.common_on_attach
   -- ESLint (Javascript and Typescript)
   if (lsp == "eslint") then
     local root_file = {
@@ -242,17 +241,23 @@ for _, lsp in ipairs(servers) do
   if (lsp == "lua_ls") then
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
         diagnostics = {
           -- Get the LS to recognize the vim global
-          globals = { 'vim' }
+          globals = { 'vim' },
+          -- Treat locals prefixed with _ as intentionally unused
+          unusedLocalExclude = { '_*' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.stdpath('config') .. '/lua'] = true,
-          },
-        }
+          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
       }
     }
   end
@@ -492,21 +497,20 @@ for _, lsp in ipairs(servers) do
   -- requires the vtsls config above
   if (lsp == "vue_ls") then
     filetypes = { "vue" }
-    root_markers = { "package.json" }
+    --root_markers = { "package.json" }
   end
 
-  if (default_config ~= nil or settings ~= nil) then
-    vim.lsp.config(lsp, {
-      default_config = default_config,
-      before_init = before_init,
-      on_init = on_init,
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = settings,
-      filetypes = filetypes,
-      configs = configs
-    })
-  else
-    vim.lsp.config(lsp)
-  end
+  local cfg = {
+    before_init = before_init,
+    on_init = on_init,
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+  if default_config ~= nil then cfg.default_config = default_config end
+  if settings ~= nil then cfg.settings = settings end
+  if filetypes ~= nil then cfg.filetypes = filetypes end
+  if next(configs) ~= nil then cfg.configs = configs end
+
+  vim.lsp.config(lsp, cfg)
+  vim.lsp.enable(lsp)
 end

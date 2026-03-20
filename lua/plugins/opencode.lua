@@ -14,8 +14,8 @@ local function opencode_spawn_command(port, url)
   -- Check if container is already running
   local check_cmd = string.format('docker ps --filter "name=%s" --format "{{.Names}}"', container_name)
   local handle = io.popen(check_cmd)
-  local result = handle:read("*a")
-  handle:close()
+  local result = handle and handle:read("*a")
+  if handle then handle:close() end
 
   if result and result:match(container_name) then
     print(string.format("[opencode.nvim] Container %s is already running, skipping start", container_name))

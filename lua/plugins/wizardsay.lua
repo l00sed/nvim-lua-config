@@ -861,15 +861,14 @@ local function draw_rectangle(h_padding, v_padding)
   local wrapped_quote = wrap_text(chosen_quote[1], max_width - 2)
   local wrapped_author = wrap_text(chosen_quote[3], max_width - 2)
 
-  -- Calculate the necessary width and height
+  -- Calculate the necessary width
   local width = max_width
-  local height = #wrapped_quote + #wrapped_author + 2 + 2 * v_padding -- Plus input[2] i.e., blank
 
   -- Top border
   local rectangle = char_top_left .. string.rep(char_top_bottom, width + 2 * h_padding) .. char_top_right .. "\n"
 
   -- Add top padding
-  for i = 1, v_padding do
+  for _i = 1, v_padding do
     rectangle = rectangle .. char_sides .. string.rep(" ", width + 2 * h_padding) .. char_sides .. "\n"
   end
 
@@ -899,7 +898,7 @@ local function draw_rectangle(h_padding, v_padding)
   end
 
   -- Add bottom padding
-  for i = 1, v_padding do
+  for _i = 1, v_padding do
     rectangle = rectangle .. char_sides .. string.rep(" ", width + 2 * h_padding) .. char_sides .. "\n"
   end
 

@@ -29,3 +29,4 @@ require('nvim-treesitter').install({
 vim.treesitter.language.register('javascript', { 'jsx' })
 vim.treesitter.language.register('markdown', 'mdx')
 vim.treesitter.language.register('markdown', 'vimwiki')
+vim.treesitter.language.register('haskell', 'tidal')

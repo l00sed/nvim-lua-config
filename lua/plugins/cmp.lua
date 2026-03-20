@@ -1,5 +1,4 @@
 local fn = vim.fn
-local cmd = vim.cmd
 
 -- local Utils = require('utils')
 local luasnip = require('luasnip')
@@ -147,7 +146,7 @@ cmp.setup({
         Folder = "",
       },
       ellipsis_char = '...',
-      before = function(entry, vim_item)
+      before = function(_entry, vim_item)
         return vim_item
       end
     })

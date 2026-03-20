@@ -14,4 +14,3 @@ g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
 -- The list of supported backends and further explanation is provided
 -- in the documentation, see ":help vimtex-compiler".
 g.vimtex_compiler_method = 'latexmk'
-

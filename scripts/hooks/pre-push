@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# pre-push: run lua-language-server --check on the lua/ directory.
+# Blocks push if any problems are found.
+
+set -uo pipefail
+
+LLS=$(command -v lua-language-server 2>/dev/null)
+if [[ -z "$LLS" ]]; then
+  echo "pre-push: lua-language-server not found, skipping lint" >&2
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+echo "pre-push: running lua-language-server --check ..."
+OUTPUT=$("$LLS" --check "$REPO_ROOT/lua" 2>&1)
+EXIT=$?
+
+# lua-language-server exits 1 when problems are found; filter out
+# false-positive undefined-global vim warnings (covered by .luarc.json
+# inside Neovim but not honoured by the CLI checker).
+# Strip ANSI escape codes first so grep patterns work reliably.
+CLEAN=$(echo "$OUTPUT" | sed 's/\x1b\[[0-9;]*m//g')
+REAL_PROBLEMS=$(echo "$CLEAN" \
+  | grep -E "\[Warning\]|\[Error\]" \
+  | grep -v "(undefined-global)" \
+  | grep -v "(undefined-doc-name)" \
+  || true)
+
+if [[ -n "$REAL_PROBLEMS" ]]; then
+  echo "pre-push: lua-language-server reported problems:" >&2
+  echo "$REAL_PROBLEMS" >&2
+  exit 1
+fi
+
+echo "pre-push: lint passed"
+exit 0

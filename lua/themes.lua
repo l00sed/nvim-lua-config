@@ -59,7 +59,7 @@ set_hl(0, 'DiagnosticHint', { fg = 'white', bg = 'none' })
 
 -- Bufferline Transparency
 set_hl(0, 'BufferLineNumbersSelected', { bg = 'none', fg = 'white' })
-set_hl(0, 'BufferLineBufferSelected', { fg = white, bg = 'none' })
+set_hl(0, 'BufferLineBufferSelected', { fg = '#ffffff', bg = 'none' })
 set_hl(0, 'BufferLineDiagnosticSelected', { bg = 'none' })
 set_hl(0, 'BufferLineHintSelected', { bg = 'none' })
 set_hl(0, 'BufferLineHintDiagnosticSelected', { bg = 'none' })

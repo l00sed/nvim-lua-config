@@ -1,10 +1,5 @@
 -- Make sure alpha exists before calling it
-local status_ok, alpha = pcall(require, "alpha")
-if not status_ok then
-	return
-end
--- Make sure lazy exists
-local status_ok, lazy = pcall(require, "lazy")
+local status_ok, _alpha = pcall(require, "alpha")
 if not status_ok then
 	return
 end
@@ -16,13 +11,6 @@ local cmd = vim.cmd
 local startify = require("alpha.themes.startify")
 -- Programmer quotes
 local wizard = require("plugins.wizardsay")
-
-local stats = require("lazy").stats()
-local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-local lazystats = "Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms"
-
--- Get plugins details
-plugins = require("lazy").stats()
 
 -- Use devicons
 startify.file_icons.provider = "devicons"
@@ -80,7 +68,5 @@ startify.section.bottom_buttons.val = {
 	startify.button("c", "  Config", ":e ~/.config/nvim/lua/options.lua<CR>"),
 	startify.button("q", " 󰈆 Quit", ":q <CR>"),
 }
-
---startify.section.footer.val = lazystats
 
 require("alpha").setup(startify.config)

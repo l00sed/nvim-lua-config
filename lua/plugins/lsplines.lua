@@ -7,4 +7,3 @@ vim.diagnostic.config({
     only_current_line = true
   }
 })
-

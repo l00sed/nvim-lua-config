@@ -1,13 +1,12 @@
 -- LSP helper function
 local cmd = vim.cmd
-local lspconfig_util = require('lspconfig.util')
 
 local M = {}
 
 -- This function defines the on_attach function for several languages which share the same key-bindings
 function M.common_on_attach(client, bufnr)
   -- Set omnifunc
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
   -- rounded borders
   vim.diagnostic.config {
