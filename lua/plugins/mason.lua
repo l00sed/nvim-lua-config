@@ -466,6 +466,9 @@ for _, lsp in ipairs(servers) do
   --   npm i -g @vtsls/language-server
   --   npm i -g typescript
   if (lsp == "vtsls") then
+    default_config = {
+      root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json'),
+    }
     settings = {
       vtsls = {
         tsserver = {
@@ -496,6 +499,9 @@ for _, lsp in ipairs(servers) do
   --  npm i -g @vue/language-server
   -- requires the vtsls config above
   if (lsp == "vue_ls") then
+    default_config = {
+      root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json'),
+    }
     filetypes = { "vue" }
     --root_markers = { "package.json" }
   end
