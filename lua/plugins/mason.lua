@@ -16,8 +16,7 @@ local servers = {
   "intelephense",
   "jsonls",
   "lua_ls",
-  --"pyright",
-  "pylsp",
+  --"pylsp", -- Disabled: ruff handles Python linting; pylsp's pycodestyle conflicts with ruff config
   "rnix",
   "ruff",
   "stylelint_lsp",
@@ -106,6 +105,7 @@ for _, lsp in ipairs(servers) do
   local configs = {}
   local settings = nil
   local filetypes = nil
+  local root_markers = nil
   local before_init = function () end
   local on_init = function () end
   local on_attach = lsp_utils.common_on_attach
@@ -375,20 +375,8 @@ for _, lsp in ipairs(servers) do
   end
 
   -- Python Language Server
-  -- Uses the flake8 plugin for linting
-  if (lsp == "pylsp") then
-    settings = {
-      pylsp = {
-        plugins = {
-          flake8 = {
-            enabled = true
-          }
-        }
-      }
-    }
-  end
-
   if (lsp == "ruff") then
+    root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' }
     filetypes = {
       "python"
     }
@@ -513,6 +501,7 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
   if default_config ~= nil then cfg.default_config = default_config end
+  if root_markers ~= nil then cfg.root_markers = root_markers end
   if settings ~= nil then cfg.settings = settings end
   if filetypes ~= nil then cfg.filetypes = filetypes end
   if next(configs) ~= nil then cfg.configs = configs end

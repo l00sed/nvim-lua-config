@@ -72,7 +72,6 @@ null_ls.setup({
 
 		-- Diagnostics
 		null_ls.builtins.diagnostics.djlint,
-		require("none-ls.diagnostics.flake8"),
 		null_ls.builtins.diagnostics.puppet_lint,
 	},
 	border = "rounded"
