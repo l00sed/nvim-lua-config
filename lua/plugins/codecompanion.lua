@@ -44,7 +44,7 @@ local model_options = {
   --ollama = "qwen2.5:7b-instruct",
   ollama = "glm-4.7-flash:latest",
   copilot = "claude-sonnet-4.5",
-  opal = "Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4"
+  opal = "Qwen/Qwen3-Coder-Next-FP8"
 }
 vim.env.MODEL = model_options[vim.env.ADAPTER]
 
