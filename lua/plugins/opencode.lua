@@ -98,8 +98,6 @@ require('opencode').setup({
       ['<leader>orR'] = { 'diff_restore_snapshot_all' }, -- Restore all files to a restore point
       ['<leader>ox'] = { 'swap_position' }, -- Swap Opencode pane left/right
       ['<leader>opa'] = { 'permission_accept' }, -- Accept permission request once
-      ['<leader>opA'] = { 'permission_accept_all' }, -- Accept all (for current tool)
-      ['<leader>opd'] = { 'permission_deny' }, -- Deny permission request once
       ['<leader>ott'] = { 'toggle_tool_output' }, -- Toggle tools output (diffs, cmd output, etc.)
       ['<leader>otr'] = { 'toggle_reasoning_output' }, -- Toggle reasoning output (thinking steps)
       ['<leader>o/'] = { 'quick_chat', mode = { 'n', 'x' } }, -- Open quick chat input with selection context in visual mode or current line context in normal mode

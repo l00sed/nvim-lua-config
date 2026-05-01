@@ -105,6 +105,7 @@ for _, lsp in ipairs(servers) do
   local configs = {}
   local settings = nil
   local filetypes = nil
+  local root_dir = nil
   local root_markers = nil
   local before_init = function () end
   local on_init = function () end
@@ -454,9 +455,7 @@ for _, lsp in ipairs(servers) do
   --   npm i -g @vtsls/language-server
   --   npm i -g typescript
   if (lsp == "vtsls") then
-    default_config = {
-      root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json'),
-    }
+    root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json')
     settings = {
       vtsls = {
         tsserver = {
@@ -487,9 +486,7 @@ for _, lsp in ipairs(servers) do
   --  npm i -g @vue/language-server
   -- requires the vtsls config above
   if (lsp == "vue_ls") then
-    default_config = {
-      root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json'),
-    }
+    root_dir = lspconfig_util.root_pattern('vite.config.js', 'vite.config.ts', 'tsconfig.json', 'package.json')
     filetypes = { "vue" }
     --root_markers = { "package.json" }
   end
@@ -500,7 +497,7 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
     capabilities = capabilities,
   }
-  if default_config ~= nil then cfg.default_config = default_config end
+  if root_dir ~= nil then cfg.root_dir = root_dir end
   if root_markers ~= nil then cfg.root_markers = root_markers end
   if settings ~= nil then cfg.settings = settings end
   if filetypes ~= nil then cfg.filetypes = filetypes end
