@@ -5,6 +5,7 @@ require('nvim-treesitter').install({
   "css",
   "cpp",
   "cuda",
+  "dockerfile",
   "haskell",
   "html",
   "javascript",

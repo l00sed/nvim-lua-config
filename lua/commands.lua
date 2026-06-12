@@ -40,10 +40,32 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
 })
 
 -- Tidal Cycles helpers
--- Auto-launch tidal
+-- Auto-launch SuperDirt (sclang) and Tidal when opening .tidal files
 autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.tidal',
-  command = 'TidalLaunch'
+  callback = function()
+    -- Start sclang/SuperDirt in background if not already running
+    local sclang_running = vim.fn.system("pgrep -x sclang"):match("%d+")
+    if not sclang_running then
+      vim.fn.jobstart({ "sclang", vim.fn.expand("~/.config/tidal/BootSuperDirt.scd") }, {
+        detach = true,
+        on_exit = function(_, code)
+          if code ~= 0 then
+            vim.schedule(function()
+              vim.notify("[sclang] exited with code " .. code, vim.log.levels.WARN)
+            end)
+          end
+        end,
+      })
+      vim.notify("[sclang] Starting SuperDirt...", vim.log.levels.INFO)
+      -- Give SuperDirt time to boot before Tidal connects
+      vim.defer_fn(function()
+        vim.cmd("TidalLaunch")
+      end, 8000)
+    else
+      vim.cmd("TidalLaunch")
+    end
+  end,
 })
 autocmd({ 'WinNew' }, {
   pattern = 'term://*',
