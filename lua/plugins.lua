@@ -406,7 +406,9 @@ return {
 
   -- TidalCycles integration
   {
-    "thgrund/tidal.nvim",
+    -- Fork of thgrund/tidal.nvim; upstream is the `upstream` remote in ~/projects/tidal-events.nvim
+    "l00sed/tidal-events.nvim",
+    dev = true,
     ft = { "tidal" },
     cmd = { "TidalLaunch", "TidalQuit" },
     init = function()
