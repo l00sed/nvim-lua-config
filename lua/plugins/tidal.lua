@@ -44,8 +44,8 @@ require("tidal").setup({
           },
         },
         fps = 15,
-        -- Lit token positions for ghostty-audio, which draws each pattern's
-        -- waveform inside its highlighted tokens (l00sed/tidal-events.nvim).
+        -- dN block positions for ghostty-audio, which draws each pattern's
+        -- waveform behind its block (l00sed/tidal-events.nvim).
         positions = {
           ip = "127.0.0.1",
           port = 57130,
