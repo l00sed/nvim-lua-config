@@ -59,9 +59,15 @@ local function tidal_audio_setup()
   end
   -- BlackHole can come back at ~20% volume, which flattens the visuals.
   vim.fn.jobstart({ "swift", vim.fn.expand("~/.config/ghostty/bin/blackhole-volume.swift"), "set" }, { detach = true })
+  -- ghostty-audio needs a tmux pane (its palette updates are pane passthrough), so
+  -- it gets a detached window hidden from the status bar. It also refuses to run
+  -- twice on its own (lock file), so this check is just to avoid an empty window.
   if vim.env.TMUX and not vim.fn.system({ "pgrep", "-f", "ghostty-audio" }):match("%d+") then
-    vim.fn.system({ "tmux", "new-window", "-d", "-n", "audio",
-      vim.fn.expand("~/.config/ghostty/bin/ghostty-audio") .. " --blocks" })
+    local win = vim.trim(vim.fn.system({ "tmux", "new-window", "-d", "-P", "-F", "#{window_id}", "-n", "audio",
+      vim.fn.expand("~/.config/ghostty/bin/ghostty-audio") .. " --blocks" }))
+    for _, opt in ipairs({ "window-status-format", "window-status-current-format", "window-status-separator" }) do
+      vim.fn.system({ "tmux", "set", "-w", "-t", win, opt, "" })
+    end
   end
 end
 
