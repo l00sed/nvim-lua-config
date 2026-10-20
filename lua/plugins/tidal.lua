@@ -50,6 +50,12 @@ require("tidal").setup({
           ip = "127.0.0.1",
           port = 57130,
         },
+        -- Writes ghostty-audio's palette updates to the terminal through
+        -- Neovim's UI (nvim_ui_send), so the encoder needs no tmux pane.
+        relay = {
+          ip = "127.0.0.1",
+          port = 57131,
+        },
       },
     },
     sclang = {

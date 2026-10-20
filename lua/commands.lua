@@ -51,7 +51,7 @@ local function tidal_is_running()
 end
 
 --- Routes system audio through BlackHole and starts ghostty-audio (feeds the
---- ~/.config/ghostty/shaders/audio-*.glsl shaders) in a background tmux window.
+--- ~/.config/ghostty/shaders/audio-*.glsl shaders) as a background job.
 --- Must run before SuperDirt boots: it binds to whichever output is default then.
 local function tidal_audio_setup()
   if vim.fn.executable("SwitchAudioSource") == 1 then
@@ -59,12 +59,10 @@ local function tidal_audio_setup()
   end
   -- BlackHole can come back at ~20% volume, which flattens the visuals.
   vim.fn.jobstart({ "swift", vim.fn.expand("~/.config/ghostty/bin/blackhole-volume.swift"), "set" }, { detach = true })
-  -- ghostty-audio needs a tmux pane: its palette updates reach Ghostty as pane
-  -- passthrough. It also refuses to run twice on its own (lock file).
-  if vim.env.TMUX and not vim.fn.system({ "pgrep", "-f", "ghostty-audio" }):match("%d+") then
-    vim.fn.system({ "tmux", "new-window", "-d", "-n", "audio",
-      vim.fn.expand("~/.config/ghostty/bin/ghostty-audio") .. " --blocks" })
-  end
+  -- ghostty-audio sends its palette updates through Neovim's UI (the tidal relay),
+  -- so it runs as a background job tied to this Neovim. A second instance exits
+  -- on its own (lock file).
+  vim.fn.jobstart({ vim.fn.expand("~/.config/ghostty/bin/ghostty-audio"), "--blocks", "--nvim" })
 end
 
 local function launch_tidal()
