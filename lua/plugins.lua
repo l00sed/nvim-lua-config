@@ -99,24 +99,6 @@ return {
     end,
   },
 
-  -- AI coding help
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    cmd = {
-      "CodeCompanion",
-      "CodeCompanionActions",
-      "CodeCompanionChat",
-      "CodeCompanionCmd",
-    },
-    config = function()
-      require("plugins.codecompanion")
-    end
-  },
-
   {
     'github/copilot.vim',
     event = 'InsertEnter',
@@ -401,6 +383,15 @@ return {
     priority = 100, -- Set high priority
     config = function()
       require("plugins.gruvbox")
+    end,
+  },
+
+  -- SuperCollider integration
+  {
+    "davidgranstrom/scnvim",
+    ft = { "supercollider" },
+    config = function()
+      require("plugins.scnvim")
     end,
   },
 
