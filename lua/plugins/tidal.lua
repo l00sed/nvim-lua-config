@@ -6,6 +6,7 @@ require("tidal").setup({
       cmd = "ghci",
       args = {
         "-v0",
+        "+RTS", "-A64m", "-I0", "-RTS",
       },
       --- Tidal boot file path
       file = os.getenv("HOME") .. "/.config/tidal/BootTidal.hs",
@@ -42,7 +43,19 @@ require("tidal").setup({
             port = 6013,
           },
         },
-        fps = 30,
+        fps = 15,
+        -- dN block positions for ghostty-audio, which draws each pattern's
+        -- waveform behind its block (l00sed/tidal-events.nvim).
+        positions = {
+          ip = "127.0.0.1",
+          port = 57130,
+        },
+        -- Writes ghostty-audio's palette updates to the terminal through
+        -- Neovim's UI (nvim_ui_send), so the encoder needs no tmux pane.
+        relay = {
+          ip = "127.0.0.1",
+          port = 57131,
+        },
       },
     },
     sclang = {

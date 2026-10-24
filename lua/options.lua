@@ -17,7 +17,11 @@ cmd [[let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"]]
 -- add additional filetype support
 ft.add({
   extension = {
-    mdx = 'mdx'
+    ghci = 'haskell',
+    mdx = 'mdx',
+  },
+  filename = {
+    ['.ghci'] = 'haskell',
   }
 })
 

@@ -41,12 +41,72 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
 
 -- Tidal Cycles helpers
 -- Auto-launch SuperDirt (sclang) and Tidal when opening .tidal files
+local tidal_autostart_group = augroup('TidalAutostart', { clear = true })
+local tidal_autostart_scheduled = false
+local tidal_ready_file = "/tmp/tidal-superdirt-ready"
+
+local function tidal_is_running()
+  local ok, tidal_state = pcall(require, "tidal.core.state")
+  return ok and tidal_state.launched
+end
+
+--- Routes system audio through BlackHole and starts ghostty-audio (feeds the
+--- ~/.config/ghostty/shaders/audio-*.glsl shaders) as a background job.
+--- Must run before SuperDirt boots: it binds to whichever output is default then.
+local function tidal_audio_setup()
+  if vim.fn.executable("SwitchAudioSource") == 1 then
+    vim.fn.system({ "SwitchAudioSource", "-t", "output", "-s", "Speakers + BlackHole" })
+  end
+  -- BlackHole can come back at ~20% volume, which flattens the visuals.
+  vim.fn.jobstart({ "swift", vim.fn.expand("~/.config/ghostty/bin/blackhole-volume.swift"), "set" }, { detach = true })
+  -- ghostty-audio sends its palette updates through Neovim's UI (the tidal relay),
+  -- so it runs as a background job tied to this Neovim. A second instance exits
+  -- on its own (lock file).
+  vim.fn.jobstart({ vim.fn.expand("~/.config/ghostty/bin/ghostty-audio"), "--blocks", "--nvim" })
+end
+
+local function launch_tidal()
+  tidal_autostart_scheduled = false
+  if tidal_is_running() then
+    return
+  end
+  vim.cmd("TidalLaunch")
+end
+
+local function wait_for_superdirt(attempt)
+  if tidal_is_running() then
+    tidal_autostart_scheduled = false
+    return
+  end
+  if vim.fn.filereadable(tidal_ready_file) == 1 then
+    launch_tidal()
+    return
+  end
+  if attempt < 600 then
+    vim.defer_fn(function()
+      wait_for_superdirt(attempt + 1)
+    end, 100)
+  else
+    tidal_autostart_scheduled = false
+    vim.notify("[sclang] SuperDirt did not become ready", vim.log.levels.WARN)
+  end
+end
+
 autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = tidal_autostart_group,
   pattern = '*.tidal',
   callback = function()
-    -- Start sclang/SuperDirt in background if not already running
+    if tidal_autostart_scheduled or tidal_is_running() then
+      return
+    end
+
+    tidal_autostart_scheduled = true
+    tidal_audio_setup()
     local sclang_running = vim.fn.system("pgrep -x sclang"):match("%d+")
+    local started_sclang = false
+
     if not sclang_running then
+      vim.fn.delete(tidal_ready_file)
       vim.fn.jobstart({ "sclang", vim.fn.expand("~/.config/tidal/BootSuperDirt.scd") }, {
         detach = true,
         on_exit = function(_, code)
@@ -58,12 +118,15 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
         end,
       })
       vim.notify("[sclang] Starting SuperDirt...", vim.log.levels.INFO)
-      -- Give SuperDirt time to boot before Tidal connects
+      started_sclang = true
+    end
+
+    if started_sclang then
       vim.defer_fn(function()
-        vim.cmd("TidalLaunch")
-      end, 8000)
+        wait_for_superdirt(0)
+      end, 100)
     else
-      vim.cmd("TidalLaunch")
+      vim.schedule(launch_tidal)
     end
   end,
 })

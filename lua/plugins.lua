@@ -99,24 +99,6 @@ return {
     end,
   },
 
-  -- AI coding help
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    cmd = {
-      "CodeCompanion",
-      "CodeCompanionActions",
-      "CodeCompanionChat",
-      "CodeCompanionCmd",
-    },
-    config = function()
-      require("plugins.codecompanion")
-    end
-  },
-
   {
     'github/copilot.vim',
     event = 'InsertEnter',
@@ -404,9 +386,20 @@ return {
     end,
   },
 
+  -- SuperCollider integration
+  {
+    "davidgranstrom/scnvim",
+    ft = { "supercollider" },
+    config = function()
+      require("plugins.scnvim")
+    end,
+  },
+
   -- TidalCycles integration
   {
-    "thgrund/tidal.nvim",
+    -- Fork of thgrund/tidal.nvim; upstream is the `upstream` remote in ~/projects/tidal-events.nvim
+    "l00sed/tidal-events.nvim",
+    dev = true,
     ft = { "tidal" },
     cmd = { "TidalLaunch", "TidalQuit" },
     init = function()

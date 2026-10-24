@@ -1,0 +1,1 @@
+require("scnvim").setup({})
