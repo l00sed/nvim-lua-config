@@ -42,13 +42,6 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
 -- Tidal Cycles helpers
 -- Auto-launch SuperDirt (sclang) and Tidal when opening .tidal files
 local tidal_autostart_group = augroup('TidalAutostart', { clear = true })
-local tidal_autostart_scheduled = false
-local tidal_ready_file = "/tmp/tidal-superdirt-ready"
-
-local function tidal_is_running()
-  local ok, tidal_state = pcall(require, "tidal.core.state")
-  return ok and tidal_state.launched
-end
 
 --- Routes system audio through BlackHole and starts ghostty-audio (feeds the
 --- ~/.config/ghostty/shaders/audio-*.glsl shaders) as a background job.
@@ -65,70 +58,25 @@ local function tidal_audio_setup()
   vim.fn.jobstart({ vim.fn.expand("~/.config/ghostty/bin/ghostty-audio"), "--blocks", "--nvim" })
 end
 
-local function launch_tidal()
-  tidal_autostart_scheduled = false
-  if tidal_is_running() then
-    return
-  end
-  vim.cmd("TidalLaunch")
-end
-
-local function wait_for_superdirt(attempt)
-  if tidal_is_running() then
-    tidal_autostart_scheduled = false
-    return
-  end
-  if vim.fn.filereadable(tidal_ready_file) == 1 then
-    launch_tidal()
-    return
-  end
-  if attempt < 600 then
-    vim.defer_fn(function()
-      wait_for_superdirt(attempt + 1)
-    end, 100)
-  else
-    tidal_autostart_scheduled = false
-    vim.notify("[sclang] SuperDirt did not become ready", vim.log.levels.WARN)
-  end
-end
-
+-- SuperDirt + Tidal booting lives in the plugin now (boot.sclang in
+-- plugins/tidal.lua). This only triggers it and feeds it the audio setup.
 autocmd({ 'BufRead', 'BufNewFile' }, {
   group = tidal_autostart_group,
   pattern = '*.tidal',
   callback = function()
-    if tidal_autostart_scheduled or tidal_is_running() then
+    local ok, state = pcall(require, "tidal.core.state")
+    if ok and state.launched then
       return
     end
-
-    tidal_autostart_scheduled = true
-    tidal_audio_setup()
-    local sclang_running = vim.fn.system("pgrep -x sclang"):match("%d+")
-    local started_sclang = false
-
-    if not sclang_running then
-      vim.fn.delete(tidal_ready_file)
-      vim.fn.jobstart({ "sclang", vim.fn.expand("~/.config/tidal/BootSuperDirt.scd") }, {
-        detach = true,
-        on_exit = function(_, code)
-          if code ~= 0 then
-            vim.schedule(function()
-              vim.notify("[sclang] exited with code " .. code, vim.log.levels.WARN)
-            end)
-          end
-        end,
-      })
-      vim.notify("[sclang] Starting SuperDirt...", vim.log.levels.INFO)
-      started_sclang = true
-    end
-
-    if started_sclang then
-      vim.defer_fn(function()
-        wait_for_superdirt(0)
-      end, 100)
-    else
-      vim.schedule(launch_tidal)
-    end
+    vim.cmd("TidalLaunch")
   end,
+})
+-- The plugin fires TidalLaunch before any process spawns, so scsynth still
+-- binds whichever output is default while this sets up BlackHole routing.
+autocmd('User', {
+  group = tidal_autostart_group,
+  pattern = 'TidalLaunch',
+  callback = tidal_audio_setup,
 })
 autocmd({ 'WinNew' }, {
   pattern = 'term://*',

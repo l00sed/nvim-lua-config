@@ -397,9 +397,8 @@ return {
 
   -- TidalCycles integration
   {
-    -- Fork of thgrund/tidal.nvim; upstream is the `upstream` remote in ~/projects/tidal-events.nvim
+    -- Fork of thgrund/tidal.nvim; develop it in ~/projects/tidal-events.nvim
     "l00sed/tidal-events.nvim",
-    dev = true,
     ft = { "tidal" },
     cmd = { "TidalLaunch", "TidalQuit" },
     init = function()
@@ -417,7 +416,6 @@ return {
       opts = {
         ensure_installed = {
           "haskell",
-          "supercollider",
         }
       },
     },

@@ -65,6 +65,8 @@ require("tidal").setup({
       --- SuperCollider boot file
       file = os.getenv("HOME") .. "/.config/tidal/BootSuperDirt.scd",
       enabled = true,
+      -- Polled by the plugin before Tidal starts (once it supports boot.sclang)
+      ready_file = "/tmp/tidal-superdirt-ready",
     },
     split = "v",
   },
