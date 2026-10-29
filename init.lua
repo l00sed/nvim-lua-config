@@ -37,13 +37,7 @@ local opts = {
   },
   ui = {
     border = "rounded"
-  },
-  -- Plugins marked `dev = true` load from local checkouts here (forks under active
-  -- development); `fallback` clones from GitHub when the checkout is missing.
-  dev = {
-    path = "~/projects",
-    fallback = true,
-  },
+  }
 }
 -- Install plugins
 require('lazy').setup(require('plugins'), opts)
